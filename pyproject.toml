@@ -1,0 +1,68 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "uEdition"
+description = ''
+readme = "README.md"
+requires-python = ">=3.7"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "Mark Hall", email = "mark.hall@work.room3b.eu" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "jupyter-book<1.0.0",
+  "pydantic[dotenv]>=1.0.0,<2.0.0",
+  "PyYAML>=6.0.0,<7.0.0",
+  "typer<1.0.0",
+]
+dynamic = ["version"]
+
+[project.scripts]
+uEdition = "uedition.cli:app"
+
+[project.urls]
+Documentation = "https://github.com/unknown/uedition#readme"
+Issues = "https://github.com/unknown/uedition/issues"
+Source = "https://github.com/unknown/uedition"
+
+[tool.hatch.version]
+path = "uedition/__about__.py"
+
+[tool.hatch.envs.test]
+extra_dependencies = [
+  "pytest",
+  "pytest-cov",
+]
+[tool.hatch.envs.test.scripts]
+cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=uedition --cov=tests {args}"
+no-cov = "cov --no-cov {args}"
+[[tool.hatch.envs.test.matrix]]
+python = ["37", "38", "39", "310", "311"]
+
+[tool.coverage.run]
+branch = true
+parallel = true
+omit = [
+  "uedition/__about__.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
