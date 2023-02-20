@@ -4,6 +4,8 @@
 """uEdtion Command-line Tool."""
 import typer
 
+from rich import print as print_cli
+
 from ..__about__ import __version__
 from ..settings import settings
 
@@ -14,11 +16,12 @@ app = typer.Typer()
 @app.command()
 def build() -> None:
     """Build the uEdition."""
-    print('Build')  # noqa: T201
-    print(settings)  # noqa: T201
+    print_cli('Build')
+    print_cli(settings)
 
 
 @app.command()
 def version() -> None:
     """Output the current uEdition version."""
-    print(f'uEdition: {__version__}')  # noqa: T201
+    print_cli(f'μEdition: {__version__}')
+    print_cli(f'Configuration: {settings["version"]}')
