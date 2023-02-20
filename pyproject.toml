@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "uEdition"
 description = ''
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.10"
 license = "MIT"
 keywords = []
 authors = [
@@ -51,7 +51,7 @@ extra_dependencies = [
 cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=uedition --cov=tests {args}"
 no-cov = "cov --no-cov {args}"
 [[tool.hatch.envs.test.matrix]]
-python = ["37", "38", "39", "310", "311"]
+python = ["310", "311"]
 
 [tool.coverage.run]
 branch = true
