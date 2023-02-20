@@ -1,4 +1,6 @@
-# uEdition
+# μEdition
+
+The μEdition is a micro framwork for quickly building Editions.
 
 [![PyPI - Version](https://img.shields.io/pypi/v/uedition.svg)](https://pypi.org/project/uedition)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/uedition.svg)](https://pypi.org/project/uedition)
@@ -12,8 +14,10 @@
 
 ## Installation
 
+The recommended installation for use is via `pipx`:
+
 ```console
-pip install uedition
+pipx install uedition
 ```
 
 ## License
