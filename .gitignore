@@ -2,3 +2,4 @@ __pycache__
 .coverage
 .python-version
 .pytest_cache
+coverage.json
