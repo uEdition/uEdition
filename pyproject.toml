@@ -43,7 +43,7 @@ Source = "https://github.com/unknown/uedition"
 path = "uedition/__about__.py"
 
 [tool.hatch.envs.test]
-extra_dependencies = [
+extra-dependencies = [
   "pytest",
   "pytest-cov",
 ]
@@ -51,13 +51,14 @@ extra_dependencies = [
 cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=uedition --cov=tests {args}"
 no-cov = "cov --no-cov {args}"
 [[tool.hatch.envs.test.matrix]]
-python = ["310", "311"]
+python = ["3.10", "3.11"]
 
 [tool.coverage.run]
 branch = true
 parallel = true
 omit = [
   "uedition/__about__.py",
+  "uedition/__main__.py",
 ]
 
 [tool.coverage.report]
@@ -66,3 +67,4 @@ exclude_lines = [
   "if __name__ == .__main__.:",
   "if TYPE_CHECKING:",
 ]
+skip_covered = true

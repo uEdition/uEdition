@@ -35,7 +35,7 @@ class LanguageSetting(BaseModel):
 class Settings(BaseSettings):
     """Application settings."""
 
-    version: str
+    version: str = '1'
     """The configuration file version."""
     languages: list[LanguageSetting] = []
     """The configured languages."""
@@ -55,3 +55,10 @@ class Settings(BaseSettings):
 
 
 settings = Settings().dict()
+
+
+def reload_settings() -> None:
+    """Reload the settings."""
+    global settings
+    settings.clear()
+    settings.update(Settings().dict())
