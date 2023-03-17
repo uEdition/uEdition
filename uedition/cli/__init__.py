@@ -19,11 +19,13 @@ app = typer.Typer()
 @app.command()
 def build() -> None:
     """Build the uEdition."""
-    if os.path.exists(settings['output']):
-        rmtree(settings['output'])
+    if not os.path.exists(settings['output']):
+        os.mkdir(settings['output'])
     for language in settings['languages']:
         run(['jupyter-book', 'clean', language['path']])
         run(['jupyter-book', 'build', language['path']])
+        if os.path.exists(os.path.join(settings['output'], language['path'])):
+            rmtree(os.path.join(settings['output'], language['path']))
         copytree(
             os.path.join(language['path'], '_build', 'html'),
             os.path.join(settings['output'], language['path'])
