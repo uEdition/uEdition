@@ -33,22 +33,3 @@ jobs:
     - name: Run Tests
       run: |
         hatch run test:cov
-
-    - name: Calculate coverage
-      run: |
-        hatch run test:coverage json
-        export TOTAL=$(python -c "import json;print(json.load(open('coverage.json'))['totals']['percent_covered_display'])")
-        echo "total=$TOTAL" >> $GITHUB_ENV
-        echo "### Total coverage: ${TOTAL}%" >> $GITHUB_STEP_SUMMARY
-
-    - name: "Make badge"
-      uses: schneegans/dynamic-badges-action@v1.4.0
-      with:
-        auth: ${{ secrets.GIST_TOKEN }}
-        gistID: 13b76c3c8e59fa624d03918fafde3f2d
-        filename: coverage.json
-        label: Coverage
-        message: ${{ env.total }}%
-        minColorRange: 50
-        maxColorRange: 90
-        valColorRange: ${{ env.total }}
