@@ -39,6 +39,8 @@ class Settings(BaseSettings):
     """The configuration file version."""
     languages: list[LanguageSetting] = []
     """The configured languages."""
+    output: str = 'docs'
+    """The output directory"""
 
     class Config:
         """Configuration overrides."""

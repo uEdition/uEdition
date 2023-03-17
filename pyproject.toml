@@ -24,7 +24,7 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = [
-  "jupyter-book<1.0.0",
+  "jupyter-book>=0.15.1,<1.0.0",
   "pydantic[dotenv]>=1.0.0,<2.0.0",
   "PyYAML>=6.0.0,<7.0.0",
   "typer[all]<1.0.0",
@@ -66,5 +66,6 @@ exclude_lines = [
   "no cov",
   "if __name__ == .__main__.:",
   "if TYPE_CHECKING:",
+  "noqa: cov",
 ]
 skip_covered = true
