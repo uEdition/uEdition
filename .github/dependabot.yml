@@ -1,6 +1,13 @@
 version: 2
 updates:
-  - package-ecosystem: "github-actions" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  # Check for updates of all GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  # Check for updates of all Python packages
+  - package-ecosystem: "pip"
+    directory: "/"
     schedule:
       interval: "weekly"
