@@ -1,3 +1,3 @@
-# Chapter A
+# Section 2 in Chapter A
 
 This is just a single page.

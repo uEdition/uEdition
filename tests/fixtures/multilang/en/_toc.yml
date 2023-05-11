@@ -3,6 +3,13 @@
 
 format: jb-book
 root: intro
-chapters:
-- file: a-page
-- file: missing-page
+parts:
+  - caption: Part A
+    chapters:
+      - file: a-page
+        sections:
+          - file: a-1-page
+          - file: a-2-page
+  - caption: Part B
+    chapters:
+      - file: b-page

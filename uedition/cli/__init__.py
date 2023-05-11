@@ -9,6 +9,7 @@ from rich import print as print_cli
 from shutil import rmtree, copytree
 from subprocess import run
 
+from . import check as check_module
 from ..__about__ import __version__
 from ..settings import settings
 
@@ -18,7 +19,7 @@ app = typer.Typer()
 
 @app.command()
 def build() -> None:
-    """Build the uEdition."""
+    """Build the μEdition."""
     if not os.path.exists(settings['output']):
         os.mkdir(settings['output'])
     for language in settings['languages']:
@@ -33,7 +34,13 @@ def build() -> None:
 
 
 @app.command()
+def check() -> None:
+    """Check that the μEdition is set up correctly."""
+    check_module.run()
+
+
+@app.command()
 def version() -> None:
-    """Output the current uEdition version."""
+    """Output the current μEdition version."""
     print_cli(f'μEdition: {__version__}')
     print_cli(f'Configuration: {settings["version"]}')
