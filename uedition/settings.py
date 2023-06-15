@@ -40,7 +40,7 @@ class Settings(BaseSettings):
     languages: list[LanguageSetting] = []
     """The configured languages."""
     output: str = 'docs'
-    """The output directory"""
+    """The output directory."""
 
     class Config:
         """Configuration overrides."""

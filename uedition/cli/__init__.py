@@ -9,7 +9,7 @@ from rich import print as print_cli
 from shutil import rmtree, copytree
 from subprocess import run
 
-from . import check as check_module
+from . import check as check_module, serve as serve_module
 from ..__about__ import __version__
 from ..settings import settings
 
@@ -31,6 +31,12 @@ def build() -> None:
             os.path.join(language['path'], '_build', 'html'),
             os.path.join(settings['output'], language['path'])
         )
+
+
+@app.command()
+def serve() -> None:
+    """Serve the μEdition for writing."""
+    serve_module.run()
 
 
 @app.command()
