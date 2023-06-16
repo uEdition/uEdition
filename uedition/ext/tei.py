@@ -144,7 +144,7 @@ class TEIParser(SphinxParser):
     def _wrap_sections(self: 'TEIParser', section: nodes.Element, tmp: nodes.Element) -> None:
         """Ensure that sections are correctly wrapped."""
         section_stack = [(0, section)]
-        for node in tmp.findall():
+        for node in tmp.children:
             if isinstance(node, TeiElement) and node.attributes['html_tag'] in ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']:
                 section_level = int(node.attributes['html_tag'][1])
                 while section_level <= section_stack[-1][0]:
