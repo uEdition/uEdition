@@ -14,16 +14,18 @@ class TeiElement(nodes.Element): pass
 
 
 def tei_element_html_enter(self, node: TeiElement) -> None:
-    buffer = [f'<{node.get("html_tag")} data-tei-tag="{node.get("tei_tag")[29:]}"']
-    if node.get('ids'):
-        buffer.append(f' id="{node.get("ids")[0]}"')
-    for key, value in node.get('tei_attributes').items():
-        buffer.append(f' {key}="{value}"')
-    self.body.append(f'{"".join(buffer)}>')
+    if node.get('html_tag') is not None:
+        buffer = [f'<{node.get("html_tag")} data-tei-tag="{node.get("tei_tag")[29:]}"']
+        if node.get('ids'):
+            buffer.append(f' id="{node.get("ids")[0]}"')
+        for key, value in node.get('tei_attributes').items():
+            buffer.append(f' {key}="{value}"')
+        self.body.append(f'{"".join(buffer)}>')
 
 
 def tei_element_html_exit(self, node: TeiElement) -> None:
-    self.body.append(f'</{node.get("html_tag")}>')
+    if node.get('html_tag') is not None:
+        self.body.append(f'</{node.get("html_tag")}>')
 
 
 class TEIParser(SphinxParser):
@@ -49,35 +51,29 @@ class TEIParser(SphinxParser):
         doc_title = nodes.title()
         doc_title.append(nodes.Text(title if title else '[Untitled]'))
         doc_section.append(doc_title)
-        tab_set = create_component('tab-set', classes=['sd-tab-set'])
         if 'tei' in self.config.uEdition and 'sections' in self.config.uEdition['tei']:
-            for section in self.config.uEdition['tei']['sections']:
-                if section['type'] == 'text':
-                    source = root.xpath(section['content'], namespaces=namespaces)
+            for conf_section in self.config.uEdition['tei']['sections']:
+                section = nodes.section(ids=[nodes.make_id(conf_section['title'])])
+                section_title = nodes.title()
+                section_title.append(nodes.Text(conf_section['title']))
+                section.append(section_title)
+                if conf_section['type'] == 'text':
+                    source = root.xpath(conf_section['content'], namespaces=namespaces)
                     if len(source) > 0:
-                        tab_item = create_component('tab-item', classes=['sd-tab-item'])
-                        tab_label = nodes.rubric(section['title'], nodes.Text(section['title']), classes=['sd-tab-label'])
-                        tab_item.append(tab_label)
-                        tab_content = create_component('tab-content', classes=['sd-tab-content', 'tei', nodes.make_id(section['title'])])
-                        tab_item.append(tab_content)
+                        doc_section.append(section)
+                        tmp = nodes.section()
                         for child in source:
-                            self._walk_tree(child, tab_content, section['mappings'])
-                        tab_set.append(tab_item)
-                elif section['type'] == 'fields':
-                    tab_item = create_component('tab-item', classes=['sd-tab-item'])
-                    tab_label = nodes.rubric(section['title'], nodes.Text(section['title']), classes=['sd-tab-label'])
-                    tab_item.append(tab_label)
-                    tab_content = create_component('tab-content', classes=['sd-tab-content', 'tei', nodes.make_id(section['title'])])
-                    tab_item.append(tab_content)
+                            self._walk_tree(child, tmp, conf_section['mappings'])
+                        self._wrap_sections(section, tmp)
+                elif conf_section['type'] == 'fields':
+                    doc_section.append(section)
                     fields = nodes.definition_list()
-                    tab_content.append(fields)
-                    for field in section['fields']:
+                    section.append(fields)
+                    for field in conf_section['fields']:
                         if field['type'] == 'single':
                             self._parse_single_field(fields, field, root)
                         elif field['type'] == 'list':
                             self._parse_list_field(fields, field, root)
-                    tab_set.append(tab_item)
-        doc_section.append(tab_set)
         document.append(doc_section)
 
     def _walk_tree(self: 'TEIParser', node: etree.Element, parent: nodes.Element, rules) -> None:
@@ -144,6 +140,34 @@ class TEIParser(SphinxParser):
         # If there is text after this XML node and we are adding all text, then add text content to the parent
         if node.tail and not text_only_in_leaf_nodes:
             parent.append(nodes.Text(node.tail))
+
+    def _wrap_sections(self: 'TEIParser', section: nodes.Element, tmp: nodes.Element) -> None:
+        """Ensure that sections are correctly wrapped."""
+        section_stack = [(0, section)]
+        for node in tmp.findall():
+            if isinstance(node, TeiElement) and node.attributes['html_tag'] in ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']:
+                section_level = int(node.attributes['html_tag'][1])
+                while section_level <= section_stack[-1][0]:
+                    section_stack.pop()
+                new_section = nodes.section(ids=[nodes.make_id(node.astext())])
+                title = nodes.title()
+                title.children = node.children
+                new_section.append(title)
+                section_stack[-1][1].append(new_section)
+                section_stack.append((section_level, new_section))
+            elif isinstance(node, nodes.section):
+                pass
+            else:
+                # Need to check that the
+                in_heading = False
+                tmp = node
+                while tmp.parent is not None and isinstance(tmp.parent, TeiElement):
+                    if tmp.parent.attributes['html_tag'] in ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']:
+                        in_heading = True
+                        break
+                    tmp = tmp.parent
+                if not in_heading:
+                    section_stack[-1][1].append(node)
 
     def _rule_for_node(self: 'TEIParser', node: etree.Element, rules: list[dict]) -> dict:
         """Determine the first matching mapping rule for the node from the configured rules."""
