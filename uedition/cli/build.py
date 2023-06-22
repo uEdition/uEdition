@@ -2,7 +2,7 @@
 import json
 import subprocess
 
-from os import path
+from os import path, makedirs
 from shutil import rmtree, copytree
 
 from ..settings import settings
@@ -10,6 +10,8 @@ from ..settings import settings
 
 def landing_build() -> None:
     """Build the landing page."""
+    if not path.exists(settings['output']):
+        makedirs(settings['output'], exist_ok=True)
     with open(path.join(settings['output'], 'config.json'), 'w') as out_f:
         json.dump(settings, out_f)
     with open(path.join(settings['output'], 'index.html'), 'w') as out_f:
