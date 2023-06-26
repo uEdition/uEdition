@@ -33,11 +33,3 @@ jobs:
     - name: Run Tests
       run: |
         hatch run test:cov
-
-  codestyle:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-
-    - uses: psf/black@stable
