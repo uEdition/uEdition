@@ -5,7 +5,6 @@ adding any required default values.
 """
 from pydantic import BaseModel, validator, ValidationError
 from sphinx.application import Sphinx
-from sphinx.config import Config
 from sphinx.util import logging
 from typing import Union, Literal, Optional
 
@@ -27,12 +26,17 @@ class RuleSelector(BaseModel):
     attributes: list[RuleSelectorAttribute] = []
 
     @validator('tag', pre=True)
-    def expand_tag_namespace(cls, v, values, **kwargs) -> str:
-        """Expand any ```tei:``` namespace prefixes. """
+    def expand_tag_namespace(cls: 'RuleSelector', v: str, values: dict, **kwargs: dict) -> str:
+        """Expand any ```tei:``` namespace prefixes."""
         return v.replace('tei:', '{http://www.tei-c.org/ns/1.0}')
 
     @validator('attributes', pre=True)
-    def convert_dict_attributes_to_list(cls, v, values, **kwargs) -> list[dict]:
+    def convert_dict_attributes_to_list(
+        cls: 'RuleSelector',
+        v: dict | list,
+        values: dict,
+        **kwargs: dict
+    ) -> list[dict]:
         """Convert a single attributes dictionary to a list with that dictionary."""
         if isinstance(v, dict):
             return [v]
@@ -78,7 +82,8 @@ class Rule(BaseModel):
     attributes: list[Union[RuleAttributeCopy, RuleAttributeSet, RuleAttributeDelete]] = []
 
     @validator('selector', pre=True)
-    def convert_str_selector_to_dict(cls, v, values, **kwargs) -> dict:
+    def convert_str_selector_to_dict(cls: 'Rule', v: str | dict, values: dict, **kwargs: dict) -> dict:
+        """Convert a simple string selector into the dictionary representation."""
         if isinstance(v, str):
             return {'tag': v}
         return v
@@ -160,24 +165,27 @@ BASE_RULES = [
 
 def validate_config(app: Sphinx, config: Config) -> None:
     """Validate the configuration and add any default values."""
-    if 'tei' in config.uEdition:
-        if 'sections' in config.uEdition['tei'] and isinstance(config.uEdition['tei']['sections'], list):
-            if 'mappings' in config.uEdition['tei'] and isinstance(config.uEdition['tei']['mappings'], list):
-                for section in config.uEdition['tei']['sections']:
-                    if 'mappings' in section and isinstance(section['mappings'], list):
-                        section['mappings'] = section['mappings'] + config.uEdition['tei']['mappings'] + BASE_RULES
-                    else:
-                        section['mappings'] = config.uEdition['tei']['mappings'] + BASE_RULES
-    try:
-        config.uEdition = Config(**config.uEdition).dict()
-    except ValidationError as e:
-        for error in e.errors():
-            logger.error(' -> '.join([str(l) for l in error['loc']]))
-            logger.error(f'  {error["msg"]}')
+    if config.uEdition:
+        if 'tei' in config.uEdition:
+            if 'sections' in config.uEdition['tei'] and isinstance(config.uEdition['tei']['sections'], list):
+                if 'mappings' in config.uEdition['tei'] and isinstance(config.uEdition['tei']['mappings'], list):
+                    for section in config.uEdition['tei']['sections']:
+                        if 'mappings' in section and isinstance(section['mappings'], list):
+                            section['mappings'] = section['mappings'] + config.uEdition['tei']['mappings'] + BASE_RULES
+                        else:
+                            section['mappings'] = config.uEdition['tei']['mappings'] + BASE_RULES
+        try:
+            config.uEdition = Config(**config.uEdition).dict()
+        except ValidationError as e:
+            for error in e.errors():
+                logger.error(' -> '.join([str(loc) for loc in error['loc']]))
+                logger.error(f'  {error["msg"]}')
+            config.uEdition = {}
+    else:
         config.uEdition = {}
 
 
 def setup(app: Sphinx) -> None:
-    """Setup the Sphinx configuration handling for the uEdition."""
+    """Set up the Sphinx configuration handling for the uEdition."""
     app.add_config_value('uEdition', default=None, rebuild='html', types=[dict])
     app.connect('config-inited', validate_config)
