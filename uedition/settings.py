@@ -12,11 +12,15 @@ from typing import Any
 
 def uedition_yaml_settings(settings: BaseSettings) -> dict[str, Any]:
     """Load the settings from a uEdition.yaml or uEdition.yml file."""
-    if os.path.exists('uEdition.yaml'):
-        with open('uEdition.yaml', encoding=settings.__config__.env_file_encoding) as in_f:
+    if os.path.exists("uEdition.yaml"):
+        with open(
+            "uEdition.yaml", encoding=settings.__config__.env_file_encoding
+        ) as in_f:
             return safe_load(in_f)
-    elif os.path.exists('uEdition.yml'):
-        with open('uEdition.yml', encoding=settings.__config__.env_file_encoding) as in_f:
+    elif os.path.exists("uEdition.yml"):
+        with open(
+            "uEdition.yml", encoding=settings.__config__.env_file_encoding
+        ) as in_f:
             return safe_load(in_f)
     return dict()
 
@@ -35,11 +39,11 @@ class LanguageSetting(BaseModel):
 class Settings(BaseSettings):
     """Application settings."""
 
-    version: str = '1'
+    version: str = "1"
     """The configuration file version."""
     languages: list[LanguageSetting] = []
     """The configured languages."""
-    output: str = 'docs'
+    output: str = "docs"
     """The output directory."""
 
     class Config:
@@ -53,7 +57,12 @@ class Settings(BaseSettings):
             file_secret_settings: SettingsSourceCallable,
         ) -> tuple[SettingsSourceCallable, ...]:
             """Add the YAMl loading functionality."""
-            return env_settings, init_settings, file_secret_settings, uedition_yaml_settings
+            return (
+                env_settings,
+                init_settings,
+                file_secret_settings,
+                uedition_yaml_settings,
+            )
 
 
 settings = Settings().dict()

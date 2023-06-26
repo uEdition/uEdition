@@ -41,6 +41,11 @@ Source = "https://github.com/unknown/uedition"
 [tool.hatch.version]
 path = "uedition/__about__.py"
 
+[tool.hatch.envs.dev]
+extra-dependencies = [
+  "black"
+]
+
 [tool.hatch.envs.test]
 extra-dependencies = [
   "pytest",
