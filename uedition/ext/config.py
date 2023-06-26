@@ -25,17 +25,16 @@ class RuleSelector(BaseModel):
     tag: str
     attributes: list[RuleSelectorAttribute] = []
 
-    @validator('tag', pre=True)
-    def expand_tag_namespace(cls: 'RuleSelector', v: str, values: dict, **kwargs: dict) -> str:
+    @validator("tag", pre=True)
+    def expand_tag_namespace(
+        cls: "RuleSelector", v: str, values: dict, **kwargs: dict
+    ) -> str:
         """Expand any ```tei:``` namespace prefixes."""
-        return v.replace('tei:', '{http://www.tei-c.org/ns/1.0}')
+        return v.replace("tei:", "{http://www.tei-c.org/ns/1.0}")
 
-    @validator('attributes', pre=True)
+    @validator("attributes", pre=True)
     def convert_dict_attributes_to_list(
-        cls: 'RuleSelector',
-        v: dict | list,
-        values: dict,
-        **kwargs: dict
+        cls: "RuleSelector", v: dict | list, values: dict, **kwargs: dict
     ) -> list[dict]:
         """Convert a single attributes dictionary to a list with that dictionary."""
         if isinstance(v, dict):
@@ -46,14 +45,14 @@ class RuleSelector(BaseModel):
 class RuleText(BaseModel):
     """Validation rule for retrieving the text content from an attribute."""
 
-    action: Literal['from-attribute']
+    action: Literal["from-attribute"]
     attr: str
 
 
 class RuleAttributeCopy(BaseModel):
     """Validation rule for copying and attribute."""
 
-    action: Literal['copy'] = 'copy'
+    action: Literal["copy"] = "copy"
     attr: str
     source: str
 
@@ -61,7 +60,7 @@ class RuleAttributeCopy(BaseModel):
 class RuleAttributeSet(BaseModel):
     """Validation rule for settings an attribute to a specific value."""
 
-    action: Literal['set']
+    action: Literal["set"]
     attr: str
     value: str
 
@@ -69,7 +68,7 @@ class RuleAttributeSet(BaseModel):
 class RuleAttributeDelete(BaseModel):
     """Validation rule for deleting an attribute."""
 
-    action: Literal['delete']
+    action: Literal["delete"]
     attr: str
 
 
@@ -77,15 +76,19 @@ class Rule(BaseModel):
     """Validation model for a rule transforming a TEI tag into a HTML tag."""
 
     selector: RuleSelector
-    tag: Union[str, None] = 'div'
+    tag: Union[str, None] = "div"
     text: Union[RuleText, None] = None
-    attributes: list[Union[RuleAttributeCopy, RuleAttributeSet, RuleAttributeDelete]] = []
+    attributes: list[
+        Union[RuleAttributeCopy, RuleAttributeSet, RuleAttributeDelete]
+    ] = []
 
-    @validator('selector', pre=True)
-    def convert_str_selector_to_dict(cls: 'Rule', v: str | dict, values: dict, **kwargs: dict) -> dict:
+    @validator("selector", pre=True)
+    def convert_str_selector_to_dict(
+        cls: "Rule", v: str | dict, values: dict, **kwargs: dict
+    ) -> dict:
         """Convert a simple string selector into the dictionary representation."""
         if isinstance(v, str):
-            return {'tag': v}
+            return {"tag": v}
         return v
 
 
@@ -93,7 +96,7 @@ class TextSection(BaseModel):
     """Validation model for a TEI text section."""
 
     title: str
-    type: Literal['text'] = 'text'
+    type: Literal["text"] = "text"
     content: str
     mappings: list[Rule] = []
 
@@ -102,7 +105,7 @@ class SingleFieldRule(BaseModel):
     """Validation model for a TEI field rule."""
 
     title: str
-    type: Literal['single'] = 'single'
+    type: Literal["single"] = "single"
     content: str
 
 
@@ -110,7 +113,7 @@ class ListFieldRule(BaseModel):
     """Validation model for a TEI field rule."""
 
     title: str
-    type: Literal['list']
+    type: Literal["list"]
     content: str
 
 
@@ -118,7 +121,7 @@ class FieldsSection(BaseModel):
     """Validation model for a TEI fields section."""
 
     title: str
-    type: Literal['fields']
+    type: Literal["fields"]
     fields: list[SingleFieldRule | ListFieldRule]
 
 
@@ -137,28 +140,25 @@ class Config(BaseModel):
 
 
 BASE_RULES = [
-    {'selector': 'tei:body', 'tag': 'section'},
-    {'selector': 'tei:head', 'tag': 'h1'},
-    {'selector': 'tei:p', 'tag': 'p'},
-
-    {'selector': 'tei:seg', 'tag': 'span'},
-    {'selector': 'tei:pb', 'tag': 'span'},
-    {'selector': 'tei:hi', 'tag': 'span'},
+    {"selector": "tei:body", "tag": "section"},
+    {"selector": "tei:head", "tag": "h1"},
+    {"selector": "tei:p", "tag": "p"},
+    {"selector": "tei:seg", "tag": "span"},
+    {"selector": "tei:pb", "tag": "span"},
+    {"selector": "tei:hi", "tag": "span"},
     {
-        'selector': 'tei:ref',
-        'tag': 'a',
-        'attributes': [
-            {'attr': 'href', 'source': 'target'}
-        ]
+        "selector": "tei:ref",
+        "tag": "a",
+        "attributes": [{"attr": "href", "source": "target"}],
     },
-    {'selector': 'tei:citedRange', 'tag': 'span'},
-    {'selector': 'tei:q', 'tag': 'span'},
-    {'selector': 'tei:hi', 'tag': 'span'},
-    {'selector': 'tei:foreign', 'tag': 'span'},
-    {'selector': 'tei:speaker', 'tag': 'span'},
-    {'selector': 'tei:stage', 'tag': 'span'},
-    {'selector': 'tei:lem', 'tag': 'span'},
-    {'selector': 'tei:sic', 'tag': 'span'},
+    {"selector": "tei:citedRange", "tag": "span"},
+    {"selector": "tei:q", "tag": "span"},
+    {"selector": "tei:hi", "tag": "span"},
+    {"selector": "tei:foreign", "tag": "span"},
+    {"selector": "tei:speaker", "tag": "span"},
+    {"selector": "tei:stage", "tag": "span"},
+    {"selector": "tei:lem", "tag": "span"},
+    {"selector": "tei:sic", "tag": "span"},
 ]
 """Base mapping rules for mapping TEI tags to default HTML elements."""
 
@@ -166,19 +166,31 @@ BASE_RULES = [
 def validate_config(app: Sphinx, config: Config) -> None:
     """Validate the configuration and add any default values."""
     if config.uEdition:
-        if 'tei' in config.uEdition:
-            if 'sections' in config.uEdition['tei'] and isinstance(config.uEdition['tei']['sections'], list):
-                if 'mappings' in config.uEdition['tei'] and isinstance(config.uEdition['tei']['mappings'], list):
-                    for section in config.uEdition['tei']['sections']:
-                        if 'mappings' in section and isinstance(section['mappings'], list):
-                            section['mappings'] = section['mappings'] + config.uEdition['tei']['mappings'] + BASE_RULES
+        if "tei" in config.uEdition:
+            if "sections" in config.uEdition["tei"] and isinstance(
+                config.uEdition["tei"]["sections"], list
+            ):
+                if "mappings" in config.uEdition["tei"] and isinstance(
+                    config.uEdition["tei"]["mappings"], list
+                ):
+                    for section in config.uEdition["tei"]["sections"]:
+                        if "mappings" in section and isinstance(
+                            section["mappings"], list
+                        ):
+                            section["mappings"] = (
+                                section["mappings"]
+                                + config.uEdition["tei"]["mappings"]
+                                + BASE_RULES
+                            )
                         else:
-                            section['mappings'] = config.uEdition['tei']['mappings'] + BASE_RULES
+                            section["mappings"] = (
+                                config.uEdition["tei"]["mappings"] + BASE_RULES
+                            )
         try:
             config.uEdition = Config(**config.uEdition).dict()
         except ValidationError as e:
             for error in e.errors():
-                logger.error(' -> '.join([str(loc) for loc in error['loc']]))
+                logger.error(" -> ".join([str(loc) for loc in error["loc"]]))
                 logger.error(f'  {error["msg"]}')
             config.uEdition = {}
     else:
@@ -187,5 +199,5 @@ def validate_config(app: Sphinx, config: Config) -> None:
 
 def setup(app: Sphinx) -> None:
     """Set up the Sphinx configuration handling for the uEdition."""
-    app.add_config_value('uEdition', default=None, rebuild='html', types=[dict])
-    app.connect('config-inited', validate_config)
+    app.add_config_value("uEdition", default=None, rebuild="html", types=[dict])
+    app.connect("config-inited", validate_config)

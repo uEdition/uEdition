@@ -10,12 +10,13 @@ from ..settings import settings
 
 def landing_build() -> None:
     """Build the landing page."""
-    if not path.exists(settings['output']):
-        makedirs(settings['output'], exist_ok=True)
-    with open(path.join(settings['output'], 'config.json'), 'w') as out_f:
+    if not path.exists(settings["output"]):
+        makedirs(settings["output"], exist_ok=True)
+    with open(path.join(settings["output"], "config.json"), "w") as out_f:
         json.dump(settings, out_f)
-    with open(path.join(settings['output'], 'index.html'), 'w') as out_f:
-        out_f.write('''\
+    with open(path.join(settings["output"], "index.html"), "w") as out_f:
+        out_f.write(
+            """\
 <!DOCTYPE html>
 <html>
   <head>
@@ -59,34 +60,52 @@ def landing_build() -> None:
     </script>
   </body>
 </html>
-''')
+"""
+        )
 
 
 def full_build(lang: dict) -> None:
     """Run the full build process for a single language."""
     landing_build()
-    subprocess.run(['jupyter-book', 'build', '--all', '--path-output', path.join('_build', lang['code']), lang['path']])
+    subprocess.run(
+        [
+            "jupyter-book",
+            "build",
+            "--all",
+            "--path-output",
+            path.join("_build", lang["code"]),
+            lang["path"],
+        ]
+    )
     copytree(
-        path.join('_build', lang['code'], '_build', 'html'),
-        path.join(settings['output'], lang['code']),
-        dirs_exist_ok=True
+        path.join("_build", lang["code"], "_build", "html"),
+        path.join(settings["output"], lang["code"]),
+        dirs_exist_ok=True,
     )
 
 
 def partial_build(lang: dict) -> None:
     """Run the as-needed build process for a single language."""
     landing_build()
-    subprocess.run(['jupyter-book', 'build', '--path-output', path.join('_build', lang['code']), lang['path']])
+    subprocess.run(
+        [
+            "jupyter-book",
+            "build",
+            "--path-output",
+            path.join("_build", lang["code"]),
+            lang["path"],
+        ]
+    )
     copytree(
-        path.join('_build', lang['code'], '_build', 'html'),
-        path.join(settings['output'], lang['code']),
-        dirs_exist_ok=True
+        path.join("_build", lang["code"], "_build", "html"),
+        path.join(settings["output"], lang["code"]),
+        dirs_exist_ok=True,
     )
 
 
 def run() -> None:
     """Build the full uEdition."""
-    if path.exists(settings['output']):
-        rmtree(settings['output'])
-    for lang in settings['languages']:
+    if path.exists(settings["output"]):
+        rmtree(settings["output"])
+    for lang in settings["languages"]:
         full_build(lang)

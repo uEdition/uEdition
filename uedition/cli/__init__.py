@@ -35,5 +35,5 @@ def check() -> None:
 @app.command()
 def version() -> None:
     """Output the current μEdition version."""
-    print_cli(f'μEdition: {__version__}')
+    print_cli(f"μEdition: {__version__}")
     print_cli(f'Configuration: {settings["version"]}')
