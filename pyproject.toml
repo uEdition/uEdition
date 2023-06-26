@@ -45,6 +45,8 @@ path = "uedition/__about__.py"
 extra-dependencies = [
   "black"
 ]
+[tool.hatch.envs.dev.scripts]
+codestyle = "black ."
 
 [tool.hatch.envs.test]
 extra-dependencies = [
