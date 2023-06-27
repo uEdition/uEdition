@@ -6,12 +6,23 @@ import typer
 
 from rich import print as print_cli
 
-from . import check as check_module, build as build_module, serve as serve_module
+from . import (
+    check as check_module,
+    build as build_module,
+    serve as serve_module,
+    create as create_module,
+)
 from ..__about__ import __version__
 from ..settings import settings
 
 
 app = typer.Typer()
+
+
+@app.command()
+def create(path: str) -> None:
+    """Create a new μEdition."""
+    create_module.run(path)
 
 
 @app.command()
