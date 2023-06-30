@@ -61,6 +61,12 @@ def version() -> None:
 
 
 @language_app.command()
-def add(path: str) -> None:
+def language_add(path: str) -> None:
     """Add a language to the μEdition."""
     language_module.add(path)
+
+
+@language_app.command()
+def language_update(path: str) -> None:
+    """Update a language."""
+    language_module.update(path)
