@@ -7,4 +7,4 @@ from copier import run_update
 
 def run() -> None:
     """Update the μEdition using Copier."""
-    run_update(".", overwrite=True)
+    run_update(".", answers_file=".uEdition.answers", overwrite=True)
