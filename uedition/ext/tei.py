@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2023-present Mark Hall <mark.hall@work.room3b.eu>
+#
+# SPDX-License-Identifier: MIT
 """TEI parsing extension for Sphinx."""
 from docutils import nodes
 from lxml import etree
