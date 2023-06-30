@@ -11,6 +11,7 @@ from . import (
     build as build_module,
     serve as serve_module,
     create as create_module,
+    update as update_module,
 )
 from ..__about__ import __version__
 from ..settings import settings
@@ -41,6 +42,12 @@ def serve() -> None:
 def check() -> None:
     """Check that the μEdition is set up correctly."""
     check_module.run()
+
+
+@app.command()
+def update() -> None:
+    """Update the μEdition."""
+    update_module.run()
 
 
 @app.command()
