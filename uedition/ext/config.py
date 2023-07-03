@@ -6,7 +6,7 @@
 This module handles reading the uEdition-specific configuration settings, validating them and
 adding any required default values.
 """
-from pydantic import BaseModel, validator, ValidationError
+from pydantic import BaseModel, field_validator, ValidationError
 from sphinx.application import Sphinx
 from sphinx.util import logging
 from typing import Union, Literal, Optional
@@ -28,14 +28,14 @@ class RuleSelector(BaseModel):
     tag: str
     attributes: list[RuleSelectorAttribute] = []
 
-    @validator("tag", pre=True)
+    @field_validator("tag", mode="before")
     def expand_tag_namespace(
         cls: "RuleSelector", v: str, values: dict, **kwargs: dict
     ) -> str:
         """Expand any ```tei:``` namespace prefixes."""
         return v.replace("tei:", "{http://www.tei-c.org/ns/1.0}")
 
-    @validator("attributes", pre=True)
+    @field_validator("attributes", mode="before")
     def convert_dict_attributes_to_list(
         cls: "RuleSelector", v: dict | list, values: dict, **kwargs: dict
     ) -> list[dict]:
@@ -85,7 +85,7 @@ class Rule(BaseModel):
         Union[RuleAttributeCopy, RuleAttributeSet, RuleAttributeDelete]
     ] = []
 
-    @validator("selector", pre=True)
+    @field_validator("selector", mode="before")
     def convert_str_selector_to_dict(
         cls: "Rule", v: str | dict, values: dict, **kwargs: dict
     ) -> dict:

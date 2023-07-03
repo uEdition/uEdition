@@ -7,8 +7,8 @@ All application settings are accessed via the `settings` dictionary.
 """
 import os
 
-from pydantic import BaseSettings, BaseModel
-from pydantic.env_settings import SettingsSourceCallable
+from pydantic import BaseModel
+from pydantic_settings import BaseSettings, PydanticBaseSettingsSource
 from yaml import safe_load
 from typing import Any
 
@@ -55,10 +55,10 @@ class Settings(BaseSettings):
         @classmethod
         def customise_sources(
             cls,  # noqa: ANN102
-            init_settings: SettingsSourceCallable,
-            env_settings: SettingsSourceCallable,
-            file_secret_settings: SettingsSourceCallable,
-        ) -> tuple[SettingsSourceCallable, ...]:
+            init_settings: PydanticBaseSettingsSource,
+            env_settings: PydanticBaseSettingsSource,
+            file_secret_settings: PydanticBaseSettingsSource,
+        ) -> tuple[PydanticBaseSettingsSource, ...]:
             """Add the YAMl loading functionality."""
             return (
                 env_settings,
