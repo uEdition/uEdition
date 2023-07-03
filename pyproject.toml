@@ -22,7 +22,7 @@ classifiers = [
 ]
 dependencies = [
   "jupyter-book>=0.15.1,<1.0.0",
-  "pydantic[dotenv]>=1.0.0,<2.0.0",
+  "pydantic[dotenv]>=1.0.0,<3.0.0",
   "PyYAML>=6.0.0,<7.0.0",
   "typer[all]<1.0.0",
   "lxml>=4.9.2,<5.0.0",
