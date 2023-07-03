@@ -36,7 +36,7 @@ def run() -> None:
     for lang, full_cmd, partial_cmd in zip(
         settings["languages"], full_rebuilds, partial_rebuilds
     ):
-        server.watch(path.join(lang["path"], "*.yml"), full_cmd)
+        server.watch("*.yml", full_cmd)
         server.watch(path.join(lang["path"], "**", "*.*"), partial_cmd)
     server.watch("uEdition.*", lambda: [cmd() for cmd in full_rebuilds])
     server.serve(root="site", port=8000)

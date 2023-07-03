@@ -1,15 +1,12 @@
-# Table of contents
-# Learn more at https://jupyterbook.org/customize/toc.html
-
 format: jb-book
-root: intro
 parts:
-  - caption: Part A
-    chapters:
-      - file: a-page
-        sections:
-          - file: a-1-page
-          - file: a-2-page
-  - caption: Part B
-    chapters:
-      - file: b-page
+- caption: Part A
+  chapters:
+  - file: a-page
+    sections:
+    - file: a-1-page
+    - file: a-2-page
+- caption: Part B
+  chapters:
+  - file: b-page
+root: intro
