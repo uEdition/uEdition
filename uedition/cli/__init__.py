@@ -60,13 +60,13 @@ def version() -> None:
     print_cli(f'Configuration: {settings["version"]}')
 
 
-@language_app.command()
+@language_app.command("add")
 def language_add(path: str) -> None:
     """Add a language to the μEdition."""
     language_module.add(path)
 
 
-@language_app.command()
+@language_app.command("update")
 def language_update(path: str) -> None:
     """Update a language."""
     language_module.update(path)
