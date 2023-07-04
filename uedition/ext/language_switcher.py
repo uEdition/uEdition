@@ -18,6 +18,7 @@ def add_language_switcher(app: Sphinx) -> None:
         None, body=f"""DOCUMENTATION_OPTIONS.UEDITION = {json.dumps(settings)}"""
     )
     app.add_js_file("language_switcher.js")
+    app.add_css_file("language_switcher.css")
 
 
 def copy_custom_files(app: Sphinx, exc: bool) -> None:
@@ -27,6 +28,8 @@ def copy_custom_files(app: Sphinx, exc: bool) -> None:
         ext_pkg = files("uedition.ext")
         with as_file(ext_pkg / "language_switcher.js") as js_file:
             copy_asset_file(str(js_file), staticdir)
+        with as_file(ext_pkg / "language_switcher.css") as css_file:
+            copy_asset_file(str(css_file), staticdir)
 
 
 def setup(app: Sphinx) -> None:

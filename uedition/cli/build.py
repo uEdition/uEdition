@@ -138,12 +138,19 @@ def config_build(lang: dict) -> None:
         safe_dump(config, out_f, encoding="utf-8")
 
 
+def static_build(lang: dict) -> None:
+    """Copy the static files for a single language."""
+    if path.exists("static"):
+        copytree("static", path.join(lang["path"], "_static"), dirs_exist_ok=True)
+
+
 def full_build(lang: dict) -> None:
     """Run the full build process for a single language."""
     reload_settings()
     landing_build()
     toc_build(lang)
     config_build(lang)
+    static_build(lang)
     subprocess.run(
         [
             "jupyter-book",

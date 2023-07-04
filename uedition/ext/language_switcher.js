@@ -15,6 +15,7 @@
             const button = document.createElement('button');
             button.classList.add('btn');
             button.classList.add('dropdown-toggle');
+            button.classList.add('ue-language-switcher');
             button.setAttribute('aria-label', 'Switch to another language');
             button.setAttribute('aria-expanded', 'false');
             button.setAttribute('data-bs-toggle', 'dropdown');
