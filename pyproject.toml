@@ -42,12 +42,13 @@ Source = "https://github.com/unknown/uedition"
 [tool.hatch.version]
 path = "uedition/__about__.py"
 
-[tool.hatch.envs.dev]
+[tool.hatch.envs.default]
 extra-dependencies = [
-  "black"
+  "black",
 ]
-[tool.hatch.envs.dev.scripts]
+[tool.hatch.envs.default.scripts]
 codestyle = "black ."
+docs-server = "python docs/docs-server.py"
 
 [tool.hatch.envs.test]
 extra-dependencies = [

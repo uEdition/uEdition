@@ -1,0 +1,15 @@
+# https://jupyterbook.org/customize/config.html
+title: μEdition
+author: Mark Hall
+latex:
+  latex_documents:
+    targetname: book.tex
+bibtex_bibfiles:
+  - references.bib
+repository:
+  url: https://github.com/uEdition/uEdition
+  path_to_book: docs
+  branch: main
+html:
+  use_issues_button: true
+  use_repository_button: true
