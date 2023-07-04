@@ -5,5 +5,47 @@ hurdles, particularly around technical knowledge and hosting costs. The μEditio
 providing a simple tool that supports users in easily building (multi-lingual) digital editions that can then easily be made
 available online using free or low-cost hosting solutions.
 
-```{tableofcontents}
-```
+## Contents
+
+:::{tableofcontents}
+:::
+
+## Quickstart
+
+To quickly get started with the μEdition, follow these steps (assuming you already have Python 3.10 or newer installed):
+
+:::{code} console
+$ pipx install hatch uedition
+$ uedition create my-edition
+🎤 What is the name of your μEdition?
+   My Edition
+🎤 What is the μEdition author's name?
+   A.N. Editor
+🎤 What is the μEdition author's address?
+   a.n.editor@example.com
+🎤 Do you wish to automatically publish using GitHub Pages?
+   Yes
+🎤 What is the URL of the repository containing your μEdition?
+   https://github.com/aneditor/my-edition
+🎤 What is the repository branch containing your μEdition?
+   main
+
+Copying from template version 0.0.10
+    create  .
+    create  toc.yml
+    create  uEdition.yml
+    create  .uEdition.answers
+    create  .github
+    create  .github/workflows
+    create  .github/workflows/pages.yml
+    create  .gitignore
+    create  pyproject.toml
+$ uedition language add cy
+🎤 What is the language code?
+   cy
+🎤 What is the name of the language?
+   Cymraeg
+$ hatch run serve
+:::
+
+Your new digital edition will be available at http://localhost:8000.
