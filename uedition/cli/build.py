@@ -10,7 +10,7 @@ from os import path, makedirs
 from shutil import rmtree, copytree
 from yaml import safe_load, safe_dump
 
-from ..settings import settings
+from ..settings import settings, reload_settings
 
 
 def landing_build() -> None:
@@ -140,6 +140,7 @@ def config_build(lang: dict) -> None:
 
 def full_build(lang: dict) -> None:
     """Run the full build process for a single language."""
+    reload_settings()
     landing_build()
     toc_build(lang)
     config_build(lang)
