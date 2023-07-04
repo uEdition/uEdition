@@ -1,7 +1,10 @@
 (function() {
     async function setup() {
         try {
-            const buttonContainer = document.querySelector('.article-header-buttons');
+            let buttonContainer = document.querySelector('.article-header-buttons');
+            if (!buttonContainer) {
+                buttonContainer = document.querySelector('.navbar-header-items__end .navbar-item.navbar-persistent--container');
+            }
             if (!buttonContainer) {
                 return;
             }
