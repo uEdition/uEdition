@@ -5,6 +5,7 @@
 import json
 import subprocess
 
+from copy import deepcopy
 from os import path, makedirs
 from shutil import rmtree, copytree
 from yaml import safe_load, safe_dump
@@ -69,7 +70,7 @@ def landing_build() -> None:
 
 
 def toc_build(lang: dict) -> None:
-    """Build the language-specific TOC based on the main TOC."""
+    """Build the language-specific JupyterBook TOC based on the main TOC."""
     with open("toc.yml") as in_f:
         toc = safe_load(in_f)
 
@@ -79,7 +80,10 @@ def toc_build(lang: dict) -> None:
             if isinstance(value, dict):
                 if lang["code"] in value:
                     output[key] = value[lang["code"]]
-                elif settings["languages"][0]["code"] in value:
+                elif (
+                    len(settings["languages"]) > 0
+                    and settings["languages"][0]["code"] in value
+                ):
                     output[key] = value[settings["languages"][0]["code"]]
                 else:
                     output[key] = ""
@@ -93,10 +97,52 @@ def toc_build(lang: dict) -> None:
         safe_dump(walk(toc), out_f)
 
 
+def config_build(lang: dict) -> None:
+    """Build the language-specific JupyterBook config based on the main config."""
+    config = deepcopy(settings["jb_config"])
+    config["author"] = settings["author"]["name"]
+    # Set the language-specific title
+    if lang["code"] in settings["title"]:
+        config["title"] = settings["title"][lang["code"]]
+    elif (
+        len(settings["languages"]) > 0
+        and settings["languages"][0]["code"] in settings["title"]
+    ):
+        config["title"] = settings["title"][settings["languages"][0]["code"]]
+    else:
+        config["title"] = f"Missing title for {lang['label']}"
+    # Set the repository information
+    if settings["repository"]["url"] and "repository" not in config:
+        config["repository"] = {
+            "url": settings["repository"]["url"],
+            "path": lang["path"],
+            "branch": settings["repository"]["branch"],
+        }
+        if "html" not in config:
+            config["html"] = {}
+        if "use_repository_button" not in config["html"]:
+            config["html"]["use_repository_button"] = True
+    # Set the Sphinx language
+    if "sphinx" not in config:
+        config["sphinx"] = {}
+    if "config" not in config["sphinx"]:
+        config["sphinx"]["config"] = {}
+    config["sphinx"]["config"]["language"] = lang["code"]
+    # Add the uEdition extension
+    if "extra_extensions" not in config["sphinx"]:
+        config["sphinx"]["extra_extensions"] = []
+    if "uedition" not in config["sphinx"]["extra_extensions"]:
+        config["sphinx"]["extra_extensions"].append("uedition")
+
+    with open(path.join(lang["path"], "_config.yml"), "w") as out_f:
+        safe_dump(config, out_f)
+
+
 def full_build(lang: dict) -> None:
     """Run the full build process for a single language."""
     landing_build()
     toc_build(lang)
+    config_build(lang)
     subprocess.run(
         [
             "jupyter-book",
