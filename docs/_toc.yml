@@ -5,3 +5,5 @@ format: jb-book
 root: index
 chapters:
   - file: user/index
+    sections:
+      - file: user/installation
