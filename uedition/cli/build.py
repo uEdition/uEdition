@@ -94,7 +94,7 @@ def toc_build(lang: dict) -> None:
         return output
 
     with open(path.join(lang["path"], "_toc.yml"), "w") as out_f:
-        safe_dump(walk(toc), out_f)
+        safe_dump(walk(toc), out_f, encoding="utf-8")
 
 
 def config_build(lang: dict) -> None:
@@ -135,7 +135,7 @@ def config_build(lang: dict) -> None:
         config["sphinx"]["extra_extensions"].append("uedition")
 
     with open(path.join(lang["path"], "_config.yml"), "w") as out_f:
-        safe_dump(config, out_f)
+        safe_dump(config, out_f, encoding="utf-8")
 
 
 def full_build(lang: dict) -> None:
