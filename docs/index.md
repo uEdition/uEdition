@@ -15,8 +15,8 @@ available online using free or low-cost hosting solutions.
 To quickly get started with the μEdition, follow these steps (assuming you already have Python 3.10 or newer installed):
 
 :::{code} console
-$ pipx install hatch uedition
-$ uedition create my-edition
+$ pipx install hatch copier
+$ copier copy https://github.com/uEdition/uEdition-project-template my-edition
 🎤 What is the name of your μEdition?
    My Edition
 🎤 What is the μEdition author's name?
@@ -40,7 +40,8 @@ Copying from template version 0.0.10
     create  .github/workflows/pages.yml
     create  .gitignore
     create  pyproject.toml
-$ uedition language add cy
+$ cd my-edition
+$ hatch run uEdition language add cy
 🎤 What is the language code?
    cy
 🎤 What is the name of the language?
