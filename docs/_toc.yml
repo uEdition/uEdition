@@ -3,3 +3,14 @@
 
 format: jb-book
 root: index
+chapters:
+  - file: user/index
+    sections:
+      - file: user/installation
+      - file: user/create
+      - file: user/language-add
+      - file: user/content
+      - file: user/configuration
+      - file: user/publish
+      - file: user/update
+      - file: user/language-update
