@@ -6,9 +6,11 @@ build:
     python: "3.11"
   commands:
     - "pip install hatch"
+    - "cd docs"
     - "hatch run uEdition build"
+    - "cd .."
     - "mkdir _readthedocs"
-    - "mv site _readthedocs/html"
+    - "mv docs/site _readthedocs/html"
 #  jobs:
 #    pre_build:
 #      - "jupyter-book config sphinx docs/"
