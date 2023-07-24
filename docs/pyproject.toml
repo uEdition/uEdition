@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "μedition"
+name = "uedition"
 description = 'The μEdition μEdition'
 readme = "README.md"
 requires-python = ">=3.10"
