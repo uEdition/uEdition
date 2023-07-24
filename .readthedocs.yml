@@ -16,6 +16,8 @@ python:
   install:
     - method: pip
       path: .
+      extra_requirements:
+        - hatch
 #      extra_requirements:
 #      - sphinx
 
