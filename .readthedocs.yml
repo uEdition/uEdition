@@ -6,7 +6,7 @@ build:
     python: "3.11"
   commands:
     - "pip install hatch"
-    - "cd docs && bash -c hatch run build"
+    - "cd docs && bash -c 'hatch run build'"
     - "mkdir _readthedocs"
     - "mv docs/site _readthedocs/html"
 #  jobs:
