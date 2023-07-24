@@ -9,19 +9,8 @@ build:
     - "cd docs && hatch run build"
     - "mkdir _readthedocs"
     - "mv docs/site _readthedocs/html"
-#  jobs:
-#    pre_build:
-#      - "jupyter-book config sphinx docs/"
 
 python:
   install:
     - method: pip
       path: .
-      extra_requirements:
-        - hatch
-#      extra_requirements:
-#      - sphinx
-
-#sphinx:
-#  builder: html
-#  fail_on_warning: false
