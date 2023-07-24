@@ -5,10 +5,14 @@ languages:
 - code: en
   label: English
   path: en
+- code: de
+  label: Deutsch
+  path: de
 output: site
 repository:
   branch: main
   url: https://github.com/uEdition/uEdition
-version: '1'
 title:
-  en: μEdition
+  en: "\u03BCEdition"
+  de: "\u03BCEdition"
+version: '1'
