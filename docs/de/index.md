@@ -5,12 +5,12 @@ hurdles, particularly around technical knowledge and hosting costs. The μEditio
 providing a simple tool that supports users in easily building (multi-lingual) digital editions that can then easily be made
 available online using free or low-cost hosting solutions.
 
-## Contents
+## Inhaltsverzeichnis
 
 :::{tableofcontents}
 :::
 
-## Quickstart
+## Schnellstart
 
 To quickly get started with the μEdition, follow these steps (assuming you already have Python 3.10 or newer installed):
 
