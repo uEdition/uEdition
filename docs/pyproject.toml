@@ -4,8 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "uedition"
-description = 'The μEdition μEdition'
-readme = "README.md"
+description = 'The μEdition Documentation'
 requires-python = ">=3.10"
 keywords = []
 authors = [
