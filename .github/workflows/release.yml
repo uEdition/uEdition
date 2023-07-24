@@ -9,6 +9,13 @@ jobs:
   pypi:
     runs-on: ubuntu-latest
 
+    environment:
+      name: pypi
+      url: https://pypi.org/project/uedition
+
+    permissions:
+      id-token: write
+
     steps:
     - uses: actions/checkout@v3
 
@@ -17,21 +24,14 @@ jobs:
         python-version: |
           3.11
 
-    - name: Add .local path
-      run: |
-        echo "PATH=$HOME/.local/bin:$PATH" >> $GITHUB_ENV
-        echo "PIPX_HOME=$HOME/.local/pipx" >> $GITHUB_ENV
-        echo "PIPX_BIN_DIR=$HOME/.local/bin" >> $GITHUB_ENV
-
     - name: Install Base Dependencies
       run: |
-        sudo apt-get install python3-venv pipx
-        pipx install hatch
+        sudo apt-get install python3-venv
+        sudo pip install hatch
 
     - name: Build the package
       run: |
         hatch build
 
-    - name: Publish the package
-      run: |
-        hatch publish --user __token__ --auth ${{ secrets.HATCH_INDEX_AUTH }}
+    - name: Publish package distributions to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
