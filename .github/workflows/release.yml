@@ -26,7 +26,8 @@ jobs:
 
     - name: Install Base Dependencies
       run: |
-        sudo apt-get install python3-venv hatch
+        sudo apt-get install python3-venv
+        sudo pip install hatch
 
     - name: Build the package
       run: |
