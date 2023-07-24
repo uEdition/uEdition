@@ -5,6 +5,7 @@ build:
   tools:
     python: "3.11"
   commands:
+    - "pip install hatch"
     - "hatch run uEdition build"
     - "mkdir _readthedocs"
     - "mv site _readthedocs/html"
