@@ -6,10 +6,7 @@ build:
     python: "3.11"
   commands:
     - "pip install hatch"
-    - "cd docs"
-    - "pwd"
-    - "hatch run uEdition build"
-    - "cd .."
+    - "cd docs && hatch run uEdition build"
     - "mkdir _readthedocs"
     - "mv docs/site _readthedocs/html"
 #  jobs:
