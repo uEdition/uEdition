@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "uedition"
+name = "uedition_docs"
 description = 'The μEdition Documentation'
 requires-python = ">=3.10"
 keywords = []
