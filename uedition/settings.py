@@ -39,15 +39,41 @@ class LanguageSetting(BaseModel):
     """The path the language's content is at."""
 
 
+class RepositorySettings(BaseModel):
+    """Settings for the git repository."""
+
+    url: str | None = None
+    """The repository's URL."""
+    branch: str | None = None
+    """The repository's branch."""
+
+
+class AuthorSettings(BaseModel):
+    """Settings for the author configuration."""
+
+    name: str = "Unnamed"
+    """The author's name."""
+    email: str = ""
+    """The author's contact e-mail."""
+
+
 class Settings(BaseSettings):
     """Application settings."""
 
     version: str = "1"
     """The configuration file version."""
+    author: AuthorSettings = AuthorSettings()
+    """The author settings."""
     languages: list[LanguageSetting] = []
     """The configured languages."""
     output: str = "docs"
     """The output directory."""
+    repository: RepositorySettings = RepositorySettings()
+    """The repository settings."""
+    title: dict = {}
+    """The titles for the individual languages."""
+    jb_config: dict = {}
+    """Additional JupyterBook configuration."""
 
     class Config:
         """Configuration overrides."""

@@ -1,0 +1,18 @@
+author:
+  email: mark.hall@work.room3b.eu
+  name: Mark Hall
+languages:
+- code: en
+  label: English
+  path: en
+- code: de
+  label: Deutsch
+  path: de
+output: site
+repository:
+  branch: main
+  url: https://github.com/uEdition/uEdition
+title:
+  en: "\u03BCEdition"
+  de: "\u03BCEdition"
+version: '1'

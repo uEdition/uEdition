@@ -161,6 +161,7 @@ class LanguageConsistencyChecks(Thread):
                         self.errors.append(
                             f"{lang_toc_path} {mismatch[0]} {base_toc_path}"
                         )
+            self._progress.update(self._task, advance=1)
 
 
 def run() -> None:
