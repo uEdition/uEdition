@@ -51,7 +51,7 @@ class TEIParser(SphinxParser):
         :param document: The root docutils node to add AST elements to
         :type document: :class:`~docutils.nodes.document`
         """
-        root = etree.fromstring(inputstring.encode("UTF-8"))
+        root = etree.fromstring(inputstring.encode("UTF-8"))  # noqa: S320
         title = root.xpath(
             "string(/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title)",
             namespaces=namespaces,
@@ -102,7 +102,7 @@ class TEIParser(SphinxParser):
         for key, value in node.attrib.items():
             # Always strip the namespace from the `id` attribute
             if key == "{http://www.w3.org/XML/1998/namespace}id":
-                key = "id"
+                key = "id"  # noqa: PLW2901
             if rule and "attributes" in rule:
                 processed = False
                 for attr_rule in rule["attributes"]:
@@ -115,7 +115,7 @@ class TEIParser(SphinxParser):
                             processed = True
                     elif attr_rule["action"] == "set":
                         if key == attr_rule["attr"]:
-                            value = attr_rule["value"]
+                            value = attr_rule["value"]  # noqa: PLW2901
                 # if the attribute did not match any attribute transform
                 if not processed:
                     # The id attribute is always output as is, all other attributes are prefixed with `data-`
@@ -123,7 +123,7 @@ class TEIParser(SphinxParser):
                         attributes["id"] = value
                     else:
                         attributes[f"data-{key}"] = value
-            else:
+            else:  # noqa: PLR5501
                 # The id attribute is always output as is, all other attributes are prefixed with `data-`
                 if key == "id":
                     attributes["id"] = value
@@ -140,10 +140,9 @@ class TEIParser(SphinxParser):
             # If there is a `text` key in the rule, use that to set the text
             if rule["text"]["action"] == "from-attribute" and rule["text"]["attr"] in node.attrib:
                 new_element.append(nodes.Text(node.attrib[rule["text"]["attr"]]))
-        else:
-            if node.text and (is_leaf or not text_only_in_leaf_nodes):
-                # Only create text content if there is text and we either are in a leaf node or are adding all text
-                new_element.append(nodes.Text(node.text))
+        elif node.text and (is_leaf or not text_only_in_leaf_nodes):
+            # Only create text content if there is text and we either are in a leaf node or are adding all text
+            new_element.append(nodes.Text(node.text))
         # Process any children
         for child in node:
             self._walk_tree(child, new_element, rules)
