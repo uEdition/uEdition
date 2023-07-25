@@ -1,9 +1,9 @@
 # μEdition
 
-The process of creating and making available a (critical) digital edition often presents projects with a range of significant
-hurdles, particularly around technical knowledge and hosting costs. The μEdition is a framwork that lowers these barriers by
-providing a simple tool that supports users in easily building (multi-lingual) digital editions that can then easily be made
-available online using free or low-cost hosting solutions.
+Das Erstellen einer kritischen, digitalen Edition bringt mit sich eine Reihe signifikanter Hürden, besonders wenn es um
+die technischen Anforderungen und Hostingkosten geht. Die μEdition bietet ein Gerüst um diese Hürden zu reduzieren, indem
+es ein einfaches Werkzeug anbietet, welches Projekte darin unterstützt einfach (multilinguale) digitale Editionen zu
+erstellen, welche dann über gratis oder billige Hostinglösungen online verfügbar gemacht werden können.
 
 ## Inhaltsverzeichnis
 
@@ -12,7 +12,7 @@ available online using free or low-cost hosting solutions.
 
 ## Schnellstart
 
-To quickly get started with the μEdition, follow these steps (assuming you already have Python 3.10 or newer installed):
+Für einen Schnellstart mit der μEdition, folgens sie diesen Schritten (Python 3.10 oder nuer muss bereits installiert sein):
 
 :::{code} console
 $ pipx install hatch copier
@@ -23,8 +23,11 @@ $ copier copy https://github.com/uEdition/uEdition-project-template my-edition
    A.N. Editor
 🎤 What is the μEdition author's address?
    a.n.editor@example.com
-🎤 Do you wish to automatically publish using GitHub Pages?
-   Yes
+🎤 Do you wish to automatically publish your μEdition?
+   (Use arrow keys)
+ » Disable automatic publishing
+   Via GitHub Pages
+   Via Read the Docs
 🎤 What is the URL of the repository containing your μEdition?
    https://github.com/aneditor/my-edition
 🎤 What is the repository branch containing your μEdition?
