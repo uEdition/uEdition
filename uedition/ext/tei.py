@@ -227,6 +227,7 @@ class TEIParser(SphinxParser):
     def _parse_single_field(
         self: "TEIParser", parent: etree.Element, field: dict, root: etree.Element
     ) -> None:
+        """Parse a single metadata field."""
         content = root.xpath(field["content"], namespaces=namespaces)
         if len(content) > 0:
             content = content[0]
@@ -242,6 +243,7 @@ class TEIParser(SphinxParser):
     def _parse_list_field(
         self: "TEIParser", parent: etree.Element, field: dict, root: etree.Element
     ) -> None:
+        """Parse a list of metadata fields."""
         content = root.xpath(field["content"], namespaces=namespaces)
         if len(content) > 0:
             li = nodes.definition_list_item()
