@@ -6,11 +6,11 @@
 This module handles reading the uEdition-specific configuration settings, validating them and
 adding any required default values.
 """
-from pydantic import BaseModel, validator, ValidationError
+from typing import Literal, Optional, Union
+
+from pydantic import BaseModel, ValidationError, validator
 from sphinx.application import Sphinx
 from sphinx.util import logging
-from typing import Union, Literal, Optional
-
 
 logger = logging.getLogger(__name__)
 
@@ -29,15 +29,13 @@ class RuleSelector(BaseModel):
     attributes: list[RuleSelectorAttribute] = []
 
     @validator("tag", pre=True)
-    def expand_tag_namespace(
-        cls: "RuleSelector", v: str, values: dict, **kwargs: dict
-    ) -> str:
+    def expand_tag_namespace(self: "RuleSelector", v: str, values: dict, **kwargs: dict) -> str:
         """Expand any ```tei:``` namespace prefixes."""
         return v.replace("tei:", "{http://www.tei-c.org/ns/1.0}")
 
     @validator("attributes", pre=True)
     def convert_dict_attributes_to_list(
-        cls: "RuleSelector", v: dict | list, values: dict, **kwargs: dict
+        self: "RuleSelector", v: dict | list, values: dict, **kwargs: dict
     ) -> list[dict]:
         """Convert a single attributes dictionary to a list with that dictionary."""
         if isinstance(v, dict):
@@ -81,14 +79,10 @@ class Rule(BaseModel):
     selector: RuleSelector
     tag: Union[str, None] = "div"
     text: Union[RuleText, None] = None
-    attributes: list[
-        Union[RuleAttributeCopy, RuleAttributeSet, RuleAttributeDelete]
-    ] = []
+    attributes: list[Union[RuleAttributeCopy, RuleAttributeSet, RuleAttributeDelete]] = []
 
     @validator("selector", pre=True)
-    def convert_str_selector_to_dict(
-        cls: "Rule", v: str | dict, values: dict, **kwargs: dict
-    ) -> dict:
+    def convert_str_selector_to_dict(self: "Rule", v: str | dict, values: dict, **kwargs: dict) -> dict:
         """Convert a simple string selector into the dictionary representation."""
         if isinstance(v, str):
             return {"tag": v}
@@ -170,25 +164,13 @@ def validate_config(app: Sphinx, config: Config) -> None:
     """Validate the configuration and add any default values."""
     if config.uEdition:
         if "tei" in config.uEdition:
-            if "sections" in config.uEdition["tei"] and isinstance(
-                config.uEdition["tei"]["sections"], list
-            ):
-                if "mappings" in config.uEdition["tei"] and isinstance(
-                    config.uEdition["tei"]["mappings"], list
-                ):
+            if "sections" in config.uEdition["tei"] and isinstance(config.uEdition["tei"]["sections"], list):
+                if "mappings" in config.uEdition["tei"] and isinstance(config.uEdition["tei"]["mappings"], list):
                     for section in config.uEdition["tei"]["sections"]:
-                        if "mappings" in section and isinstance(
-                            section["mappings"], list
-                        ):
-                            section["mappings"] = (
-                                section["mappings"]
-                                + config.uEdition["tei"]["mappings"]
-                                + BASE_RULES
-                            )
+                        if "mappings" in section and isinstance(section["mappings"], list):
+                            section["mappings"] = section["mappings"] + config.uEdition["tei"]["mappings"] + BASE_RULES
                         else:
-                            section["mappings"] = (
-                                config.uEdition["tei"]["mappings"] + BASE_RULES
-                            )
+                            section["mappings"] = config.uEdition["tei"]["mappings"] + BASE_RULES
         try:
             config.uEdition = Config(**config.uEdition).dict()
         except ValidationError as e:

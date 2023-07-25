@@ -3,20 +3,18 @@
 # SPDX-License-Identifier: MIT
 """The Language Switcher extension."""
 import json
-
-from importlib.resources import files, as_file
+from importlib.resources import as_file, files
 from os import path
+
 from sphinx.application import Sphinx
 from sphinx.util.fileutil import copy_asset_file
 
-from ..settings import settings
+from uedition.settings import settings
 
 
 def add_language_switcher(app: Sphinx) -> None:
     """Add the language switcher in-line and file JavaScript."""
-    app.add_js_file(
-        None, body=f"""DOCUMENTATION_OPTIONS.UEDITION = {json.dumps(settings)}"""
-    )
+    app.add_js_file(None, body=f"""DOCUMENTATION_OPTIONS.UEDITION = {json.dumps(settings)}""")
     app.add_js_file("language_switcher.js")
     app.add_css_file("language_switcher.css")
 

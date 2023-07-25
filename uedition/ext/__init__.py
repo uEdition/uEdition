@@ -4,7 +4,7 @@
 """Sphinx extensions for the uEdition."""
 from sphinx.application import Sphinx
 
-from . import config, tei, language_switcher
+from uedition.ext import config, language_switcher, tei
 
 
 def setup(app: Sphinx) -> None:

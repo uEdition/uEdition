@@ -1,8 +1,8 @@
 """Py.test fixtures."""
 import os
+from shutil import rmtree
 
 from pytest import fixture
-from shutil import rmtree
 from typer.testing import CliRunner
 
 
@@ -57,11 +57,11 @@ def multilang_app() -> None:
     """Yield a fully featured application with multiple languages configured."""
     cwd = os.getcwd()
     os.chdir("tests/fixtures/multilang")
-    if os.path.exists("docs"):  # noqa: cov
+    if os.path.exists("docs"):
         rmtree("docs")
-    if os.path.exists("en/_build"):  # noqa: cov
+    if os.path.exists("en/_build"):
         rmtree("en/_build")
-    if os.path.exists("de/_build"):  # noqa: cov
+    if os.path.exists("de/_build"):
         rmtree("de/_build")
     from uedition.cli import app
     from uedition.settings import reload_settings
