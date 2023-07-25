@@ -23,8 +23,11 @@ $ copier copy https://github.com/uEdition/uEdition-project-template my-edition
    A.N. Editor
 🎤 What is the μEdition author's address?
    a.n.editor@example.com
-🎤 Do you wish to automatically publish using GitHub Pages?
-   Yes
+🎤 Do you wish to automatically publish your μEdition?
+   (Use arrow keys)
+ » Disable automatic publishing
+   Via GitHub Pages
+   Via Read the Docs
 🎤 What is the URL of the repository containing your μEdition?
    https://github.com/aneditor/my-edition
 🎤 What is the repository branch containing your μEdition?
