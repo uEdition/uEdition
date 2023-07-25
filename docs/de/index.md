@@ -33,7 +33,7 @@ $ copier copy https://github.com/uEdition/uEdition-project-template my-edition
 🎤 What is the repository branch containing your μEdition?
    main
 
-Copying from template version 0.0.10
+Copying from template version 0.1.0
     create  .
     create  toc.yml
     create  uEdition.yml
