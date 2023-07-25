@@ -6,6 +6,7 @@
 All application settings are accessed via the `settings` dictionary.
 """
 import os
+from typing import Any
 
 from pydantic import BaseModel
 from pydantic.fields import FieldInfo
@@ -65,16 +66,12 @@ class YAMLConfigSettingsSource(PydanticBaseSettingsSource):
 def uedition_yaml_settings(settings: BaseSettings) -> dict[str, Any]:
     """Load the settings from a uEdition.yaml or uEdition.yml file."""
     if os.path.exists("uEdition.yaml"):
-        with open(
-            "uEdition.yaml", encoding=settings.__config__.env_file_encoding
-        ) as in_f:
+        with open("uEdition.yaml", encoding=settings.__config__.env_file_encoding) as in_f:
             return safe_load(in_f)
     elif os.path.exists("uEdition.yml"):
-        with open(
-            "uEdition.yml", encoding=settings.__config__.env_file_encoding
-        ) as in_f:
+        with open("uEdition.yml", encoding=settings.__config__.env_file_encoding) as in_f:
             return safe_load(in_f)
-    return dict()
+    return {}
 
 
 class LanguageSetting(BaseModel):

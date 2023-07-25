@@ -1,5 +1,6 @@
 """Py.test fixtures."""
 import os
+from shutil import rmtree
 
 from pytest import fixture
 from shutil import rmtree

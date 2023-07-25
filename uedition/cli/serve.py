@@ -2,12 +2,13 @@
 #
 # SPDX-License-Identifier: MIT
 """Local server that automatically rebuilds on changes."""
-from livereload import Server
 from os import path
 from typing import Callable
 
-from .build import full_build, partial_build
-from ..settings import settings
+from livereload import Server
+
+from uedition.cli.build import full_build, partial_build
+from uedition.settings import settings
 
 
 def build_cmd(lang: dict, full: bool = True) -> Callable[[], None]:
@@ -33,9 +34,7 @@ def run() -> None:
     for cmd in full_rebuilds:
         cmd()
     server = Server()
-    for lang, full_cmd, partial_cmd in zip(
-        settings["languages"], full_rebuilds, partial_rebuilds
-    ):
+    for lang, full_cmd, partial_cmd in zip(settings["languages"], full_rebuilds, partial_rebuilds):
         server.watch("*.yml", full_cmd)
         server.watch(path.join("static", "**", "*.*"), full_cmd)
         server.watch(path.join(lang["path"], "**", "*.*"), partial_cmd)
