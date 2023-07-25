@@ -52,4 +52,4 @@ $ hatch run uEdition language add cy
 $ hatch run serve
 :::
 
-Your new digital edition will be available at http://localhost:8000.
+Die neue, digitale Edition ist dann unter http://localhost:8000 verfügbar.
