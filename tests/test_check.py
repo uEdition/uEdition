@@ -10,9 +10,7 @@ def test_check_multilang(runner: CliRunner, multilang_app: Typer) -> None:
     assert "All checks successfully passed" in result.stdout
 
 
-def test_check_missing_core_files(
-    runner: CliRunner, missing_core_files_app: Typer
-) -> None:
+def test_check_missing_core_files(runner: CliRunner, missing_core_files_app: Typer) -> None:
     """Test that missing core files (_config.yml, _toc.yml) are correctly reported."""
     result = runner.invoke(missing_core_files_app, ["check"])
     assert result.exit_code == 1
@@ -21,9 +19,7 @@ def test_check_missing_core_files(
     assert "Missing toc file en/_toc.yml" in result.stdout
 
 
-def test_check_invalid_core_files_app(
-    runner: CliRunner, invalid_core_files_app: Typer
-) -> None:
+def test_check_invalid_core_files_app(runner: CliRunner, invalid_core_files_app: Typer) -> None:
     """Test that missing core files (_config.yml, _toc.yml) are correctly reported."""
     result = runner.invoke(invalid_core_files_app, ["check"])
     assert result.exit_code == 1
@@ -41,9 +37,7 @@ def test_missing_toc_root(runner: CliRunner, missing_toc_root_app: Typer) -> Non
     assert "No root in en/_toc.yml" in result.stdout
 
 
-def test_missing_toc_root_file(
-    runner: CliRunner, missing_toc_root_file_app: Typer
-) -> None:
+def test_missing_toc_root_file(runner: CliRunner, missing_toc_root_file_app: Typer) -> None:
     """Test that a missing root file is correctly reported."""
     result = runner.invoke(missing_toc_root_file_app, ["check"])
     assert result.exit_code == 1
