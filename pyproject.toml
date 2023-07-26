@@ -102,6 +102,7 @@ select = [
   "ANN",
   "B",
   "C",
+  "D",
   "DTZ",
   "E",
   "EM",
@@ -135,6 +136,8 @@ ignore = [
   "C901", "PLR0911", "PLR0912", "PLR0913", "PLR0915",
   # Ignore self annotations
   "ANN101",
+  # Ignore conflicting documentation options
+  "D203", "D213",
 ]
 unfixable = [
   # Don't touch unused imports

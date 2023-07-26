@@ -107,7 +107,7 @@ class TEITranslator(nodes.GenericNodeVisitor):
         return {"tagname": "div", "type": "block"}
 
     def default_visit(self, node: nodes.Element) -> None:
-        """Default node visit method."""
+        """Visit a generic node."""
         rule = self.rule_for_node(node)
         # Skip the node if it has no associated TEI "tagname"
         if "tagname" not in rule:
@@ -171,7 +171,7 @@ class TEITranslator(nodes.GenericNodeVisitor):
             self.output.append(self.newline)
 
     def default_departure(self, node: nodes.Element) -> None:
-        """Default node depart method."""
+        """Depart a generic node."""
         rule = self.rule_for_node(node)
         self.level -= 1
         # Only indent if we are not inside an inline element
@@ -230,9 +230,6 @@ class TEIBuilder(XMLBuilder):
     writer: XMLWriter
     default_translator_class = TEITranslator
 
-    def init(self) -> None:
-        pass
-
     def get_outdated_docs(self) -> Iterator[str]:
         """Determine the list of outdated documents."""
         for docname in self.env.found_docs:
@@ -253,6 +250,7 @@ class TEIBuilder(XMLBuilder):
                 pass
 
     def get_target_uri(self, docname: str, typ: str | None = None) -> str:  # noqa: ARG002
+        """Return the `docname` as the target_uri."""
         return docname
 
     def prepare_writing(self, docnames: set[str]) -> None:  # noqa: ARG002
