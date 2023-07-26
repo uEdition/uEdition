@@ -99,6 +99,7 @@ line-length = 120
 select = [
   "A",
   "ARG",
+  "ANN",
   "B",
   "C",
   "DTZ",
@@ -132,6 +133,8 @@ ignore = [
   "S105", "S106", "S107",
   # Ignore complexity
   "C901", "PLR0911", "PLR0912", "PLR0913", "PLR0915",
+  # Ignore self annotations
+  "ANN101",
 ]
 unfixable = [
   # Don't touch unused imports
