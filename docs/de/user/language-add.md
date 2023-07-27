@@ -1,14 +1,14 @@
-# Adding a Language
+# Eine Sprache hinzufügen
 
-The μEdition has multi-language support as a core principle. Thus, even if you are planning to release your edition in
-a single language only, you need to explicitly configure this one language.
+In der μEdition ist Mehrsprachigkeit eine Kernfunktionalität. Das bedeutet, dass selbst wenn die Edition nur in einer
+einzigen Sprache veröffentlicht werden soll, diese Sprache trotzdem explizit konfiguriert werden muss.
 
-To add a language to your μEdition, run the following command:
+Um der μEdition eine Sprache hinzuzufügen, führen sie folgenden Befehl aus:
 
 :::{code-block} console
-$ hatch run uEdition language add FOLDER_NAME
+$ hatch run uEdition language add ORDERNAME
 :::
 
-Replace `FOLDER_NAME` with the name of the folder that the μEdition content for that language is to be placed in. The
-process will ask you for some detail about the language you are adding and will then create skeleton in the folder,
-which is then ready for editing.
+Ersetzen sie `ORDNERNAME` mit dem Namen des Orderners in dem die Inhalte in der Sprache gespeichert werden. Der Vorgang
+wird ein paar Detailfragen zu der neuen Sprache abfragen und dann ein Inhaltsskelet in dem Ordern erzeugen, welches
+dann bereit ist um ediert zu werden.

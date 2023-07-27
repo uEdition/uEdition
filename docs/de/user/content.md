@@ -1,12 +1,11 @@
-# Writing Content
+# Inhalte hinzufügen
 
-The μEdition uses [Jupyter Book](https://jupyterbook.org) as its underlying technology for turning your text into a
-publishable website. Each language in the μEdition is a separate Jupyter Book and the μEdition provides the glue that
-merges the individual outputs together into a single site. This is achieved by moving the Jupyter Book configuration
-into shared configuration files. When the μEdition builds the final website, language-specific versions of the
-configurations are added to each language-specific Jupyter Book, before the Jupyter Book build process is then run
-for each language. Due to this structure, most of the guidance that the Jupyter Book project provides for writing
-and configuring Jupyter Book projects can be used in the μEdition.
+Die μEdition nutzt [Jupyter Book](https://jupyterbook.org) um aus den Inhalten eine Webseite zu generieren,
+welche dann veröffentlicht werden kann. Wenn die Webseite generiert wird, generiert die μEdition zuerst die
+Webseiten für die einzelnen Sprachen und fügt dann die notwendigen Element hinzu um die einzelnen Sprachen
+zusammenzufügen. Da die μEdition auf dem Jupyter Book aufbaut, sind der Großteil der Dokumentation des
+Jupyter Book Projekts auch für die μEdition nutzbar. Der einzige Unterschied ist, dass die μEdition eine
+Konfigurationsdatei und ein Inhaltsverzeichnisse für alle Sprachen nutzt.
 
 ## Structuring the μEdition
 

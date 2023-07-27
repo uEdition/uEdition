@@ -12,7 +12,7 @@ is used.
 
 The easiest way to install both Copier and Hatch is via [pipx](https://pypa.github.io/pipx/), which you can
 [install from here](https://pypa.github.io/pipx/installation/). When you have pipx installed, then on the commandline
-run the following command to install Copier:
+run the following command to install Copier and Hatch:
 
 :::{code} console
 $ pipx install copier
