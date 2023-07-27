@@ -1,37 +1,37 @@
 # Installation
 
-The μEdition is built on top of a set of other tools and in order to create our first μEdition, it is necessary to first
-install these dependencies.
+Die μEdition baut auf einer Reihe von Werkzeugen auf und um die erste μEdition zu erstellen, müssen diese Werkzeuge
+installiert werden.
 
-The μEdition is built in Python and supports version 3.10 and 3.11 [^python-version]. In order to use it, please
-[install an appropriate version of Python for your operating system](https://python.org/downloads).
+Die μEdition nutzt Python und unterstützt Versionen 3.10 und 3.11 [^python-version]. Bitte
+[installieren sie die Python Version für ihr Betriebssystem](https://python.org/downloads).
 
-For the initial creation of a new μEdition, the μEdition uses a tool called [Copier](https://copier.readthedocs.io/en/stable/).
-To install all required μEdition dependencies and to run the various μEdition tools, [Hatch](https://hatch.pypa.io)
-is used.
+Für die Erstellung einer μEdition wird ein Werkzeug namens [Copier](https://copier.readthedocs.io/en/stable/) genutzt.
+Für die Installation aller weiteren Abhängigkeiten und um die verschiedenen μEdition Funktionen aufzurufen wird
+[Hatch](https://hatch.pypa.io) genutzt.
 
-The easiest way to install both Copier and Hatch is via [pipx](https://pypa.github.io/pipx/), which you can
-[install from here](https://pypa.github.io/pipx/installation/). When you have pipx installed, then on the commandline
-run the following command to install Copier:
+Die einfachste Weise um beide zu installieren ist mittels [pipx](https://pypa.github.io/pipx/), welches
+[von hier installiert werden kann](https://pypa.github.io/pipx/installation/). Nach der pipx installation nutzen sie
+die folgenden zwei Befehle um Copier und Hatch zu installieren:
 
 :::{code} console
 $ pipx install copier
 $ pipx install hatch
 :::
 
-You can test that your installation has been successful by running
+Um zu überprüfen, dass die Installationen erfolgreich waren, nutzen sie die folgenden Befehle:
 
 :::{code} console
 $ copier
 $ hatch
 :::
 
-If the two commands show you a summary of the available options and commands, then the core tools are installed correctly.
+Wenn beide Befehle eine Zusammenfassung der verfügbaren Optionen und Befehle für die zwei Werkzeuge anzeigen, dann
+sind beide Werkzeuge korrekt installiert.
 
-In order to work collaboratively and for the GitHub Pages publishing functionality to work, you also need to install the
-version control system [Git](https://git-scm.com/downloads). Providing you with a full intro to using git exceeds the
-space we have here, but there are many good git tutorials out there and there is also the
-[official documentation](https://git-scm.com/doc).
+Um im Team zusammenzuarbeiten und für die GitHub Pages Veröffentlichungsfunktionalität, muss auch das Versionskontrollwerkzeug
+[Git](https://git-scm.com/downloads) installiert sein. Eine vollständige Einführung in Git übersteigt den Platz hier,
+aber es gibt viele gute Tutorials im Netz und die [offizielle Dokumentation](https://git-scm.com/doc) ist auch hilfreich.
 
-[^python-version]: The μEdition is tested using Python 3.10 and 3.11. It may also work on newer Python version,
-  it just hasn't been tested on those.
+[^python-version]: The μEdition wird mit Python 3.10 and 3.11 getested. Die μEdition funktioniert möglicherweise auch mit
+  neueren Python Versionen, ist aber auf diesen noch nicht getestet worden.

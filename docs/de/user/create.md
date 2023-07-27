@@ -1,13 +1,15 @@
-# Creating a μEdition
+# Eine μEdition erstellen
 
-With all the pre-requisites installed correctly, you are now ready to create your first μEdition. On the commandline
-navigate to the folder where you want to create your μEdition and run:
+Jetzt wo alle Vorraussetzungen installiert sind, kann die erste μEdition erstellt werden. Auf der Kommandozeile
+navigieren sie in den Ordner in dem die μEdition erstellt werden soll und führen sie folgenden Befehl aus:
 
 :::{code-block} console
-$ copier copy https://github.com/uEdition/uEdition-project-template my-edition
+$ copier copy gh:uEdition/uEdition-project-template my-edition
 :::
 
-Replace `my-edition` with the name of the folder you want your edition to be created in. The setup process will ask
-you a few questions about your new μEdition and create a skeleton μEdition in the folder you specified.
+Ersetzen sie `my-edition` mit dem Ordernamen in dem die μEdition erstellt werden soll. Der Installationsvorgang
+wird eine Reihe an Fragen stellen, um die neue μEdition zu konfigurieren und dann das μEditionsskeleton in dem
+Ordern erzeugen.
 
-On the commandline, navigate into that new folder and all further commands are to be run inside that folder.
+Navigieren sie danach auf der Kommandozeile in den neuen Ordern und führen alle weiteren Befehle innerhalb des
+Ordners aus.
