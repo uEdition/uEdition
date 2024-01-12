@@ -7,10 +7,24 @@ All application settings are accessed via the `settings` dictionary.
 """
 import os
 
-from pydantic import BaseSettings, BaseModel
-from pydantic.env_settings import SettingsSourceCallable
+from pydantic import BaseModel
+from pydantic_settings import BaseSettings, PydanticBaseSettingsSource
 from yaml import safe_load
-from typing import Any
+from typing import Any, Type, Tuple, Dict
+
+
+class YAMLConfigSettingsSource(PydanticBaseSettingsSource):
+    """Loads the configuration settings from a YAML file."""
+
+    def __call__(self: "YAMLConfigSettingsSource") -> Dict[str, Any]:
+        """Call the loader."""
+        if os.path.exists("uEdition.yaml"):
+            with open("uEdition.yaml", encoding="utf-8") as in_f:
+                return safe_load(in_f)
+        elif os.path.exists("uEdition.yml"):
+            with open("uEdition.yml", encoding="utf-8") as in_f:
+                return safe_load(in_f)
+        return dict()
 
 
 def uedition_yaml_settings(settings: BaseSettings) -> dict[str, Any]:
@@ -75,26 +89,25 @@ class Settings(BaseSettings):
     jb_config: dict = {}
     """Additional JupyterBook configuration."""
 
-    class Config:
-        """Configuration overrides."""
+    @classmethod
+    def settings_customise_sources(
+        cls: Type["Settings"],
+        settings_cls: Type[BaseSettings],
+        init_settings: PydanticBaseSettingsSource,
+        env_settings: PydanticBaseSettingsSource,
+        dotenv_settings: PydanticBaseSettingsSource,
+        file_secret_settings: PydanticBaseSettingsSource,
+    ) -> Tuple[PydanticBaseSettingsSource, ...]:
+        """Customise the settings sources."""
+        return (
+            init_settings,
+            env_settings,
+            file_secret_settings,
+            YAMLConfigSettingsSource(settings_cls),
+        )
 
-        @classmethod
-        def customise_sources(
-            cls,  # noqa: ANN102
-            init_settings: SettingsSourceCallable,
-            env_settings: SettingsSourceCallable,
-            file_secret_settings: SettingsSourceCallable,
-        ) -> tuple[SettingsSourceCallable, ...]:
-            """Add the YAMl loading functionality."""
-            return (
-                env_settings,
-                init_settings,
-                file_secret_settings,
-                uedition_yaml_settings,
-            )
 
-
-settings = Settings().dict()
+settings = Settings().model_dump()
 
 
 def reload_settings() -> None:
