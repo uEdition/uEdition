@@ -9,9 +9,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
 keywords = []
-authors = [
-  { name = "Mark Hall", email = "mark.hall@work.room3b.eu" },
-]
+authors = [{ name = "Mark Hall", email = "mark.hall@work.room3b.eu" }]
 classifiers = [
   "Development Status :: 4 - Beta",
   "Programming Language :: Python",
@@ -21,13 +19,14 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = [
+  "copier>=9.0.0,<10.0.0",
   "jupyter-book>=0.15.1,<1.0.0",
-  "pydantic[dotenv]>=1.0.0,<2.0.0",
-  "PyYAML>=6.0.0,<7.0.0",
-  "typer[all]<1.0.0",
   "lxml>=4.9.2,<6.0.0",
   "livereload",
-  "copier>=8.0.0,<10.0.0",
+  "pydantic>=2.0.0,<3.0.0",
+  "pydantic-settings>=2.0.0,<3.0.0",
+  "PyYAML>=6.0.0,<7.0.0",
+  "typer[all]<1.0.0",
 ]
 dynamic = ["version"]
 
@@ -43,18 +42,13 @@ Source = "https://github.com/unknown/uedition"
 path = "uedition/__about__.py"
 
 [tool.hatch.envs.default]
-extra-dependencies = [
-  "black",
-]
+extra-dependencies = ["black"]
 [tool.hatch.envs.default.scripts]
 codestyle = "black ."
 docs-server = "python docs/docs-server.py"
 
 [tool.hatch.envs.test]
-extra-dependencies = [
-  "pytest",
-  "pytest-cov",
-]
+extra-dependencies = ["pytest", "pytest-cov"]
 [tool.hatch.envs.test.scripts]
 cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=uedition --cov=tests --cov-branch {args}"
 no-cov = "cov --no-cov {args}"
@@ -64,10 +58,7 @@ python = ["3.10", "3.11"]
 [tool.coverage.run]
 branch = true
 parallel = true
-omit = [
-  "uedition/__about__.py",
-  "uedition/__main__.py",
-]
+omit = ["uedition/__about__.py", "uedition/__main__.py"]
 
 [tool.coverage.report]
 exclude_lines = [
