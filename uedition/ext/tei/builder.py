@@ -177,7 +177,7 @@ class TEITranslator(nodes.GenericNodeVisitor):
         # Only indent if we are not inside an inline element
         if self.inline_level == 0:
             self.output.append(self.indent * self.level)
-        self.output.append(f"<tei:{rule['tagname']}>")
+        self.output.append(f"</tei:{rule['tagname']}>")
         # Update the indentation levels
         if isinstance(node, nodes.FixedTextElement):
             self.fixed_level -= 1
