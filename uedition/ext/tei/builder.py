@@ -220,7 +220,7 @@ class TEIBuilder(XMLBuilder):
     """Builds TEI representations of the μEdition."""
 
     name = "tei"
-    format = "tei"  # noqa: A003
+    format = "tei"
     epilog = __("The TEI files are in %(outdir)s.")
 
     out_suffix = ".tei"

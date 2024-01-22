@@ -1,12 +1,11 @@
 """Py.test fixtures."""
 import os
 from shutil import rmtree
+from typing import Generator
 
 from pytest import fixture
-from shutil import rmtree
 from typer import Typer
 from typer.testing import CliRunner
-from typing import Generator
 
 
 @fixture
@@ -67,11 +66,11 @@ def multilang_app() -> Generator[Typer, None, None]:
     cwd = os.getcwd()
     try:
         os.chdir("tests/fixtures/multilang")
-        if os.path.exists("docs"):  # noqa: cov
+        if os.path.exists("docs"):  # nocov
             rmtree("docs")
-        if os.path.exists("en/_build"):  # noqa: cov
+        if os.path.exists("en/_build"):  # nocov
             rmtree("en/_build")
-        if os.path.exists("de/_build"):  # noqa: cov
+        if os.path.exists("de/_build"):  # nocov
             rmtree("de/_build")
         from uedition.cli import app
         from uedition.settings import reload_settings

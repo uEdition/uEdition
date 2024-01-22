@@ -159,7 +159,7 @@ tests = ["tests", "*/uedition/tests"]
 
 [tool.coverage.report]
 exclude_lines = [
-  "no cov",
+  "nocov",
   "if __name__ == .__main__.:",
   "if TYPE_CHECKING:",
 ]

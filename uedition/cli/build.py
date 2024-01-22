@@ -153,7 +153,7 @@ def full_build(lang: dict) -> None:
             "--path-output",
             path.join("_build", lang["code"]),
             lang["path"],
-        ]
+        ], check=False
     )
     copytree(
         path.join("_build", lang["code"], "_build", "html"),
@@ -172,7 +172,7 @@ def partial_build(lang: dict) -> None:
             "--path-output",
             path.join("_build", lang["code"]),
             lang["path"],
-        ]
+        ], check=False
     )
     copytree(
         path.join("_build", lang["code"], "_build", "html"),
