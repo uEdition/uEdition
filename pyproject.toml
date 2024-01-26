@@ -152,3 +152,5 @@ tests = ["tests", "*/uedition/tests"]
 
 [tool.coverage.report]
 exclude_lines = ["no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:"]
+skip_covered = true
+show_missing = true
