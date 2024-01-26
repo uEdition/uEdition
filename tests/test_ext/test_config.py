@@ -1,4 +1,5 @@
 """Tests for the Sphinx extension configuration."""
+
 from uedition.ext.config import Rule, RuleSelector, RuleSelectorAttribute
 
 

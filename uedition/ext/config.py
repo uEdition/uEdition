@@ -6,7 +6,7 @@
 This module handles reading the uEdition-specific configuration settings, validating them and
 adding any required default values.
 """
-from typing import Annotated, Literal, Optional, Union, Any
+from typing import Annotated, Any, Literal, Optional, Union
 
 from pydantic import BaseModel, ValidationError
 from pydantic.functional_validators import BeforeValidator
@@ -28,7 +28,7 @@ def expand_tei_namespace(value: str) -> str:
     return value.replace("tei:", "{http://www.tei-c.org/ns/1.0}")
 
 
-def force_list(value: Any) -> list:
+def force_list(value: Any) -> list:  # noqa: ANN401
     """Force the value into a list form."""
     if isinstance(value, list):
         return value
