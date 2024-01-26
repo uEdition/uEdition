@@ -1,8 +1,9 @@
 # Changes here will be overwritten by Copier
-_commit: v0.0.11
+_commit: v0.1.8
 _src_path: gh:uEdition/uEdition-project-template
 author_email: mark.hall@work.room3b.eu
 author_name: Mark Hall
 edition_name: μEdition
+publishing: readthedocs
 repository_branch: main
 repository_url: https://github.com/uEdition/uEdition
