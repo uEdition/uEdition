@@ -3,14 +3,14 @@
 # SPDX-License-Identifier: MIT
 """The uEdition check functionality for validating a uEdition and its files."""
 import os
-import typer
+from threading import Thread
 
+import typer
 from rich import print as print_cli
 from rich.progress import Progress
-from threading import Thread
 from yaml import safe_load
 
-from ..settings import settings
+from uedition.settings import settings
 
 
 def collect_files(toc: dict) -> list[str]:
@@ -29,9 +29,7 @@ def collect_files(toc: dict) -> list[str]:
     return files
 
 
-def compare_tocs(
-    prefix: str, toc_a: dict, toc_b: dict
-) -> list[tuple[str | None, str | None]]:
+def compare_tocs(prefix: str, toc_a: dict, toc_b: dict) -> list[tuple[str | None, str | None]]:
     """Recursively compare the structure of two TOCs."""
     mismatches = []
     if "parts" in toc_a and "parts" in toc_b:
@@ -41,20 +39,18 @@ def compare_tocs(
     elif "sections" in toc_a and "sections" in toc_b:
         pass
     elif "parts" in toc_a:
-        mismatches.append((f"{prefix}has parts, which are missing from"))
+        mismatches.append(f"{prefix}has parts, which are missing from")
     elif "chapters" in toc_a:
-        mismatches.append((f"{prefix}has chapters, which are missing from"))
+        mismatches.append(f"{prefix}has chapters, which are missing from")
     elif "sections" in toc_b:
-        mismatches.append((f"{prefix}has sections, which are missing from"))
+        mismatches.append(f"{prefix}has sections, which are missing from")
     return mismatches
 
 
 class ConfigurationFileChecks(Thread):
     """Basic configuration file checks."""
 
-    def __init__(
-        self: "ConfigurationFileChecks", progress: Progress, task: int
-    ) -> None:
+    def __init__(self: "ConfigurationFileChecks", progress: Progress, task: int) -> None:
         """Initialise the thread."""
         super().__init__(group=None)
         self._progress = progress
@@ -97,17 +93,11 @@ class TocFileChecks(Thread):
                         if "root" in toc:
                             root_path = os.path.join(lang["path"], f'{toc["root"]}.md')
                             if not os.path.exists(root_path):
-                                self.errors.append(
-                                    f'Root in {yaml_path} points to missing file {toc["root"]}.md'
-                                )
+                                self.errors.append(f'Root in {yaml_path} points to missing file {toc["root"]}.md')
                             root_base = os.path.dirname(root_path)
                             for filename in collect_files(toc):
-                                if not os.path.exists(
-                                    os.path.join(root_base, f"{filename}.md")
-                                ):
-                                    self.errors.append(
-                                        f"File {filename}.md missing in {yaml_path}"
-                                    )
+                                if not os.path.exists(os.path.join(root_base, f"{filename}.md")):
+                                    self.errors.append(f"File {filename}.md missing in {yaml_path}")
                         else:
                             self.errors.append(f"No root in {yaml_path}")
                     except Exception as e:
@@ -120,9 +110,7 @@ class TocFileChecks(Thread):
 class LanguageConsistencyChecks(Thread):
     """Multi-language consistency checks."""
 
-    def __init__(
-        self: "LanguageConsistencyChecks", progress: Progress, task: int
-    ) -> None:
+    def __init__(self: "LanguageConsistencyChecks", progress: Progress, task: int) -> None:
         """Initialise the thread."""
         super().__init__(group=None)
         self._progress = progress
@@ -148,20 +136,16 @@ class LanguageConsistencyChecks(Thread):
             try:
                 with open(lang_toc_path) as in_f:
                     lang_toc = safe_load(in_f)
-            except Exception:
-                continue
-            missmatches = compare_tocs("", base_toc, lang_toc)
-            if len(missmatches) > 0:
-                for mismatch in missmatches:
-                    if mismatch[0] is None:
-                        self.errors.append(
-                            f"{base_toc_path} {mismatch[1]} {lang_toc_path}"
-                        )
-                    elif mismatch[0] is None:
-                        self.errors.append(
-                            f"{lang_toc_path} {mismatch[0]} {base_toc_path}"
-                        )
-            self._progress.update(self._task, advance=1)
+                missmatches = compare_tocs("", base_toc, lang_toc)
+                if len(missmatches) > 0:
+                    for mismatch in missmatches:
+                        if mismatch[0] is None:
+                            self.errors.append(f"{base_toc_path} {mismatch[1]} {lang_toc_path}")
+                        elif mismatch[0] is None:
+                            self.errors.append(f"{lang_toc_path} {mismatch[0]} {base_toc_path}")
+                self._progress.update(self._task, advance=1)
+            except Exception as e:
+                self.errors.append(f"Fail to check langauge {lang}: {e!s}")
 
 
 def run() -> None:
@@ -171,15 +155,11 @@ def run() -> None:
         threads = [
             ConfigurationFileChecks(
                 progress,
-                progress.add_task(
-                    "[green]Configuration file checks", total=len(settings["languages"])
-                ),
+                progress.add_task("[green]Configuration file checks", total=len(settings["languages"])),
             ),
             TocFileChecks(
                 progress,
-                progress.add_task(
-                    "[green]TOC file checks", total=len(settings["languages"])
-                ),
+                progress.add_task("[green]TOC file checks", total=len(settings["languages"])),
             ),
             LanguageConsistencyChecks(
                 progress,

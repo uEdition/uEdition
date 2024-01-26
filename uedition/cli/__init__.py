@@ -3,20 +3,16 @@
 # SPDX-License-Identifier: MIT
 """uEdtion Command-line Tool."""
 import typer
-
 from rich import print as print_cli
 
-from . import (
-    check as check_module,
-    build as build_module,
-    serve as serve_module,
-    create as create_module,
-    update as update_module,
-    language as language_module,
-)
-from ..__about__ import __version__
-from ..settings import settings
-
+from uedition.__about__ import __version__
+from uedition.cli import build as build_module
+from uedition.cli import check as check_module
+from uedition.cli import create as create_module
+from uedition.cli import language as language_module
+from uedition.cli import serve as serve_module
+from uedition.cli import update as update_module
+from uedition.settings import settings
 
 app = typer.Typer()
 language_app = typer.Typer()

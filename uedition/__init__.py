@@ -4,9 +4,9 @@
 """The uEdition toolkit."""
 from sphinx.application import Sphinx
 
-from . import ext
+from uedition import ext
 
 
-def setup(app: Sphinx):
-    """Setup the theme and its extensions."""
+def setup(app: Sphinx) -> None:
+    """Set up the theme and its extensions."""
     ext.setup(app)

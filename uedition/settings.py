@@ -6,19 +6,19 @@
 All application settings are accessed via the `settings` dictionary.
 """
 import os
+from typing import Any, Dict, Tuple, Type
 
 from pydantic import BaseModel
 from pydantic.fields import FieldInfo
 from pydantic_settings import BaseSettings, PydanticBaseSettingsSource
 from yaml import safe_load
-from typing import Any, Type, Tuple, Dict
 
 
 class YAMLConfigSettingsSource(PydanticBaseSettingsSource):
     """Loads the configuration settings from a YAML file."""
 
     def get_field_value(
-        self: "YAMLConfigSettingsSource", field: FieldInfo, field_name: str
+        self: "YAMLConfigSettingsSource", field: FieldInfo, field_name: str  # noqa: ARG002
     ) -> Tuple[Any, str, bool]:
         """Get the value of a specific field."""
         encoding = self.config.get("env_file_encoding")
@@ -37,11 +37,11 @@ class YAMLConfigSettingsSource(PydanticBaseSettingsSource):
 
     def prepare_field_value(
         self: "YAMLConfigSettingsSource",
-        field_name: str,
-        field: FieldInfo,
-        value: Any,
-        value_is_complex: bool,
-    ) -> Any:
+        field_name: str,  # noqa: ARG002
+        field: FieldInfo,  # noqa: ARG002
+        value: Any,  # noqa: ANN401
+        value_is_complex: bool,  # noqa: ARG002, FBT001
+    ) -> Any:  # noqa: ANN401
         """Just return the value."""
         return value
 
@@ -50,31 +50,12 @@ class YAMLConfigSettingsSource(PydanticBaseSettingsSource):
         d: Dict[str, Any] = {}
 
         for field_name, field in self.settings_cls.model_fields.items():
-            field_value, field_key, value_is_complex = self.get_field_value(
-                field, field_name
-            )
-            field_value = self.prepare_field_value(
-                field_name, field, field_value, value_is_complex
-            )
+            field_value, field_key, value_is_complex = self.get_field_value(field, field_name)
+            field_value = self.prepare_field_value(field_name, field, field_value, value_is_complex)
             if field_value is not None:
                 d[field_key] = field_value
 
         return d
-
-
-def uedition_yaml_settings(settings: BaseSettings) -> dict[str, Any]:
-    """Load the settings from a uEdition.yaml or uEdition.yml file."""
-    if os.path.exists("uEdition.yaml"):
-        with open(
-            "uEdition.yaml", encoding=settings.__config__.env_file_encoding
-        ) as in_f:
-            return safe_load(in_f)
-    elif os.path.exists("uEdition.yml"):
-        with open(
-            "uEdition.yml", encoding=settings.__config__.env_file_encoding
-        ) as in_f:
-            return safe_load(in_f)
-    return dict()
 
 
 class LanguageSetting(BaseModel):
@@ -137,6 +118,7 @@ class Settings(BaseSettings):
         return (
             init_settings,
             env_settings,
+            dotenv_settings,
             file_secret_settings,
             YAMLConfigSettingsSource(settings_cls),
         )
@@ -147,6 +129,5 @@ settings = Settings().model_dump()
 
 def reload_settings() -> None:
     """Reload the settings."""
-    global settings
     settings.clear()
     settings.update(Settings().dict())

@@ -2,7 +2,6 @@
 #
 # SPDX-License-Identifier: MIT
 """Run the CLI via `python -m uedition`."""
-from .cli import app
-
+from uedition.cli import app
 
 app()

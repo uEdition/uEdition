@@ -4,13 +4,13 @@
 """Build functionality."""
 import json
 import subprocess
-
 from copy import deepcopy
-from os import path, makedirs
-from shutil import rmtree, copytree
-from yaml import safe_load, safe_dump
+from os import makedirs, path
+from shutil import copytree, ignore_patterns, rmtree
 
-from ..settings import settings, reload_settings
+from yaml import safe_dump, safe_load
+
+from uedition.settings import reload_settings, settings
 
 
 def landing_build() -> None:
@@ -74,16 +74,13 @@ def toc_build(lang: dict) -> None:
     with open("toc.yml") as in_f:
         toc = safe_load(in_f)
 
-    def walk(input: dict) -> dict:
+    def walk(source: dict) -> dict:
         output = {}
-        for key, value in input.items():
+        for key, value in source.items():
             if isinstance(value, dict):
                 if lang["code"] in value:
                     output[key] = value[lang["code"]]
-                elif (
-                    len(settings["languages"]) > 0
-                    and settings["languages"][0]["code"] in value
-                ):
+                elif len(settings["languages"]) > 0 and settings["languages"][0]["code"] in value:
                     output[key] = value[settings["languages"][0]["code"]]
                 else:
                     output[key] = ""
@@ -104,10 +101,7 @@ def config_build(lang: dict) -> None:
     # Set the language-specific title
     if lang["code"] in settings["title"]:
         config["title"] = settings["title"][lang["code"]]
-    elif (
-        len(settings["languages"]) > 0
-        and settings["languages"][0]["code"] in settings["title"]
-    ):
+    elif len(settings["languages"]) > 0 and settings["languages"][0]["code"] in settings["title"]:
         config["title"] = settings["title"][settings["languages"][0]["code"]]
     else:
         config["title"] = f"Missing title for {lang['label']}"
@@ -152,18 +146,40 @@ def full_build(lang: dict) -> None:
     config_build(lang)
     static_build(lang)
     subprocess.run(
-        [
+        [  # noqa: S603, S607
             "jupyter-book",
             "build",
             "--all",
             "--path-output",
             path.join("_build", lang["code"]),
             lang["path"],
-        ]
+        ],
+        check=False,
+    )
+    subprocess.run(
+        [  # noqa: S603, S607
+            "jupyter-book",
+            "build",
+            "--all",
+            "--path-output",
+            path.join("_build", lang["code"]),
+            "--builder",
+            "custom",
+            "--custom-builder",
+            "tei",
+            lang["path"],
+        ],
+        check=False,
     )
     copytree(
         path.join("_build", lang["code"], "_build", "html"),
         path.join(settings["output"], lang["code"]),
+        dirs_exist_ok=True,
+    )
+    copytree(
+        path.join("_build", lang["code"], "_build", "tei"),
+        path.join(settings["output"], lang["code"]),
+        ignore=ignore_patterns("_sphinx_design_static"),
         dirs_exist_ok=True,
     )
 
@@ -172,17 +188,38 @@ def partial_build(lang: dict) -> None:
     """Run the as-needed build process for a single language."""
     landing_build()
     subprocess.run(
-        [
+        [  # noqa: S603, S607
             "jupyter-book",
             "build",
             "--path-output",
             path.join("_build", lang["code"]),
             lang["path"],
-        ]
+        ],
+        check=False,
+    )
+    subprocess.run(
+        [  # noqa: S603, S607
+            "jupyter-book",
+            "build",
+            "--path-output",
+            path.join("_build", lang["code"]),
+            "--builder",
+            "custom",
+            "--custom-builder",
+            "tei",
+            lang["path"],
+        ],
+        check=False,
     )
     copytree(
         path.join("_build", lang["code"], "_build", "html"),
         path.join(settings["output"], lang["code"]),
+        dirs_exist_ok=True,
+    )
+    copytree(
+        path.join("_build", lang["code"], "_build", "tei"),
+        path.join(settings["output"], lang["code"]),
+        ignore=ignore_patterns("_sphinx_design_static"),
         dirs_exist_ok=True,
     )
 
