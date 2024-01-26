@@ -2,7 +2,9 @@ name: Coverage
 
 on:
   push:
-    branches: [ main, add-tei-output ]
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   coverage:
