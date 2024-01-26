@@ -1,6 +1,6 @@
 # Changelog
 
-## Dev
+## 0.9.0
 
 * **New**: Added TEI output
 * **Update**: Don't re-ask answered questions on updates
