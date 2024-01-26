@@ -151,7 +151,7 @@ def full_build(lang: dict) -> None:
             "build",
             "--all",
             "--path-output",
-            path.join("_build", lang["code"]),
+            path.join("_build", lang["path"]),
             lang["path"],
         ],
         check=False,
@@ -162,7 +162,7 @@ def full_build(lang: dict) -> None:
             "build",
             "--all",
             "--path-output",
-            path.join("_build", lang["code"]),
+            path.join("_build", lang["path"]),
             "--builder",
             "custom",
             "--custom-builder",
@@ -172,13 +172,13 @@ def full_build(lang: dict) -> None:
         check=False,
     )
     copytree(
-        path.join("_build", lang["code"], "_build", "html"),
-        path.join(settings["output"], lang["code"]),
+        path.join("_build", lang["path"], "_build", "html"),
+        path.join(settings["output"], lang["path"]),
         dirs_exist_ok=True,
     )
     copytree(
-        path.join("_build", lang["code"], "_build", "tei"),
-        path.join(settings["output"], lang["code"]),
+        path.join("_build", lang["path"], "_build", "tei"),
+        path.join(settings["output"], lang["path"]),
         ignore=ignore_patterns("_sphinx_design_static"),
         dirs_exist_ok=True,
     )
@@ -192,7 +192,7 @@ def partial_build(lang: dict) -> None:
             "jupyter-book",
             "build",
             "--path-output",
-            path.join("_build", lang["code"]),
+            path.join("_build", lang["path"]),
             lang["path"],
         ],
         check=False,
@@ -202,7 +202,7 @@ def partial_build(lang: dict) -> None:
             "jupyter-book",
             "build",
             "--path-output",
-            path.join("_build", lang["code"]),
+            path.join("_build", lang["path"]),
             "--builder",
             "custom",
             "--custom-builder",
@@ -212,13 +212,13 @@ def partial_build(lang: dict) -> None:
         check=False,
     )
     copytree(
-        path.join("_build", lang["code"], "_build", "html"),
-        path.join(settings["output"], lang["code"]),
+        path.join("_build", lang["path"], "_build", "html"),
+        path.join(settings["output"], lang["path"]),
         dirs_exist_ok=True,
     )
     copytree(
-        path.join("_build", lang["code"], "_build", "tei"),
-        path.join(settings["output"], lang["code"]),
+        path.join("_build", lang["path"], "_build", "tei"),
+        path.join(settings["output"], lang["path"]),
         ignore=ignore_patterns("_sphinx_design_static"),
         dirs_exist_ok=True,
     )

@@ -3,6 +3,7 @@
 ## Dev
 
 * **Bugfix**: Fixed a bug in the TEI generation
+* **Bugfix**: Fixed the builder output paths
 
 ## 0.9.0
 
