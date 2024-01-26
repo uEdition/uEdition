@@ -1,4 +1,5 @@
 """Tests for the core settings functionality."""
+
 from typer import Typer
 from typer.testing import CliRunner
 

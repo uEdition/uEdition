@@ -1,4 +1,5 @@
 """Builder for generating TEI XML outputs."""
+
 import logging
 import os
 import xml.sax.saxutils

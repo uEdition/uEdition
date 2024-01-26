@@ -1,4 +1,5 @@
 """Tests for the check functionality."""
+
 from typer import Typer
 from typer.testing import CliRunner
 

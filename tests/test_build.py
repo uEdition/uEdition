@@ -1,4 +1,5 @@
 """Tests for the 'build' functionality."""
+
 from typer import Typer
 from typer.testing import CliRunner
 

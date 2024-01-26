@@ -1,4 +1,5 @@
 """Py.test fixtures."""
+
 import os
 from shutil import rmtree
 from typing import Generator

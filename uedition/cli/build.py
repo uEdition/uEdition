@@ -168,7 +168,8 @@ def full_build(lang: dict) -> None:
             "--custom-builder",
             "tei",
             lang["path"],
-        ], check=False
+        ],
+        check=False,
     )
     copytree(
         path.join("_build", lang["code"], "_build", "html"),
@@ -207,7 +208,8 @@ def partial_build(lang: dict) -> None:
             "--custom-builder",
             "tei",
             lang["path"],
-        ], check=False
+        ],
+        check=False,
     )
     copytree(
         path.join("_build", lang["code"], "_build", "html"),

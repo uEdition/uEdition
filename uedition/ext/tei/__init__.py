@@ -1,4 +1,5 @@
 """TEI extension for Sphinx."""
+
 from importlib.resources import as_file, files
 from os import path
 
