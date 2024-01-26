@@ -1,5 +1,9 @@
 # Changelog
 
+## Dev
+
+* **Bugfix**: Fixed a bug in the TEI generation
+
 ## 0.9.0
 
 * **New**: Added TEI output

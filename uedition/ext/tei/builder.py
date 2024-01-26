@@ -139,7 +139,7 @@ class TEITranslator(nodes.GenericNodeVisitor):
                 for attr in node.attlist():
                     if "source" in attr_rule and attr[0] == attr_rule["source"]:
                         output_attrs[attr_rule["target"]] = attr[1]
-                if isinstance(output_attrs[attr_rule["target"]], list):
+                if attr_rule["target"] in output_attrs and isinstance(output_attrs[attr_rule["target"]], list):
                     joiner = attr_rule["join"] if "join" in attr_rule else " "
                     if "format" in attr_rule:
                         output_attrs[attr_rule["target"]] = joiner.join(
