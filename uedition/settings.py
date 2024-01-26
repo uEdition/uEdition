@@ -6,10 +6,11 @@
 All application settings are accessed via the `settings` dictionary.
 """
 import os
-from typing import Any, Dict, Tuple, Type
+from typing import Annotated, Any, Dict, Tuple, Type
 
 from pydantic import BaseModel
 from pydantic.fields import FieldInfo
+from pydantic.functional_validators import BeforeValidator
 from pydantic_settings import BaseSettings, PydanticBaseSettingsSource
 from yaml import safe_load
 
@@ -87,6 +88,22 @@ class AuthorSettings(BaseModel):
     """The author's contact e-mail."""
 
 
+class OuputSettings(BaseModel):
+    """Settings for the output configuration."""
+
+    path: str = "docs"
+    """The output path."""
+    tei: bool = True
+    """Whether to generate TEI output."""
+
+
+def convert_output_str_to_dict(value: str | dict) -> dict:
+    """Convert the simple output directory string to a dictionary."""
+    if isinstance(value, str):
+        return {"path": value}
+    return value
+
+
 class Settings(BaseSettings):
     """Application settings."""
 
@@ -96,7 +113,7 @@ class Settings(BaseSettings):
     """The author settings."""
     languages: list[LanguageSetting] = []
     """The configured languages."""
-    output: str = "docs"
+    output: Annotated[OuputSettings, BeforeValidator(convert_output_str_to_dict)] = OuputSettings()
     """The output directory."""
     repository: RepositorySettings = RepositorySettings()
     """The repository settings."""

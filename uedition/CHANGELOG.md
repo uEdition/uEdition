@@ -2,6 +2,7 @@
 
 ## Dev
 
+* **New**: Add a switch to turn off the TEI generation
 * **Bugfix**: Fixed a bug in the TEI generation
 * **Bugfix**: Fixed the builder output paths
 

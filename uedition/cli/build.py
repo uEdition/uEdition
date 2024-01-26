@@ -15,11 +15,11 @@ from uedition.settings import reload_settings, settings
 
 def landing_build() -> None:
     """Build the landing page."""
-    if not path.exists(settings["output"]):
-        makedirs(settings["output"], exist_ok=True)
-    with open(path.join(settings["output"], "config.json"), "w") as out_f:
+    if not path.exists(settings["output"]["path"]):
+        makedirs(settings["output"]["path"], exist_ok=True)
+    with open(path.join(settings["output"]["path"], "config.json"), "w") as out_f:
         json.dump(settings, out_f)
-    with open(path.join(settings["output"], "index.html"), "w") as out_f:
+    with open(path.join(settings["output"]["path"], "index.html"), "w") as out_f:
         out_f.write(
             """\
 <!DOCTYPE html>
@@ -156,32 +156,34 @@ def full_build(lang: dict) -> None:
         ],
         check=False,
     )
-    subprocess.run(
-        [  # noqa: S603, S607
-            "jupyter-book",
-            "build",
-            "--all",
-            "--path-output",
-            path.join("_build", lang["path"]),
-            "--builder",
-            "custom",
-            "--custom-builder",
-            "tei",
-            lang["path"],
-        ],
-        check=False,
-    )
+    if settings["output"]["tei"]:
+        subprocess.run(
+            [  # noqa: S603, S607
+                "jupyter-book",
+                "build",
+                "--all",
+                "--path-output",
+                path.join("_build", lang["path"]),
+                "--builder",
+                "custom",
+                "--custom-builder",
+                "tei",
+                lang["path"],
+            ],
+            check=False,
+        )
     copytree(
         path.join("_build", lang["path"], "_build", "html"),
-        path.join(settings["output"], lang["path"]),
+        path.join(settings["output"]["path"], lang["path"]),
         dirs_exist_ok=True,
     )
-    copytree(
-        path.join("_build", lang["path"], "_build", "tei"),
-        path.join(settings["output"], lang["path"]),
-        ignore=ignore_patterns("_sphinx_design_static"),
-        dirs_exist_ok=True,
-    )
+    if settings["output"]["tei"]:
+        copytree(
+            path.join("_build", lang["path"], "_build", "tei"),
+            path.join(settings["output"]["path"], lang["path"]),
+            ignore=ignore_patterns("_sphinx_design_static"),
+            dirs_exist_ok=True,
+        )
 
 
 def partial_build(lang: dict) -> None:
@@ -197,36 +199,38 @@ def partial_build(lang: dict) -> None:
         ],
         check=False,
     )
-    subprocess.run(
-        [  # noqa: S603, S607
-            "jupyter-book",
-            "build",
-            "--path-output",
-            path.join("_build", lang["path"]),
-            "--builder",
-            "custom",
-            "--custom-builder",
-            "tei",
-            lang["path"],
-        ],
-        check=False,
-    )
+    if settings["output"]["tei"]:
+        subprocess.run(
+            [  # noqa: S603, S607
+                "jupyter-book",
+                "build",
+                "--path-output",
+                path.join("_build", lang["path"]),
+                "--builder",
+                "custom",
+                "--custom-builder",
+                "tei",
+                lang["path"],
+            ],
+            check=False,
+        )
     copytree(
         path.join("_build", lang["path"], "_build", "html"),
-        path.join(settings["output"], lang["path"]),
+        path.join(settings["output"]["path"], lang["path"]),
         dirs_exist_ok=True,
     )
-    copytree(
-        path.join("_build", lang["path"], "_build", "tei"),
-        path.join(settings["output"], lang["path"]),
-        ignore=ignore_patterns("_sphinx_design_static"),
-        dirs_exist_ok=True,
-    )
+    if settings["output"]["tei"]:
+        copytree(
+            path.join("_build", lang["path"], "_build", "tei"),
+            path.join(settings["output"]["path"], lang["path"]),
+            ignore=ignore_patterns("_sphinx_design_static"),
+            dirs_exist_ok=True,
+        )
 
 
 def run() -> None:
     """Build the full uEdition."""
-    if path.exists(settings["output"]):
-        rmtree(settings["output"])
+    if path.exists(settings["output"]["path"]):
+        rmtree(settings["output"]["path"])
     for lang in settings["languages"]:
         full_build(lang)
