@@ -19,13 +19,14 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = [
+  "copier>=9.0.0,<10.0.0",
   "jupyter-book>=0.15.1,<1.0.0",
-  "pydantic[dotenv]>=1.0.0,<2.0.0",
+  "lxml>=4.9.2,<6.0.0",
+  "livereload",
+  "pydantic>=2.0.0,<3.0.0",
+  "pydantic-settings>=2.0.0,<3.0.0",
   "PyYAML>=6.0.0,<7.0.0",
   "typer[all]<1.0.0",
-  "lxml>=4.9.2,<5.0.0",
-  "livereload",
-  "copier>=8.0.0,<9.0.0",
 ]
 dynamic = ["version"]
 
@@ -57,15 +58,17 @@ cov = ["test-cov", "cov-report"]
 python = ["3.10", "3.11"]
 
 [tool.hatch.envs.lint]
-detached = true
+
 dependencies = ["black>=23.1.0", "mypy>=1.0.0", "ruff>=0.0.243"]
+detached = true
 [tool.hatch.envs.lint.scripts]
+
+
+[tool.black]
 typing = "mypy --install-types --non-interactive {args:uedition tests}"
 style = ["ruff {args:.}", "black --check --diff {args:.}"]
 fmt = ["black {args:.}", "ruff --fix {args:.}", "style"]
 all = ["style", "typing"]
-
-[tool.black]
 target-version = ["py37"]
 line-length = 120
 skip-string-normalization = true

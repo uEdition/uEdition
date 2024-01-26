@@ -153,7 +153,8 @@ def full_build(lang: dict) -> None:
             "--path-output",
             path.join("_build", lang["code"]),
             lang["path"],
-        ]
+        ],
+        check=False,
     )
     subprocess.run(
         [  # noqa: S603, S607
@@ -192,7 +193,8 @@ def partial_build(lang: dict) -> None:
             "--path-output",
             path.join("_build", lang["code"]),
             lang["path"],
-        ]
+        ],
+        check=False,
     )
     subprocess.run(
         [  # noqa: S603, S607
