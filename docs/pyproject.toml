@@ -7,28 +7,21 @@ name = "uedition_docs"
 description = 'The μEdition Documentation'
 requires-python = ">=3.10"
 keywords = []
-authors = [
-  { name = "Mark Hall", email = "mark.hall@work.room3b.eu" },
-]
-classifiers = [
-  "Development Status :: 4 - Beta",
-  "Programming Language :: Python",
-  "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3.11",
-  "Programming Language :: Python :: Implementation :: CPython",
-  "Programming Language :: Python :: Implementation :: PyPy",
-]
-dependencies = [
-  "uedition>=0.7.0",
-]
+authors = [{ name = "Mark Hall", email = "mark.hall@work.room3b.eu" }]
+classifiers = []
+dependencies = []
 version = "1.0.0"
 
 [project.urls]
-Documentation = "https://github.com/scmmmh/under-the-surface/-#readme"
-Issues = "https://github.com/scmmmh/under-the-surface/-/issues"
-Source = "https://github.com/scmmmh/under-the-surface/-"
+Documentation = "https://github.com/uEdition/uEdition/-#readme"
+Issues = "https://github.com/uEdition/uEdition/-/issues"
+Source = "https://github.com/uEdition/uEdition/-"
+
+[tool.hatch.envs.default]
+dependencies = ["uedition>=0.9.0",]
+skip-install = true
 
 [tool.hatch.envs.default.scripts]
-build = "uEdition build"
-serve = "uEdition serve"
-update = "uEdition update"
+build = "uEdition build {args}"
+serve = "uEdition serve {args}"
+update = "uEdition update {args}"
