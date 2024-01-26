@@ -1,5 +1,4 @@
 """TEI extension for Sphinx."""
-import json
 from importlib.resources import as_file, files
 from os import path
 
@@ -14,7 +13,7 @@ def add_language_switcher(app: Sphinx) -> None:
     app.add_js_file("tei_download.js")
 
 
-def copy_custom_files(app: Sphinx, exc: bool) -> None:
+def copy_custom_files(app: Sphinx, exc: bool) -> None:  # noqa: FBT001
     """Copy the language_switcher.js file from the package."""
     if app.builder.format == "html" and not exc:
         staticdir = path.join(app.builder.outdir, "_static")

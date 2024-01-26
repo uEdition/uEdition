@@ -160,7 +160,7 @@ BASE_RULES = [
 """Base mapping rules for mapping TEI tags to default HTML elements."""
 
 
-def validate_config(app: Sphinx, config: Config) -> None:
+def validate_config(app: Sphinx, config: Config) -> None:  # noqa: ARG001
     """Validate the configuration and add any default values."""
     if config.uEdition:
         if "tei" in config.uEdition:

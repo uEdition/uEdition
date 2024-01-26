@@ -17,7 +17,9 @@ from yaml import safe_load
 class YAMLConfigSettingsSource(PydanticBaseSettingsSource):
     """Loads the configuration settings from a YAML file."""
 
-    def get_field_value(self: "YAMLConfigSettingsSource", field: FieldInfo, field_name: str) -> Tuple[Any, str, bool]:
+    def get_field_value(
+        self: "YAMLConfigSettingsSource", field: FieldInfo, field_name: str  # noqa: ARG002
+    ) -> Tuple[Any, str, bool]:
         """Get the value of a specific field."""
         encoding = self.config.get("env_file_encoding")
         file_content_json = None
@@ -35,11 +37,11 @@ class YAMLConfigSettingsSource(PydanticBaseSettingsSource):
 
     def prepare_field_value(
         self: "YAMLConfigSettingsSource",
-        field_name: str,
-        field: FieldInfo,
-        value: Any,
-        value_is_complex: bool,
-    ) -> Any:
+        field_name: str,  # noqa: ARG002
+        field: FieldInfo,  # noqa: ARG002
+        value: Any,  # noqa: ANN401
+        value_is_complex: bool,  # noqa: ARG002, FBT001
+    ) -> Any:  # noqa: ANN401
         """Just return the value."""
         return value
 
@@ -127,6 +129,7 @@ class Settings(BaseSettings):
         return (
             init_settings,
             env_settings,
+            dotenv_settings,
             file_secret_settings,
             YAMLConfigSettingsSource(settings_cls),
         )
@@ -137,6 +140,5 @@ settings = Settings().model_dump()
 
 def reload_settings() -> None:
     """Reload the settings."""
-    global settings
     settings.clear()
     settings.update(Settings().dict())

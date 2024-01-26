@@ -19,7 +19,7 @@ def add_language_switcher(app: Sphinx) -> None:
     app.add_css_file("language_switcher.css")
 
 
-def copy_custom_files(app: Sphinx, exc: bool) -> None:
+def copy_custom_files(app: Sphinx, exc: bool) -> None:  # noqa: FBT001
     """Copy the language_switcher.js file from the package."""
     if app.builder.format == "html" and not exc:
         staticdir = path.join(app.builder.outdir, "_static")

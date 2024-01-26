@@ -11,7 +11,7 @@ from uedition.cli.build import full_build, partial_build
 from uedition.settings import settings
 
 
-def build_cmd(lang: dict, full: bool = True) -> Callable[[], None]:
+def build_cmd(lang: dict, full: bool = True) -> Callable[[], None]:  # noqa: FBT001, FBT002
     """Create a function that (re-)builds one of the sub-sites."""
     if full:
 

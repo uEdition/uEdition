@@ -6,7 +6,7 @@ import json
 import subprocess
 from copy import deepcopy
 from os import makedirs, path
-from shutil import copytree, rmtree, ignore_patterns
+from shutil import copytree, ignore_patterns, rmtree
 
 from yaml import safe_dump, safe_load
 
@@ -168,7 +168,7 @@ def full_build(lang: dict) -> None:
             "--custom-builder",
             "tei",
             lang["path"],
-        ]
+        ], check=False
     )
     copytree(
         path.join("_build", lang["code"], "_build", "html"),
@@ -207,7 +207,7 @@ def partial_build(lang: dict) -> None:
             "--custom-builder",
             "tei",
             lang["path"],
-        ]
+        ], check=False
     )
     copytree(
         path.join("_build", lang["code"], "_build", "html"),

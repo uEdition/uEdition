@@ -136,16 +136,16 @@ class LanguageConsistencyChecks(Thread):
             try:
                 with open(lang_toc_path) as in_f:
                     lang_toc = safe_load(in_f)
-            except Exception:
-                continue
-            missmatches = compare_tocs("", base_toc, lang_toc)
-            if len(missmatches) > 0:
-                for mismatch in missmatches:
-                    if mismatch[0] is None:
-                        self.errors.append(f"{base_toc_path} {mismatch[1]} {lang_toc_path}")
-                    elif mismatch[0] is None:
-                        self.errors.append(f"{lang_toc_path} {mismatch[0]} {base_toc_path}")
-            self._progress.update(self._task, advance=1)
+                missmatches = compare_tocs("", base_toc, lang_toc)
+                if len(missmatches) > 0:
+                    for mismatch in missmatches:
+                        if mismatch[0] is None:
+                            self.errors.append(f"{base_toc_path} {mismatch[1]} {lang_toc_path}")
+                        elif mismatch[0] is None:
+                            self.errors.append(f"{lang_toc_path} {mismatch[0]} {base_toc_path}")
+                self._progress.update(self._task, advance=1)
+            except Exception as e:
+                self.errors.append(f"Fail to check langauge {lang}: {e!s}")
 
 
 def run() -> None:
