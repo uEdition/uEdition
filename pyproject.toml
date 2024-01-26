@@ -62,13 +62,12 @@ python = ["3.10", "3.11"]
 dependencies = ["black>=23.1.0", "mypy>=1.0.0", "ruff>=0.0.243"]
 detached = true
 [tool.hatch.envs.lint.scripts]
-
-
-[tool.black]
 typing = "mypy --install-types --non-interactive {args:uedition tests}"
 style = ["ruff {args:.}", "black --check --diff {args:.}"]
 fmt = ["black {args:.}", "ruff --fix {args:.}", "style"]
 all = ["style", "typing"]
+
+[tool.black]
 target-version = ["py37"]
 line-length = 120
 skip-string-normalization = true

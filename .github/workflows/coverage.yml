@@ -2,7 +2,7 @@ name: Coverage
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, add-tei-output ]
 
 jobs:
   coverage:
@@ -30,11 +30,11 @@ jobs:
 
     - name: Run Tests
       run: |
-        hatch run test:cov
+        hatch run cov
 
     - name: Calculate coverage
       run: |
-        hatch run test:coverage json
+        hatch run coverage json
         export TOTAL=$(python -c "import json;print(json.load(open('coverage.json'))['totals']['percent_covered_display'])")
         echo "total=$TOTAL" >> $GITHUB_ENV
         echo "### Total coverage: ${TOTAL}%" >> $GITHUB_STEP_SUMMARY

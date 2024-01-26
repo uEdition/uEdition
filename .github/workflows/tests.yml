@@ -32,4 +32,4 @@ jobs:
 
     - name: Run Tests
       run: |
-        hatch run test:cov
+        hatch run cov
