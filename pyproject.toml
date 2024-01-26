@@ -9,9 +9,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
 keywords = []
-authors = [
-  { name = "Mark Hall", email = "mark.hall@work.room3b.eu" },
-]
+authors = [{ name = "Mark Hall", email = "mark.hall@work.room3b.eu" }]
 classifiers = [
   "Development Status :: 4 - Beta",
   "Programming Language :: Python",
@@ -46,47 +44,26 @@ tei = "uedition.ext.tei.builder"
 path = "uedition/__about__.py"
 
 [tool.hatch.envs.default]
-dependencies = [
-  "coverage[toml]>=6.5",
-  "pytest",
-]
+extra-dependencies = ["coverage[toml]>=6.5", "pytest"]
+
 [tool.hatch.envs.default.scripts]
+docs-server = "cd docs && uEdition serve"
 test = "pytest {args:tests}"
 test-cov = "coverage run -m pytest {args:tests}"
-cov-report = [
-  "- coverage combine",
-  "coverage report",
-]
-cov = [
-  "test-cov",
-  "cov-report",
-]
+cov-report = ["- coverage combine", "coverage report"]
+cov = ["test-cov", "cov-report"]
 
 [[tool.hatch.envs.all.matrix]]
 python = ["3.10", "3.11"]
 
 [tool.hatch.envs.lint]
 detached = true
-dependencies = [
-  "black>=23.1.0",
-  "mypy>=1.0.0",
-  "ruff>=0.0.243",
-]
+dependencies = ["black>=23.1.0", "mypy>=1.0.0", "ruff>=0.0.243"]
 [tool.hatch.envs.lint.scripts]
 typing = "mypy --install-types --non-interactive {args:uedition tests}"
-style = [
-  "ruff {args:.}",
-  "black --check --diff {args:.}",
-]
-fmt = [
-  "black {args:.}",
-  "ruff --fix {args:.}",
-  "style",
-]
-all = [
-  "style",
-  "typing",
-]
+style = ["ruff {args:.}", "black --check --diff {args:.}"]
+fmt = ["black {args:.}", "ruff --fix {args:.}", "style"]
+all = ["style", "typing"]
 
 [tool.black]
 target-version = ["py37"]
@@ -131,13 +108,20 @@ ignore = [
   # Allow boolean positional values in function calls, like `dict.get(... True)`
   "FBT003",
   # Ignore checks for possible passwords
-  "S105", "S106", "S107",
+  "S105",
+  "S106",
+  "S107",
   # Ignore complexity
-  "C901", "PLR0911", "PLR0912", "PLR0913", "PLR0915",
+  "C901",
+  "PLR0911",
+  "PLR0912",
+  "PLR0913",
+  "PLR0915",
   # Ignore self annotations
   "ANN101",
   # Ignore conflicting documentation options
-  "D203", "D213",
+  "D203",
+  "D213",
 ]
 unfixable = [
   # Don't touch unused imports
@@ -158,17 +142,11 @@ ban-relative-imports = "all"
 source_pkgs = ["uedition", "tests"]
 branch = true
 parallel = true
-omit = [
-  "uedition/__about__.py",
-]
+omit = ["uedition/__about__.py"]
 
 [tool.coverage.paths]
 uedition = ["uedition", "*/uedition/uedition"]
 tests = ["tests", "*/uedition/tests"]
 
 [tool.coverage.report]
-exclude_lines = [
-  "no cov",
-  "if __name__ == .__main__.:",
-  "if TYPE_CHECKING:",
-]
+exclude_lines = ["no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:"]

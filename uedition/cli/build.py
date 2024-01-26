@@ -6,7 +6,7 @@ import json
 import subprocess
 from copy import deepcopy
 from os import makedirs, path
-from shutil import copytree, rmtree
+from shutil import copytree, rmtree, ignore_patterns
 
 from yaml import safe_dump, safe_load
 
@@ -155,9 +155,29 @@ def full_build(lang: dict) -> None:
             lang["path"],
         ]
     )
+    subprocess.run(
+        [  # noqa: S603, S607
+            "jupyter-book",
+            "build",
+            "--all",
+            "--path-output",
+            path.join("_build", lang["code"]),
+            "--builder",
+            "custom",
+            "--custom-builder",
+            "tei",
+            lang["path"],
+        ]
+    )
     copytree(
         path.join("_build", lang["code"], "_build", "html"),
         path.join(settings["output"], lang["code"]),
+        dirs_exist_ok=True,
+    )
+    copytree(
+        path.join("_build", lang["code"], "_build", "tei"),
+        path.join(settings["output"], lang["code"]),
+        ignore=ignore_patterns("_sphinx_design_static"),
         dirs_exist_ok=True,
     )
 
@@ -174,9 +194,28 @@ def partial_build(lang: dict) -> None:
             lang["path"],
         ]
     )
+    subprocess.run(
+        [  # noqa: S603, S607
+            "jupyter-book",
+            "build",
+            "--path-output",
+            path.join("_build", lang["code"]),
+            "--builder",
+            "custom",
+            "--custom-builder",
+            "tei",
+            lang["path"],
+        ]
+    )
     copytree(
         path.join("_build", lang["code"], "_build", "html"),
         path.join(settings["output"], lang["code"]),
+        dirs_exist_ok=True,
+    )
+    copytree(
+        path.join("_build", lang["code"], "_build", "tei"),
+        path.join(settings["output"], lang["code"]),
+        ignore=ignore_patterns("_sphinx_design_static"),
         dirs_exist_ok=True,
     )
 
