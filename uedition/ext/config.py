@@ -6,9 +6,10 @@
 This module handles reading the uEdition-specific configuration settings, validating them and
 adding any required default values.
 """
-from typing import Literal, Optional, Union
+from typing import Annotated, Literal, Optional, Union, Any
 
-from pydantic import BaseModel, ValidationError, validator
+from pydantic import BaseModel, ValidationError
+from pydantic.functional_validators import BeforeValidator
 from sphinx.application import Sphinx
 from sphinx.util import logging
 
@@ -22,25 +23,23 @@ class RuleSelectorAttribute(BaseModel):
     value: str
 
 
+def expand_tei_namespace(value: str) -> str:
+    """Expand any ```tei:``` namespace prefixes."""
+    return value.replace("tei:", "{http://www.tei-c.org/ns/1.0}")
+
+
+def force_list(value: Any) -> list:
+    """Force the value into a list form."""
+    if isinstance(value, list):
+        return value
+    return [value]
+
+
 class RuleSelector(BaseModel):
     """Validation rule for the selector for matching a TEI tag."""
 
-    tag: str
-    attributes: list[RuleSelectorAttribute] = []
-
-    @validator("tag", pre=True)
-    def expand_tag_namespace(cls: "RuleSelector", v: str, values: dict, **kwargs: dict) -> str:
-        """Expand any ```tei:``` namespace prefixes."""
-        return v.replace("tei:", "{http://www.tei-c.org/ns/1.0}")
-
-    @validator("attributes", pre=True)
-    def convert_dict_attributes_to_list(
-        cls: "RuleSelector", v: dict | list, values: dict, **kwargs: dict
-    ) -> list[dict]:
-        """Convert a single attributes dictionary to a list with that dictionary."""
-        if isinstance(v, dict):
-            return [v]
-        return v
+    tag: Annotated[str, BeforeValidator(expand_tei_namespace)]
+    attributes: Annotated[list[RuleSelectorAttribute], BeforeValidator(force_list)] = []
 
 
 class RuleText(BaseModel):
@@ -73,20 +72,20 @@ class RuleAttributeDelete(BaseModel):
     attr: str
 
 
+def convert_string_to_selector_dict(value: str | dict) -> dict:
+    """Convert a simple string selector into the dictionary representation."""
+    if isinstance(value, str):
+        return {"tag": value}
+    return value
+
+
 class Rule(BaseModel):
     """Validation model for a rule transforming a TEI tag into a HTML tag."""
 
-    selector: RuleSelector
+    selector: Annotated[RuleSelector, BeforeValidator(convert_string_to_selector_dict)]
     tag: Union[str, None] = "div"
     text: Union[RuleText, None] = None
     attributes: list[Union[RuleAttributeCopy, RuleAttributeSet, RuleAttributeDelete]] = []
-
-    @validator("selector", pre=True)
-    def convert_str_selector_to_dict(cls: "Rule", v: str | dict, values: dict, **kwargs: dict) -> dict:
-        """Convert a simple string selector into the dictionary representation."""
-        if isinstance(v, str):
-            return {"tag": v}
-        return v
 
 
 class TextSection(BaseModel):
