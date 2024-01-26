@@ -1,7 +1,8 @@
-# User Guide
+# Anleitung für Nutzer und Nutzerinnen
 
-Welcome to the μEdition User Guide, which guides you, the editor, through the process of {doc}`creating a new μEdition <create>`,
-{doc}`adding languages <language-add>` and {doc}`content <content>` to it, and {doc}`publishing it to GitHub Pages <publish>`.
+Willkommen in der Nutzeranleitung für die μEdition, welche die Herausgeber durch die Abläufe zum
+{doc}`Erstellen einer neuen μEdition <create>`, {doc}`hinzufügen einer Sprache <language-add>`,
+{doc}`Erstellung von Inhalten <content>` und {doc}`Veröffentlichen mittels GitHub Pages <publish>` führt.
 
-The user guide tries to assume as little prior knowledge as possible, but you are expected to be able to navigate the
-command-line. Additionally, for publishing via GitHub Pages, basic Git knowledge is also required.
+Die Anleitung erwartet keine großen, technischen Vorkenntnisse, ausser Grundkenntnisse über die Nutzung der
+Kommandozeile. Zusätzlich werden für die Veröffentlichung über GitHub Pages grundlegende Git Kenntnisse benötigt.
