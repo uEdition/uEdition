@@ -4,6 +4,5 @@ _src_path: ../uEdition-project-template/
 author_email: mark.hall@work.room3b.eu
 author_name: Mark Hall
 edition_name: μEdition
-publishing: ''
 repository_branch: main
 repository_url: https://github.com/uEdition/uEdition
