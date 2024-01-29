@@ -20,7 +20,7 @@ classifiers = [
 ]
 dependencies = [
   "copier>=9.0.0,<10.0.0",
-  "jupyter-book>=0.15.1,<1.0.0",
+  "jupyter-book>=0.15.1,<2.0.0",
   "lxml>=4.9.2,<6.0.0",
   "livereload",
   "pydantic>=2.0.0,<3.0.0",
