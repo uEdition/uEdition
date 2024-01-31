@@ -56,6 +56,8 @@ MAPPINGS = [
     },
     {"cls": nodes.inline, "tagname": "hi", "type": "inline"},
     {"cls": nodes.literal, "tagname": "hi", "type": "inline"},
+    {"cls": nodes.strong, "tagname": "hi", "type": "inline", "attrs": [{"target": "rend", "value": "bold"}]},
+    {"cls": nodes.emphasis, "tagname": "hi", "type": "inline", "attrs": [{"target": "rend", "value": "italic"}]},
     {"cls": nodes.label, "tagname": "label", "type": "inline"},
     {
         "cls": nodes.reference,
