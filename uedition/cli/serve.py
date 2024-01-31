@@ -39,4 +39,4 @@ def run() -> None:
         server.watch(path.join("static", "**", "*.*"), full_cmd)
         server.watch(path.join(lang["path"], "**", "*.*"), partial_cmd)
     server.watch("uEdition.*", lambda: [cmd() for cmd in full_rebuilds])
-    server.serve(root="site", port=8000)
+    server.serve(root=settings["output"]["path"], port=8000)

@@ -7,6 +7,7 @@ from sphinx.application import Sphinx
 from sphinx.util.fileutil import copy_asset_file
 
 from uedition.ext.tei import parser
+from uedition.settings import settings
 
 
 def add_language_switcher(app: Sphinx) -> None:
@@ -26,5 +27,6 @@ def copy_custom_files(app: Sphinx, exc: bool) -> None:  # noqa: FBT001
 def setup(app: Sphinx) -> None:
     """Set up the TEI Sphinx extension."""
     parser.setup(app)
-    app.connect("builder-inited", add_language_switcher)
-    app.connect("build-finished", copy_custom_files)
+    if settings["output"]["tei"]:
+        app.connect("builder-inited", add_language_switcher)
+        app.connect("build-finished", copy_custom_files)

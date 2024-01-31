@@ -56,6 +56,8 @@ MAPPINGS = [
     },
     {"cls": nodes.inline, "tagname": "hi", "type": "inline"},
     {"cls": nodes.literal, "tagname": "hi", "type": "inline"},
+    {"cls": nodes.strong, "tagname": "hi", "type": "inline", "attrs": [{"target": "rend", "value": "bold"}]},
+    {"cls": nodes.emphasis, "tagname": "hi", "type": "inline", "attrs": [{"target": "rend", "value": "italic"}]},
     {"cls": nodes.label, "tagname": "label", "type": "inline"},
     {
         "cls": nodes.reference,
@@ -139,7 +141,7 @@ class TEITranslator(nodes.GenericNodeVisitor):
                 for attr in node.attlist():
                     if "source" in attr_rule and attr[0] == attr_rule["source"]:
                         output_attrs[attr_rule["target"]] = attr[1]
-                if isinstance(output_attrs[attr_rule["target"]], list):
+                if attr_rule["target"] in output_attrs and isinstance(output_attrs[attr_rule["target"]], list):
                     joiner = attr_rule["join"] if "join" in attr_rule else " "
                     if "format" in attr_rule:
                         output_attrs[attr_rule["target"]] = joiner.join(

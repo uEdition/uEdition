@@ -1,5 +1,12 @@
 # Changelog
 
+## Dev
+
+* **New**: Add a switch to turn off the TEI generation
+* **Update**: Don't enable the language switcher when only one language is configured
+* **Bugfix**: Fixed a bug in the TEI generation
+* **Bugfix**: Fixed the builder output paths
+
 ## 0.9.0
 
 * **New**: Added TEI output

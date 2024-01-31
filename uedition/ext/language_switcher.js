@@ -1,4 +1,4 @@
-(function() {
+(function () {
     async function setup() {
         try {
             let buttonContainer = document.querySelector('.article-header-buttons');
@@ -39,7 +39,7 @@
                     link.classList.add('fw-bold');
                 }
                 link.innerHTML = langConfig.label;
-                link.setAttribute('href', DOCUMENTATION_OPTIONS.URL_ROOT + '../' + langConfig.path + '/' + DOCUMENTATION_OPTIONS.pagename + DOCUMENTATION_OPTIONS.LINK_SUFFIX);
+                link.setAttribute('href', document.querySelector("html").getAttribute("data-content_root") + '../' + langConfig.path + '/' + DOCUMENTATION_OPTIONS.pagename + DOCUMENTATION_OPTIONS.LINK_SUFFIX);
 
                 item.append(link);
                 menu.append(item);
@@ -50,7 +50,7 @@
             container.append(button);
             container.append(menu);
             buttonContainer.prepend(container);
-        } catch(e) {
+        } catch (e) {
             console.error(e);
         }
     }

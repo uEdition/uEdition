@@ -32,5 +32,6 @@ def copy_custom_files(app: Sphinx, exc: bool) -> None:  # noqa: FBT001
 
 def setup(app: Sphinx) -> None:
     """Set up the Language switcher extension."""
-    app.connect("builder-inited", add_language_switcher)
-    app.connect("build-finished", copy_custom_files)
+    if len(settings["languages"]) > 1:
+        app.connect("builder-inited", add_language_switcher)
+        app.connect("build-finished", copy_custom_files)
