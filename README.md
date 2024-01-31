@@ -22,6 +22,16 @@ The recommended installation for use is via `pipx`:
 pipx install uedition
 ```
 
+All commands can then be run via
+
+```console
+uEdition {command}
+```
+
+## Documentation
+
+Full documentation is available at [https://uedition.readthedocs.io](https://uedition.readthedocs.io).
+
 ## License
 
-`uedition` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
+The μEdition is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
