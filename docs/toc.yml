@@ -11,3 +11,4 @@ chapters:
       - file: user/publish
       - file: user/update
       - file: user/language-update
+  - file: changelog
