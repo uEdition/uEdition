@@ -6,6 +6,7 @@
 * **Aktualisiert**: JupyterBook auf Version 1 aktualisert
 * **Aktualisert**: Sprachwechsler wird nicht angezeigt, wenn nur eine Sprache konfiguriert ist
 * **Bugfix**: Einen Bug im Ausgabepfadname korrigiert
+* **Bugfix**: Einen Bug im Sprachwechsler behoben
 
 ## 0.9.0 (26.01.2023)
 

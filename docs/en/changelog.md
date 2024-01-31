@@ -6,6 +6,7 @@
 * **Update**: JupyterBook updated to version 1
 * **Update**: Hide the language switcher when only one language is configured
 * **Bugfix**: Fix a bug in the output path naming
+* **Bugfix**: fixed a bug in the language switcher
 
 ## 0.9.0 (26.01.2023)
 
