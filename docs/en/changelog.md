@@ -1,6 +1,6 @@
 # Changelog
 
-## Development
+## 1.0.0 (31.01.2024)
 
 * **New**: TEI output optional
 * **Update**: JupyterBook updated to version 1
@@ -8,7 +8,7 @@
 * **Bugfix**: Fix a bug in the output path naming
 * **Bugfix**: fixed a bug in the language switcher
 
-## 0.9.0 (26.01.2023)
+## 0.9.0 (26.01.2024)
 
 * **New**: Add TEI Output
 * **Update**: Skip previously answered questions
