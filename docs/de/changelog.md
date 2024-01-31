@@ -1,6 +1,6 @@
 # Änderungsgeschichte
 
-## Entwicklung
+## 1.0.0 (31.01.2024)
 
 * **Neu**: TEI Output ist optional
 * **Aktualisiert**: JupyterBook auf Version 1 aktualisert
@@ -8,7 +8,7 @@
 * **Bugfix**: Einen Bug im Ausgabepfadname korrigiert
 * **Bugfix**: Einen Bug im Sprachwechsler behoben
 
-## 0.9.0 (26.01.2023)
+## 0.9.0 (26.01.2024)
 
 * **Neu**: TEI Output hinzugefügt
 * **Aktualisiert**: Bereits beantwortet Fragen überspringen
