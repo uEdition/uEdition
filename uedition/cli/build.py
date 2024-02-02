@@ -12,16 +12,7 @@ from yaml import safe_dump, safe_load
 
 from uedition.settings import reload_settings, settings
 
-
-def landing_build() -> None:
-    """Build the landing page."""
-    if not path.exists(settings["output"]["path"]):
-        makedirs(settings["output"]["path"], exist_ok=True)
-    with open(path.join(settings["output"]["path"], "config.json"), "w") as out_f:
-        json.dump(settings, out_f)
-    with open(path.join(settings["output"]["path"], "index.html"), "w") as out_f:
-        out_f.write(
-            """\
+LANDING_PAGE_TEMPLATE = """\
 <!DOCTYPE html>
 <html>
   <head>
@@ -34,6 +25,13 @@ def landing_build() -> None:
       We are checking if there is a site in your preferred language and will redirect you to that, if possible.
       Otherwise we will redirect you to the default language site.
     </p>
+    <p>
+      If you are not automatically redirected, then please use one of the links below to access the site in your
+      preferred language:
+    </p>
+    <ul>
+      $LANGUAGE_ITEMS
+    </ul>
     <script>
       async function redirect() {
         const response = await fetch('config.json');
@@ -66,7 +64,17 @@ def landing_build() -> None:
   </body>
 </html>
 """
-        )
+
+
+def landing_build() -> None:
+    """Build the landing page."""
+    if not path.exists(settings["output"]["path"]):
+        makedirs(settings["output"]["path"], exist_ok=True)
+    with open(path.join(settings["output"]["path"], "config.json"), "w") as out_f:
+        json.dump(settings, out_f)
+    with open(path.join(settings["output"]["path"], "index.html"), "w") as out_f:
+        language_items = (f'<li><a href="{lang["path"]}">{lang["label"]}</a></li>' for lang in settings["languages"])
+        out_f.write(LANDING_PAGE_TEMPLATE.replace("$LANGUAGE_ITEMS", "\n".join(language_items)))
 
 
 def toc_build(lang: dict) -> None:
