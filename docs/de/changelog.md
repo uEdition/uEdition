@@ -1,6 +1,6 @@
 # Änderungsgeschichte
 
-## In Entwicklung
+## 1.1.0 (02.02.2024)
 
 * **Neu**: TEI Textabschnitte können jetzt sortiert werden
 * **Bugfix**: Die Landungsseite funktioniert jetzt auch ohne JavaScript
