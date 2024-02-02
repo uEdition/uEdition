@@ -2,6 +2,9 @@
 #
 # SPDX-License-Identifier: MIT
 """TEI parsing extension for Sphinx."""
+import re
+from typing import Callable
+
 from docutils import nodes
 from lxml import etree
 from sphinx.application import Sphinx
@@ -69,6 +72,9 @@ class TEIParser(SphinxParser):
                 if conf_section["type"] == "text":
                     source = root.xpath(conf_section["content"], namespaces=namespaces)
                     if len(source) > 0:
+                        if conf_section["sort"]:
+                            source.sort(key=self._sort_key(conf_section["sort"]))
+                            # print(child.xpath(conf_section["sort"], namespaces=namespaces))
                         doc_section.append(section)
                         tmp = nodes.section()
                         for child in source:
@@ -84,6 +90,32 @@ class TEIParser(SphinxParser):
                         elif field["type"] == "list":
                             self._parse_list_field(fields, field, root)
         document.append(doc_section)
+
+    def _sort_key(
+        self: "TEIParser", xpath: str
+    ) -> Callable[[etree.Element], tuple[str, ...] | tuple[int, ...] | tuple[None]]:
+        """Create a sortkey that understands about `page,line` patterns for sorting."""
+
+        def sorter(node: etree.Element) -> tuple[str, ...] | tuple[int, ...] | tuple[None]:
+            value = node.xpath(xpath, namespaces=namespaces)
+            if value is not None and len(value) > 0:
+                if isinstance(value, list):
+                    value = value[0]
+                else:
+                    value = str(value)
+                match = re.match("([0-9]+)(?:,([0-9-]+))*", value)
+                if match is not None:
+                    groups: list[int] = []
+                    for group in match.groups():
+                        if group is not None:
+                            if "-" in group:
+                                groups.append(int(group[: group.find("-")]))
+                            else:
+                                groups.append(int(group))
+                    return tuple(groups)
+            return (0,)
+
+        return sorter
 
     def _walk_tree(self: "TEIParser", node: etree.Element, parent: nodes.Element, rules: list) -> None:
         """Walk the XML tree and create the appropriate AST nodes.

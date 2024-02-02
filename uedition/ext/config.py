@@ -94,6 +94,7 @@ class TextSection(BaseModel):
     title: str
     type: Literal["text"] = "text"
     content: str
+    sort: str | None = None
     mappings: list[Rule] = []
 
 
