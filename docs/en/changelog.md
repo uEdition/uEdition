@@ -1,6 +1,6 @@
 # Changelog
 
-## Dev
+## 1.1.0 (02.02.2024)
 
 * **New**: Added the ability to sort TEI text sections
 * **Bugfix**: Fix the language page if JavaScript is turned off
