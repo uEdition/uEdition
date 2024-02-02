@@ -1,5 +1,9 @@
 # Änderungsgeschichte
 
+## In Entwicklung
+
+* **Neu**: TEI Textabschnitte können jetzt sortiert werden
+
 ## 1.0.0 (31.01.2024)
 
 * **Neu**: TEI Output ist optional

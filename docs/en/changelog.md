@@ -1,5 +1,9 @@
 # Changelog
 
+## Dev
+
+* **New**: Added the ability to sort TEI text sections
+
 ## 1.0.0 (31.01.2024)
 
 * **New**: TEI output optional
