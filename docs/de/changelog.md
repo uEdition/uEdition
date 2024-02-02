@@ -3,6 +3,7 @@
 ## In Entwicklung
 
 * **Neu**: TEI Textabschnitte können jetzt sortiert werden
+* **Bugfix**: Die Landungsseite funktioniert jetzt auch ohne JavaScript
 
 ## 1.0.0 (31.01.2024)
 

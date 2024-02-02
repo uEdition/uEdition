@@ -3,6 +3,7 @@
 ## Dev
 
 * **New**: Added the ability to sort TEI text sections
+* **Bugfix**: Fix the language page if JavaScript is turned off
 
 ## 1.0.0 (31.01.2024)
 
