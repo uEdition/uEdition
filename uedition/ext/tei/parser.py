@@ -244,7 +244,8 @@ class TEIParser(SphinxParser):
         """Parse a single metadata field."""
         content = root.xpath(field["content"], namespaces=namespaces)
         if len(content) > 0:
-            content = content[0]
+            if isinstance(content, list):
+                content = content[0]
             li = nodes.definition_list_item()
             dt = nodes.term()
             dt.append(nodes.Text(field["title"]))

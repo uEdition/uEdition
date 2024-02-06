@@ -1,5 +1,9 @@
 # Changelog
 
+## Dev
+
+* **Bugfix**: Fix a bug in parsing TEI metadata that is not a list
+
 ## 1.1.0 (02.02.2024)
 
 * **New**: Added the ability to sort TEI text sections
