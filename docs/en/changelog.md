@@ -2,6 +2,7 @@
 
 ## Dev
 
+* **New**: Added an ISO8601 formatting TEI function
 * **Bugfix**: Fix a bug in parsing TEI metadata that is not a list
 
 ## 1.1.0 (02.02.2024)
