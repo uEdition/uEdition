@@ -2,6 +2,7 @@
 
 ## In Entwicklung
 
+* **Neu**: TEI Funktion zum Parsen von ISO8601 Daten
 * **Bugfix**: Fehler im TEI Parsing von Metadaten behoben
 
 ## 1.1.0 (02.02.2024)

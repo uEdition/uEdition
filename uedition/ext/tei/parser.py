@@ -11,7 +11,16 @@ from sphinx.application import Sphinx
 from sphinx.parsers import Parser as SphinxParser
 from sphinx.writers.html import HTMLWriter
 
-namespaces = {"tei": "http://www.tei-c.org/ns/1.0"}
+namespaces = {"tei": "http://www.tei-c.org/ns/1.0", "uedition": "https://uedition.readthedocs.org"}
+
+
+def format_iso8601_date(dummy: None, text: str) -> str:  # noqa: ARG001
+    """Format a date."""
+    if isinstance(text, str):
+        match = re.search("([0-9]{4})-?([0-9]{2})?-?([0-9]{2})?", text)
+        if match:
+            return ".".join(reversed([v for v in match.groups() if v is not None]))
+    return ""
 
 
 class TeiElement(nodes.Element):
@@ -54,6 +63,8 @@ class TEIParser(SphinxParser):
         :param document: The root docutils node to add AST elements to
         :type document: :class:`~docutils.nodes.document`
         """
+        functions = etree.FunctionNamespace("https://uedition.readthedocs.org")
+        functions["format_iso8601_date"] = format_iso8601_date
         root = etree.fromstring(inputstring.encode("UTF-8"))  # noqa: S320
         title = root.xpath(
             "string(/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title)",
