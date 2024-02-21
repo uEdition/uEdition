@@ -7,6 +7,7 @@ from typing import Callable
 
 from docutils import nodes
 from lxml import etree
+from sphinx import addnodes
 from sphinx.application import Sphinx
 from sphinx.parsers import Parser as SphinxParser
 from sphinx.writers.html import HTMLWriter
@@ -81,17 +82,18 @@ class TEIParser(SphinxParser):
                 section_title.append(nodes.Text(conf_section["title"]))
                 section.append(section_title)
                 if conf_section["type"] == "text":
+                    # Process a text section
                     source = root.xpath(conf_section["content"], namespaces=namespaces)
                     if len(source) > 0:
                         if conf_section["sort"]:
                             source.sort(key=self._sort_key(conf_section["sort"]))
-                            # print(child.xpath(conf_section["sort"], namespaces=namespaces))
                         doc_section.append(section)
                         tmp = nodes.section()
                         for child in source:
                             self._walk_tree(child, tmp, conf_section["mappings"])
                         self._wrap_sections(section, tmp)
                 elif conf_section["type"] == "fields":
+                    # Process a field or metadata section
                     doc_section.append(section)
                     fields = nodes.definition_list()
                     section.append(fields)
@@ -100,6 +102,8 @@ class TEIParser(SphinxParser):
                             self._parse_single_field(fields, field, root)
                         elif field["type"] == "list":
                             self._parse_list_field(fields, field, root)
+                        elif field["type"] == "download":
+                            self._parse_download_field(fields, field, root)
         document.append(doc_section)
 
     def _sort_key(
@@ -283,6 +287,25 @@ class TEIParser(SphinxParser):
             dd.append(values)
             li.append(dd)
             parent.append(li)
+
+    def _parse_download_field(self: "TEIParser", parent: etree.Element, field: dict, root: etree.Element) -> None:
+        """Parse a download metadata field."""
+        content = root.xpath(field["content"], namespaces=namespaces)
+        target = root.xpath(field["target"], namespaces=namespaces)
+        if len(content) > 0 and len(target) > 0:
+            if isinstance(content, list):
+                content = content[0]
+            if isinstance(target, list):
+                target = target[0]
+            if content.strip() and target.strip():
+                li = nodes.definition_list_item()
+                dt = nodes.term()
+                dt.append(nodes.Text(field["title"]))
+                li.append(dt)
+                dd = nodes.definition()
+                dd.append(addnodes.download_reference(content, content, reftarget=target))
+                li.append(dd)
+                parent.append(li)
 
 
 def setup(app: Sphinx) -> None:

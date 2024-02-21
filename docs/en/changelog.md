@@ -1,5 +1,9 @@
 # Changelog
 
+## In Development
+
+* **New**: Support download links in TEI documents
+
 ## 1.2.0 (06.02.2024)
 
 * **New**: Added an ISO8601 formatting TEI function

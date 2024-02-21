@@ -99,7 +99,7 @@ class TextSection(BaseModel):
 
 
 class SingleFieldRule(BaseModel):
-    """Validation model for a TEI field rule."""
+    """Validation model for a TEI field rule with a single value."""
 
     title: str
     type: Literal["single"] = "single"
@@ -107,11 +107,20 @@ class SingleFieldRule(BaseModel):
 
 
 class ListFieldRule(BaseModel):
-    """Validation model for a TEI field rule."""
+    """Validation model for a TEI field rule with a list of values."""
 
     title: str
     type: Literal["list"]
     content: str
+
+
+class DownloadFieldRule(BaseModel):
+    """Validation model for a TEI field rule that creates a download link."""
+
+    title: str
+    type: Literal["download"]
+    content: str
+    target: str
 
 
 class FieldsSection(BaseModel):
@@ -119,7 +128,7 @@ class FieldsSection(BaseModel):
 
     title: str
     type: Literal["fields"]
-    fields: list[SingleFieldRule | ListFieldRule]
+    fields: list[SingleFieldRule | ListFieldRule | DownloadFieldRule]
 
 
 class TEIConfig(BaseModel):
