@@ -1,6 +1,6 @@
 # Änderungsgeschichte
 
-## In Entwicklung
+## 1.3.0 (22.02.2024)
 
 * **Neu**: Unterstützung für Downloadlinks in TEI Dateien
 
