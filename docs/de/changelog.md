@@ -1,5 +1,9 @@
 # Änderungsgeschichte
 
+## In Entwicklung
+
+* **Neu**: Unterstützung für Downloadlinks in TEI Dateien
+
 ## 1.2.0 (06.02.2024)
 
 * **Neu**: TEI Funktion zum Parsen von ISO8601 Daten
