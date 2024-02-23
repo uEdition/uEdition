@@ -37,19 +37,19 @@ parts:
 Jupter Book primarily uses MyST or Markedly Structured Text for writing text content, which is an extension of Markdown
 designed for publishable content. A good overview over the core functionality can be found
 [here](https://myst-parser.readthedocs.io/en/latest/syntax/typography.html). Jupyter Book provides a range of extensions
-built upon the core MySQ structure, which are documented [here](https://jupyterbook.org/en/stable/content/index.html)
+built upon the core MyST structure, which are documented [here](https://jupyterbook.org/en/stable/content/index.html)
 and which include useful things like glossaries, indices, citations, footnotes, plus elements for structuring the layout
 of the page and its content.
 
 ## Local server
 
 While writing it can be helpful to see what the result will look like. To simplify this, the μEdition provides a built-in
-web-server that automatically re-generates the website when you edit the content. To start this server, run the
+web-server that automatically re-generates your μEdition when you edit the content. To start this server, run the
 following command:
 
 :::{code-block} console
 $ hatch run serve
 :::
 
-This will build the μEdition and then make it available at http://localhost:8000. When you make changes to the content,
-the μEdition will automatically re-build the website and automatically reload the view in the browser.
+This will build your μEdition and then make it available at http://localhost:8000. When you make changes to the content,
+the μEdition will automatically re-build your μEdition and automatically reload the view in the browser.

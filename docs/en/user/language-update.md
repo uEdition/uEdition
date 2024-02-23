@@ -4,7 +4,7 @@ The μEdition uses the same template approach for each language that you set up 
 from the main update. Run the following command to update a single language:
 
 :::{code-block} console
-$ hatch run uEdition language update PATH
+$ hatch run update-language PATH
 :::
 
 Replace `PATH` with the name of the folder of the language you wish to update.

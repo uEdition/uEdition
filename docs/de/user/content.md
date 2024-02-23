@@ -7,14 +7,14 @@ zusammenzufügen. Da die μEdition auf dem Jupyter Book aufbaut, sind der Großt
 Jupyter Book Projekts auch für die μEdition nutzbar. Der einzige Unterschied ist, dass die μEdition eine
 Konfigurationsdatei und ein Inhaltsverzeichnisse für alle Sprachen nutzt.
 
-## Structuring the μEdition
+## Die μEdition strukturieren
 
-The structure of the μEdition is defined via its table of contents, which is configured in the {file}`toc.yml` file
-in the μEdition root folder. The {file}`toc.yml` file uses the same format as [defined by the Jupyter Book project](https://jupyterbook.org/en/stable/structure/toc.html).
-The only difference is that where the standard Jupyter Book table of contents has a single `title` or `caption`,
-in the μEdition these entries can contain a mapping of language code to text. When generating the language-specific
-table of contents the μEdition ensures that the correct language value is used for the caption or title for that
-language:
+Die Struktur der μEdition wird über das Inhaltsverzeichnis definiert, welches in der {file}`toc.yml` Datei
+(im Wurzelverzeichnis der μEdition) konfiguriert wird. Die {file}`toc.yml` Datei nutzt das Format
+[der zugrundeliegenden Jupyter Book Technik](https://jupyterbook.org/en/stable/structure/toc.html). Der
+einzige Unterschied ist, dass die `title` und `caption` Einträge in der μEdition mit sprachspezifischen
+Werten konfiguriert werden. Wenn die μEdition dann generiert wird, werden für jede konfigurierte Sprache
+die jeweils relevanten Werte genutzt:
 
 :::{code-block} yaml
 format: jb-book
@@ -31,24 +31,26 @@ parts:
     - file: path/to/part1/chapter2
 :::
 
-## Writing text content
+## Texte schreiben
 
-Jupter Book primarily uses MyST or Markedly Structured Text for writing text content, which is an extension of Markdown
-designed for publishable content. A good overview over the core functionality can be found
-[here](https://myst-parser.readthedocs.io/en/latest/syntax/typography.html). Jupyter Book provides a range of extensions
-built upon the core MySQ structure, which are documented [here](https://jupyterbook.org/en/stable/content/index.html)
-and which include useful things like glossaries, indices, citations, footnotes, plus elements for structuring the layout
-of the page and its content.
+Das Jupyter Book nutzt primär MyST (Markedly Structured Text) um die Textinhalte zu erstellen. Dies ist eine Erweiterung
+des Markdownformats für komplexere Texte. Eine gute Übersicht über die Kernfunktionalität
+[findet sich hier](https://myst-parser.readthedocs.io/en/latest/syntax/typography.html). Das Jupyter Book stellte eine
+Reihe von Erweiterungen bereit, welche [hier dokumentiert sind](https://jupyterbook.org/en/stable/content/index.html)
+und welche die einfache Erstellung von Aspekten wie Glossar, Index, Zitierbarkeit, Fußnoten und Layoutstrukturen.
 
-## Local server
+Die μEdition stellt selbst eine Erweiterung zur Verfügung, welche die nutzung von TEI-XML (Text Encoding Initiative)
+sowohl als Eingabe, wie auch als Ausgabeformat bereitstellt.
 
-While writing it can be helpful to see what the result will look like. To simplify this, the μEdition provides a built-in
-web-server that automatically re-generates the website when you edit the content. To start this server, run the
-following command:
+## Lokaler Server
+
+Während des Schreibprozesses kann es hilfreich sein zu sehen, wie das Ergebnis aussieht. Um dies zu vereinfachen stellt
+die μEdition einen eingebauten Webserver zur verfügung, der die generierte μEdition automatisch aktualisiert, wenn die
+Inhalte bearbeitet werden. Um den Server zu starten wird folgender Befehl genutzt:
 
 :::{code-block} console
 $ hatch run serve
 :::
 
-This will build the μEdition and then make it available at http://localhost:8000. When you make changes to the content,
-the μEdition will automatically re-build the website and automatically reload the view in the browser.
+This generiert die μEdition und macht sie dann unter http://localhost:8000 verfügbar. Wenn die Inhalte geändert werden,
+wird die μEdition automatisch neugeneriert und die Seite im Browser automatisch neugeladen.
