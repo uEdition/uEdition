@@ -25,3 +25,4 @@ skip-install = true
 build = "uEdition build {args}"
 serve = "uEdition serve {args}"
 update = "uEdition update {args}"
+add-language = "uEdition language add {args}"
