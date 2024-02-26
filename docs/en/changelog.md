@@ -1,6 +1,6 @@
 # Changelog
 
-## In Development
+## 1.3.1 (26.02.2024)
 
 * **Bugfix**: Fix a bug in sorting by page
 

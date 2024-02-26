@@ -1,6 +1,6 @@
 # Änderungsgeschichte
 
-## In Entwicklung
+## 1.3.1 (26.02.2024)
 
 * **Bugfix**: Fehler in der Sortierung nach Seitenzahlen behoben
 
