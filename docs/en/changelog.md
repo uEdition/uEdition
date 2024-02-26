@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.3.2 (26.02.2024)
+
+* **Bugfix**: Further bugfix in the sorting by page functionality
+
+## 1.3.1 (26.02.2024)
+
+* **Bugfix**: Fix a bug in sorting by page
+
 ## 1.3.0 (22.02.2024)
 
 * **New**: Support download links in TEI documents

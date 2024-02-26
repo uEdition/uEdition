@@ -1,5 +1,13 @@
 # Änderungsgeschichte
 
+## 1.3.2 (26.02.2024)
+
+* **Bugfix**: Weiteren Fehler in der Sortierung nach Seitenzahlen behoben
+
+## 1.3.1 (26.02.2024)
+
+* **Bugfix**: Fehler in der Sortierung nach Seitenzahlen behoben
+
 ## 1.3.0 (22.02.2024)
 
 * **Neu**: Unterstützung für Downloadlinks in TEI Dateien
