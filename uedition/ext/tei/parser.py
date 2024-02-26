@@ -118,16 +118,16 @@ class TEIParser(SphinxParser):
                     value = value[0]
                 else:
                     value = str(value)
-                match = re.match("([0-9]+)(?:,([0-9-]+))*", value)
+                match = re.match("[0-9-,]+", value)
                 if match is not None:
-                    groups: list[int] = []
-                    for group in match.groups():
-                        if group is not None:
-                            if "-" in group:
-                                groups.append(int(group[: group.find("-")]))
-                            else:
-                                groups.append(int(group))
-                    return tuple(groups)
+                    order = []
+                    for part in value.split("-"):
+                        tpl = tuple([int(v) for v in part.split(",")])
+                        if len(order) > 0 and len(order[-1]) > len(tpl):
+                            order.append(tuple(list(order[-1][: -len(tpl)]) + list(tpl)))
+                        else:
+                            order.append(tpl)
+                    return tuple(order)
             return (0,)
 
         return sorter
