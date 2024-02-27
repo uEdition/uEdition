@@ -7,7 +7,6 @@ from rich import print as print_cli
 
 from uedition.__about__ import __version__
 from uedition.cli import build as build_module
-from uedition.cli import check as check_module
 from uedition.cli import create as create_module
 from uedition.cli import language as language_module
 from uedition.cli import serve as serve_module
@@ -35,12 +34,6 @@ def build() -> None:
 def serve() -> None:
     """Serve the μEdition for writing."""
     serve_module.run()
-
-
-@app.command()
-def check() -> None:
-    """Check that the μEdition is set up correctly."""
-    check_module.run()
 
 
 @app.command()
