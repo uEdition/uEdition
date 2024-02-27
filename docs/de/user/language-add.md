@@ -6,7 +6,7 @@ einzigen Sprache veröffentlicht werden soll, diese Sprache trotzdem explizit ko
 Um der μEdition eine Sprache hinzuzufügen, führen sie folgenden Befehl aus:
 
 :::{code-block} console
-$ hatch run uEdition language add ORDERNAME
+$ hatch run add-language ORDNERNAME
 :::
 
 Ersetzen sie `ORDNERNAME` mit dem Namen des Orderners in dem die Inhalte in der Sprache gespeichert werden. Der Vorgang

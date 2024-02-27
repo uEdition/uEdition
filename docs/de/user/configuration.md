@@ -1,29 +1,31 @@
-# Configuring the μEdition
+# Die μEdition konfigurieren
 
-The μEdition and Jupyter Book are highly configurable and in the μEdition both are configured via the {file}`uEdition.yml`
-file in the μEdition root. The block below shows the available configuration options that can be used in that file:
+Die μEdition und Jupyter Book sind sehr konfigurable. Sowohl die μEdition, wie auch die Jupyter Book Funktionalität
+werden über die {file}`uEdition.yml` (im Wurzelverzeichnis der μEdition) konfiguriert. Der folgende Block zeigt alle
+verfügbaren Konfigurationsoptionen:
 
 :::{code-block} yaml
-author:           # The author information consisting of:
-  name:           #   The name to display
-  email:          #   The e-mail address to use
-jb_config:        # Can contain any valid Jupyter Book configuration settings
-languages:        # The languages configured for the μEdition. A list, where each item consists of:
-- code:           #   The ISO 639-1 two-letter language code
-  label:          #   The label to display for this language
-  path:           #   The path that contains the language-specific Jupyter Book
-output:           # The output directory for the complete μEdition
-repository:       # The repository that contains this μEdition, configured via:
-  url:            #   The URL to the repository
-  branch:         #   The branch containing the μEdition
-title:            # The title of the μEdition in all configured languages. Each configured language code must have a key in this mapping:
-  en:             #   Mapping from ISO 639-1 language code to the human-readable title
-version: '1'      # The version of the μEdition configuration, which must be set to "1"
+author:           # Die Autor:innen:information bestehend aus
+  name:           #   Dem Autor:in:namen
+  email:          #   Der E-Mailaddresse der/des Autor:in:s
+jb_config:        # Enthält alle gültigen Jupyter Book Konfigurationseinträge
+languages:        # Die in der μEdition konfigurierten Sprachen. Eine List, in der jeder Eintrag aus folgenden Teilen besteht:
+- code:           #   Der ISO 639-1 zweistellige Sprachcode
+  label:          #   Der Text der in der Ausgabe für die Sprache angezeigt wird
+  path:           #   Der Dateipfad in dem das sprachspezifische Jupyter Book abgelegt ist
+output:           # Das Ausgabeverzeichnis für die komplette μEdition
+repository:       # Das Git Repository für diese μEdition:
+  url:            #   Die URL für das Repository
+  branch:         #   Der Repositoryzweig in der μEdition
+title:            # Der Titel der μEdition in allen konfigurierten Sprachen. Jede konfigurierte Sprache muss vorkommen.
+  en:             #   Abbildung vom ISO 639-1 Sprachcode auf den natürlichsprachlichen Titel
+version: '1'      # Die Version der μEdition Konfigurationsdatei. Muss auf "1" gesetzt sein.
 :::
 
-All elements of this file are optional and working defaults will be substituted.
+Alle Konfigurationselement der Datei sind optional und nicht angegebene Werte werden durch funktionierende Standardwerte
+ersetzt.
 
-All elements of the Jupyter Book can be configured via the `jb_config` settings ([see here for a full list](https://jupyterbook.org/en/stable/customize/config.html)).
-These values will be used as they are for all configured language-specific Jupyter Books. The only exception to this is
-the `title` configuration setting, for which the μEdition will always use the language-specific value configured in the
-{file}`uEdition.yml`.
+Alle Element des Jupyter Book können über den `jb_config` Eintrag konfiguriert werden
+([eine vollständige Liste findet sich hier](https://jupyterbook.org/en/stable/customize/config.html)).
+Die hier angebenen Einstellungen werden für alle sprachspezifischen Jupyter Books genutzt. Die Ausnahme ist die `titel`
+Einstellung, für die der Text für die jeweilige Sprache genutzt wird.

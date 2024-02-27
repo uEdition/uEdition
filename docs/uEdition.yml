@@ -13,6 +13,6 @@ repository:
   branch: main
   url: https://github.com/uEdition/uEdition
 title:
-  en: "\u03BCEdition"
   de: "\u03BCEdition"
+  en: "\u03BCEdition"
 version: '1'

@@ -6,7 +6,7 @@ a single language only, you need to explicitly configure this one language.
 To add a language to your μEdition, run the following command:
 
 :::{code-block} console
-$ hatch run uEdition language add FOLDER_NAME
+$ hatch run add-language FOLDER_NAME
 :::
 
 Replace `FOLDER_NAME` with the name of the folder that the μEdition content for that language is to be placed in. The

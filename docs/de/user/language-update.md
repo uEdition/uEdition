@@ -1,12 +1,12 @@
-# Updating a Language
+# Eine Sprache aktualisieren
 
-The μEdition uses the same template approach for each language that you set up and these need to be updated separately
-from the main update. Run the following command to update a single language:
+Die μEdition nutzt dieselbe Schablonenfunktion für jede Sprache und diese müssen für jede Sprache einzeln
+aktualisiert werden. Dazu wird folgender Befehl genutzt:
 
 :::{code-block} console
-$ hatch run uEdition language update PATH
+$ hatch run update-language ORDNERNAME
 :::
 
-Replace `PATH` with the name of the folder of the language you wish to update.
+Dabei wird `ORDNERNAME` mit dem Namen des Verzeichnisse, in dem das sprachspezifische Jupyter Book sitzt, ersetzt.
 
-As with updating the main μEdition, check all files, before continuing with your work.
+Ähnlich wie beim Update der μEdition selbst, sollten alle Änderungen überprüft werden, bevor weitergearbeitet wird.

@@ -4,7 +4,7 @@ When you have your μEdition in a state that you want to publish it, then run th
 publishable version:
 
 :::{code-block} console
-$ hatch run publish
+$ hatch run build
 :::
 
 The μEdition will build the site into the configured output folder, which by default is {file}`site`. You can then

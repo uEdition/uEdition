@@ -33,7 +33,7 @@ $ copier copy https://github.com/uEdition/uEdition-project-template my-edition
 🎤 What is the repository branch containing your μEdition?
    main
 
-Copying from template version 0.1.0
+Copying from template version 0.6.1
     create  .
     create  toc.yml
     create  uEdition.yml
@@ -44,7 +44,7 @@ Copying from template version 0.1.0
     create  .gitignore
     create  pyproject.toml
 $ cd my-edition
-$ hatch run uEdition language add cy
+$ hatch run add-language cy
 🎤 What is the language code?
    cy
 🎤 What is the name of the language?
