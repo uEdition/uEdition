@@ -1,7 +1,0 @@
-author: "\u03BCEdition Project"
-sphinx:
-  config:
-    language: de
-  extra_extensions:
-  - uedition
-title: "Test \u03BCEdition"
