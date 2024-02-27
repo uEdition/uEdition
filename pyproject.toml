@@ -144,7 +144,7 @@ ban-relative-imports = "all"
 source_pkgs = ["uedition", "tests"]
 branch = true
 parallel = true
-omit = ["uedition/__about__.py"]
+omit = ["uedition/__about__.py", "uedition/__main__.py"]
 
 [tool.coverage.paths]
 uedition = ["uedition", "*/uedition/uedition"]
