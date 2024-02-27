@@ -155,4 +155,4 @@ settings = Settings().model_dump()
 def reload_settings() -> None:
     """Reload the settings."""
     settings.clear()
-    settings.update(Settings().dict())
+    settings.update(Settings().model_dump())
