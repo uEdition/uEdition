@@ -80,18 +80,3 @@ def multilang_app() -> Generator[Typer, None, None]:
         yield app
     finally:
         os.chdir(cwd)
-
-
-@fixture
-def missing_files_app() -> Generator[Typer, None, None]:
-    """Yield a basic application where some files are missing root file."""
-    cwd = os.getcwd()
-    try:
-        os.chdir("tests/fixtures/missing_files")
-        from uedition.cli import app
-        from uedition.settings import reload_settings
-
-        reload_settings()
-        yield app
-    finally:
-        os.chdir(cwd)
