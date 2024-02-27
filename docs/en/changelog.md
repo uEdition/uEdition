@@ -1,5 +1,9 @@
 # Changelog
 
+## In Development
+
+* **Removed**: Removed undocumented "check" command
+
 ## 1.3.2 (26.02.2024)
 
 * **Bugfix**: Further bugfix in the sorting by page functionality
