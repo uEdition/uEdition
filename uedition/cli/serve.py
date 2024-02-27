@@ -8,7 +8,7 @@ from typing import Callable
 from livereload import Server
 
 from uedition.cli.build import full_build, partial_build
-from uedition.settings import settings
+from uedition.settings import NoConfigError, settings
 
 
 def build_cmd(lang: dict, full: bool = True) -> Callable[[], None]:  # noqa: FBT001, FBT002
@@ -29,6 +29,8 @@ def build_cmd(lang: dict, full: bool = True) -> Callable[[], None]:  # noqa: FBT
 
 def run() -> None:
     """Run the development server."""
+    if not path.exists("uEdition.yml") and not path.exists("uEdition.yaml"):
+        raise NoConfigError()
     full_rebuilds = [build_cmd(lang, full=True) for lang in settings["languages"]]
     partial_rebuilds = [build_cmd(lang, full=False) for lang in settings["languages"]]
     for cmd in full_rebuilds:
