@@ -10,7 +10,7 @@ from shutil import copytree, ignore_patterns, rmtree
 
 from yaml import safe_dump, safe_load
 
-from uedition.settings import reload_settings, settings
+from uedition.settings import NoConfigError, reload_settings, settings
 
 LANDING_PAGE_TEMPLATE = """\
 <!DOCTYPE html>
@@ -238,6 +238,8 @@ def partial_build(lang: dict) -> None:
 
 def run() -> None:
     """Build the full uEdition."""
+    if not path.exists("uEdition.yml") and not path.exists("uEdition.yaml"):
+        raise NoConfigError()
     if path.exists(settings["output"]["path"]):
         rmtree(settings["output"]["path"])
     for lang in settings["languages"]:

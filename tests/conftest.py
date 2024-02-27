@@ -67,27 +67,12 @@ def multilang_app() -> Generator[Typer, None, None]:
     cwd = os.getcwd()
     try:
         os.chdir("tests/fixtures/multilang")
-        if os.path.exists("docs"):  # nocov
+        if os.path.exists("docs"):  # no cov
             rmtree("docs")
-        if os.path.exists("en/_build"):  # nocov
+        if os.path.exists("en/_build"):  # no cov
             rmtree("en/_build")
-        if os.path.exists("de/_build"):  # nocov
+        if os.path.exists("de/_build"):  # no cov
             rmtree("de/_build")
-        from uedition.cli import app
-        from uedition.settings import reload_settings
-
-        reload_settings()
-        yield app
-    finally:
-        os.chdir(cwd)
-
-
-@fixture
-def missing_files_app() -> Generator[Typer, None, None]:
-    """Yield a basic application where some files are missing root file."""
-    cwd = os.getcwd()
-    try:
-        os.chdir("tests/fixtures/missing_files")
         from uedition.cli import app
         from uedition.settings import reload_settings
 

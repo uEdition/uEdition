@@ -15,6 +15,14 @@ from pydantic_settings import BaseSettings, PydanticBaseSettingsSource
 from yaml import safe_load
 
 
+class NoConfigError(Exception):
+    """Exception to signal that no configuration file was found in the current directory."""
+
+    def __init__(self) -> None:
+        """Initialise the Exception with the default error message."""
+        super().__init__("No uEdition.yml or uEdition.yaml was found in the current directory")
+
+
 class YAMLConfigSettingsSource(PydanticBaseSettingsSource):
     """Loads the configuration settings from a YAML file."""
 
@@ -147,4 +155,4 @@ settings = Settings().model_dump()
 def reload_settings() -> None:
     """Reload the settings."""
     settings.clear()
-    settings.update(Settings().dict())
+    settings.update(Settings().model_dump())

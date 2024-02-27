@@ -7,9 +7,13 @@ import os
 from copier import run_copy, run_update
 from yaml import dump, safe_load
 
+from uedition.settings import NoConfigError
+
 
 def add(path: str) -> None:
     """Add a language to the μEdition using Copier."""
+    if not os.path.exists("uEdition.yml") and not os.path.exists("uEdition.yaml"):
+        raise NoConfigError()
     run_copy("gh:uEdition/uEdition-language-template", path, data={"path": path})
     with open(os.path.join(path, ".uEdition.answers")) as in_f:
         answers = safe_load(in_f)
@@ -32,6 +36,8 @@ def add(path: str) -> None:
 
 def update(path: str) -> None:
     """Update a language to the latest template."""
+    if not os.path.exists("uEdition.yml") and not os.path.exists("uEdition.yaml"):
+        raise NoConfigError()
     run_update(path, answers_file=".uEdition.answers", overwrite=True, data={"path": path})
     with open(os.path.join(path, ".uEdition.answers")) as in_f:
         answers = safe_load(in_f)

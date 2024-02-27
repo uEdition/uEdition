@@ -5,7 +5,6 @@ format: jb-book
 root: intro
 parts:
   - caption:
-      de: Teil A
       en: Part A
     chapters:
       - file: a-page
