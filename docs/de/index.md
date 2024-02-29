@@ -5,6 +5,20 @@ die technischen Anforderungen und Hostingkosten geht. Die μEdition bietet ein G
 es ein einfaches Werkzeug anbietet, welches Projekte darin unterstützt einfach (multilinguale) digitale Editionen zu
 erstellen, welche dann über gratis oder billige Hostinglösungen online verfügbar gemacht werden können.
 
+:::{admonition} Hilfe und Unterstützung
+:class: tip
+
+Die μEdition ist noch ein junges Projekt und benötigt Feedback von Nutzern und Nutzerinnen um die Hürden zur Nutzung
+weiter zu reduzieren. Egal ob dies zusätzliche Dokumentation ist, Fehler beheben, oder zusätzliche Funktionalität,
+bitte informiert uns und dann können wir die μEdition besser machen.
+
+Für alle Fragen zur μEdition und zu ihrer Nutzung, nutzt bitte unser GitHub Discussions Forum:
+https://github.com/uEdition/uEdition/discussions.
+
+Wenn Fehler auftreten, dann bitte diese über unsere GitHub Issues melden und dann können wir sie reparieren:
+https://github.com/uEdition/uEdition/issues.
+:::
+
 ## Inhaltsverzeichnis
 
 :::{tableofcontents}
