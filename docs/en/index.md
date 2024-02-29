@@ -5,6 +5,20 @@ hurdles, particularly around technical knowledge and hosting costs. The μEditio
 providing a simple tool that supports users in easily building (multi-lingual) digital editions that can then easily be made
 available online using free or low-cost hosting solutions.
 
+:::{admonition} Getting Help
+:class: tip
+
+The μEdition is still a young project and relies on your feedback to further lower the barriers to its use. Whether this is
+adding documentation on how to do things, fixing broken things, or adding extra features, please let us know what is needed
+and then we can make it better.
+
+If you have any questions about anything related to the μEdition, please use our GitHub Discussions forum to ask:
+https://github.com/uEdition/uEdition/discussions.
+
+If you run into any bugs, then please report these via the GitHub Issues and we can get them fixed:
+https://github.com/uEdition/uEdition/issues.
+:::
+
 ## Contents
 
 :::{tableofcontents}
