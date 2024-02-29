@@ -12,10 +12,11 @@ available online using free or low-cost hosting solutions.
 
 ## Quickstart
 
-To quickly get started with the μEdition, follow these steps (assuming you already have Python 3.10 or newer installed):
+To quickly get started with the μEdition, follow these steps (assuming you already have Python 3.10 or newer and pipx installed):
 
 :::{code} console
-$ pipx install hatch copier
+$ pipx install hatch
+$ pipx install copier
 $ copier copy https://github.com/uEdition/uEdition-project-template my-edition
 🎤 What is the name of your μEdition?
    My Edition
