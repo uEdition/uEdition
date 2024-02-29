@@ -26,10 +26,11 @@ https://github.com/uEdition/uEdition/issues.
 
 ## Schnellstart
 
-Für einen Schnellstart mit der μEdition, folgens sie diesen Schritten (Python 3.10 oder nuer muss bereits installiert sein):
+Für einen Schnellstart mit der μEdition, folgens sie diesen Schritten (Python 3.10 oder neuer und pipx müssen bereits installiert sein):
 
 :::{code} console
-$ pipx install hatch copier
+$ pipx install hatch
+$ pipx install copier
 $ copier copy https://github.com/uEdition/uEdition-project-template my-edition
 🎤 What is the name of your μEdition?
    My Edition
