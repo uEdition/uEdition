@@ -2,6 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 """TEI parsing extension for Sphinx."""
+
 import re
 from typing import Callable
 
@@ -11,6 +12,9 @@ from sphinx import addnodes
 from sphinx.application import Sphinx
 from sphinx.parsers import Parser as SphinxParser
 from sphinx.writers.html import HTMLWriter
+
+from uedition.ext.settings import TEISettings
+from uedition.ext.tei.tei2doc import clean_tei_subdoc, parse_tei_subdoc
 
 namespaces = {"tei": "http://www.tei-c.org/ns/1.0", "uedition": "https://uedition.readthedocs.org"}
 
@@ -38,13 +42,13 @@ def tei_element_html_enter(self: "HTMLWriter", node: TeiElement) -> None:
             buffer.append(f' id="{node.get("ids")[0]}"')
         for key, value in node.get("tei_attributes").items():
             buffer.append(f' {key}="{value}"')
-        self.body.append(f'{"".join(buffer)}>')
+        self.body.append(f"{''.join(buffer)}>")
 
 
 def tei_element_html_exit(self: "HTMLWriter", node: TeiElement) -> None:
     """Close the HTML tag."""
     if node.get("html_tag") is not None:
-        self.body.append(f'</{node.get("html_tag")}>')
+        self.body.append(f"</{node.get('html_tag')}>")
 
 
 class TEIParser(SphinxParser):
@@ -54,7 +58,8 @@ class TEIParser(SphinxParser):
     """Specify that only .tei files are parsed"""
 
     def parse(self: "TEIParser", inputstring: str, document: nodes.document) -> None:
-        """Parse source TEI text.
+        """
+        Parse source TEI text.
 
         This function creates the basic structure and then the :func:`~uEdition.extensions.tei.TEIParser._walk_tree`
         function is used to actually process the XML.
@@ -75,6 +80,14 @@ class TEIParser(SphinxParser):
         doc_title = nodes.title()
         doc_title.append(nodes.Text(title if title else "[Untitled]"))
         doc_section.append(doc_title)
+        for section in self.config.tei["sections"]:
+            if section["type"] == "text":
+                tei_subtrees = root.xpath(section["selector"], namespaces=namespaces)
+                for tei_subtree in tei_subtrees:
+                    doc_tree = parse_tei_subdoc(tei_subtree, TEISettings(**self.config.tei))
+                    for child in doc_tree["content"]:
+                        doc_section.append(self._docnode_to_docutils(child))
+        """
         if "tei" in self.config.uEdition and "sections" in self.config.uEdition["tei"]:
             for conf_section in self.config.uEdition["tei"]["sections"]:
                 section = nodes.section(ids=[nodes.make_id(conf_section["title"])])
@@ -103,8 +116,28 @@ class TEIParser(SphinxParser):
                         elif field["type"] == "list":
                             self._parse_list_field(fields, field, root)
                         elif field["type"] == "download":
-                            self._parse_download_field(fields, field, root)
+                            self._parse_download_field(fields, field, root)'
+        """
         document.append(doc_section)
+
+    def _docnode_type_to_tag(self, type: str) -> str:
+        for node_config in self.config.tei["blocks"] + self.config.tei["marks"]:
+            if node_config["type"] == type:
+                if "tag" in node_config:
+                    return node_config["tag"]
+                else:
+                    return "p"
+        return "p"
+
+    def _docnode_to_docutils(self, docnode: dict) -> nodes.Node:
+        if docnode["type"] == "text":
+            return nodes.Text(docnode["text"])
+        else:
+            nodes.paragraph("", f"Unknown node type {docnode['type']}")
+        if "content" in docnode:
+            for child in docnode["content"]:
+                parent.append(self._docnode_to_docutils(child))
+        return parent
 
     def _sort_key(self: "TEIParser", xpath: str) -> Callable[[etree.Element], tuple[tuple[int, ...], ...]]:
         """Create a sortkey that understands about `page,line` patterns for sorting."""
@@ -131,7 +164,8 @@ class TEIParser(SphinxParser):
         return sorter
 
     def _walk_tree(self: "TEIParser", node: etree.Element, parent: nodes.Element, rules: list) -> None:
-        """Walk the XML tree and create the appropriate AST nodes.
+        """
+        Walk the XML tree and create the appropriate AST nodes.
 
         Uses the mapping rules defined in :mod:`~uEdition.extensions.config` to determine what to
         map the XML to.

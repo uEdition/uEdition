@@ -11,4 +11,5 @@ chapters:
       - file: user/publish
       - file: user/update
       - file: user/language-update
+      - file: user/working-with-tei
   - file: changelog

@@ -1,0 +1,16 @@
+<tei:TEI xmlns:tei="http://www.tei-c.org/ns/1.0">
+  <tei:teiHeader>
+    <tei:fileDesc>
+      <tei:titleStmt>
+        <tei:title>Working with TEI</tei:title>
+      </tei:titleStmt>
+    </tei:fileDesc>
+  </tei:teiHeader>
+  <tei:text>
+    <tei:body>
+      <tei:p>
+        <tei:seg>This is an example section.</tei:seg>
+      </tei:p>
+    </tei:body>
+  </tei:text>
+</tei:TEI>

@@ -14,4 +14,14 @@ repository:
 title:
   de: "\u03BCEdition"
   en: "\u03BCEdition"
+sphinx_config:
+  tei:
+    blocks:
+      - name: paragraph
+        selector: tei:p
+        tag: p
+    sections:
+      - name: bodytext
+        type: text
+        selector: /tei:TEI/tei:text/tei:body
 version: "2"
