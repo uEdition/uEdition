@@ -6,7 +6,6 @@ import xml.sax.saxutils
 from collections.abc import Iterator
 
 import sphinx
-import sphinx_jupyterbook_latex
 from docutils import nodes
 from docutils.io import StringOutput
 from sphinx.application import Sphinx
@@ -37,6 +36,7 @@ MAPPINGS = [
         "attrs": [{"target": "type", "value": "literal-block"}, {"source": "language", "target": "subtype"}],
     },
     {"cls": nodes.compound, "tagname": "div", "type": "block"},
+    {"cls": nodes.admonition, "tagname": "div", "type": "block"},
     {"cls": sphinx.addnodes.toctree},
     {
         "cls": nodes.footnote,
@@ -47,7 +47,6 @@ MAPPINGS = [
             {"target": "target", "source": "backrefs", "format": "#{value}", "join": " "},
         ],
     },
-    {"cls": sphinx_jupyterbook_latex.nodes.HiddenCellNode},
     {
         "cls": nodes.transition,
         "tagname": "div",
@@ -204,7 +203,7 @@ class TEITranslator(nodes.GenericNodeVisitor):
             else:
                 self.output.append(text)
         else:
-            self.output.append(f"{self.indent*self.level}<tei:span>{text}</tei:span>\n")
+            self.output.append(f"{self.indent * self.level}<tei:span>{text}</tei:span>\n")
 
     def depart_Text(self, node: nodes.TextElement) -> None:  # noqa: N802
         """Unused."""

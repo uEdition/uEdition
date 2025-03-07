@@ -15,18 +15,23 @@ classifiers = [
   "Programming Language :: Python",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = [
   "copier>=9.0.0,<10.0.0",
-  "jupyter-book>=1.0.0,<2.0.0",
   "lxml>=4.9.2,<6.0.0",
   "livereload",
+  "myst-parser>=4.0.1,<5",
   "pydantic>=2.0.0,<3.0.0",
   "pydantic-settings>=2.0.0,<3.0.0",
   "PyYAML>=6.0.0,<7.0.0",
-  "typer[all]<1.0.0",
+  "sphinx>=8.2.3,<9",
+  "sphinx_external_toc>=1.0.1,<2",
+  "sphinx-book-theme>=1.1.4,<2",
+  "typer<1.0.0",
 ]
 dynamic = ["version"]
 
@@ -45,7 +50,7 @@ tei = "uedition.ext.tei.builder"
 path = "uedition/__about__.py"
 
 [tool.hatch.envs.default]
-extra-dependencies = ["coverage[toml]>=6.5", "pytest"]
+extra-dependencies = ["coverage[toml]>=6.5", "pytest", "ruff==0.9.5"]
 
 [tool.hatch.envs.default.scripts]
 docs-server = "cd docs && uEdition serve"
@@ -53,24 +58,10 @@ test = "pytest {args:tests}"
 test-cov = "coverage run -m pytest {args:tests}"
 cov-report = ["- coverage combine", "coverage report"]
 cov = ["test-cov", "cov-report"]
-
-[[tool.hatch.envs.all.matrix]]
-python = ["3.10", "3.11"]
-
-[tool.hatch.envs.lint]
-
-dependencies = ["black>=23.1.0", "mypy>=1.0.0", "ruff>=0.0.243"]
-detached = true
-[tool.hatch.envs.lint.scripts]
-typing = "mypy --install-types --non-interactive {args:uedition tests}"
-style = ["ruff {args:.}", "black --check --diff {args:.}"]
-fmt = ["black {args:.}", "ruff --fix {args:.}", "style"]
-all = ["style", "typing"]
-
-[tool.black]
-target-version = ["py37"]
-line-length = 120
-skip-string-normalization = true
+style = [
+  "ruff check --fix --exit-non-zero-on-fix {args:.}",
+  "ruff format --check {args:.}",
+]
 
 [tool.ruff]
 target-version = "py37"
@@ -119,8 +110,6 @@ ignore = [
   "PLR0912",
   "PLR0913",
   "PLR0915",
-  # Ignore self annotations
-  "ANN101",
   # Ignore conflicting documentation options
   "D203",
   "D213",

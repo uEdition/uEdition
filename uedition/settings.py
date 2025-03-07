@@ -5,6 +5,7 @@
 
 All application settings are accessed via the `settings` dictionary.
 """
+
 import os
 from typing import Annotated, Any, Dict, Tuple, Type
 
@@ -27,7 +28,9 @@ class YAMLConfigSettingsSource(PydanticBaseSettingsSource):
     """Loads the configuration settings from a YAML file."""
 
     def get_field_value(
-        self: "YAMLConfigSettingsSource", field: FieldInfo, field_name: str  # noqa: ARG002
+        self: "YAMLConfigSettingsSource",
+        field: FieldInfo,  # noqa: ARG002
+        field_name: str,
     ) -> Tuple[Any, str, bool]:
         """Get the value of a specific field."""
         encoding = self.config.get("env_file_encoding")
@@ -83,8 +86,6 @@ class RepositorySettings(BaseModel):
 
     url: str | None = None
     """The repository's URL."""
-    branch: str | None = None
-    """The repository's branch."""
 
 
 class AuthorSettings(BaseModel):
@@ -115,7 +116,7 @@ def convert_output_str_to_dict(value: str | dict) -> dict:
 class Settings(BaseSettings):
     """Application settings."""
 
-    version: str = "1"
+    version: str = "2"
     """The configuration file version."""
     author: AuthorSettings = AuthorSettings()
     """The author settings."""
@@ -127,8 +128,8 @@ class Settings(BaseSettings):
     """The repository settings."""
     title: dict = {}
     """The titles for the individual languages."""
-    jb_config: dict = {}
-    """Additional JupyterBook configuration."""
+    sphinx_config: dict = {}
+    """Sphinx configuration."""
 
     @classmethod
     def settings_customise_sources(

@@ -2,9 +2,9 @@
 #
 # SPDX-License-Identifier: MIT
 """Build functionality."""
+
 import json
 import subprocess
-from copy import deepcopy
 from os import makedirs, path
 from shutil import copytree, ignore_patterns, rmtree
 
@@ -103,41 +103,50 @@ def toc_build(lang: dict) -> None:
 
 
 def config_build(lang: dict) -> None:
-    """Build the language-specific JupyterBook config based on the main config."""
-    config = deepcopy(settings["jb_config"])
-    config["author"] = settings["author"]["name"]
-    # Set the language-specific title
+    """Build the language-specific Sphinx config based on the main config."""
+    with open("toc.yml") as in_f:
+        toc = safe_load(in_f)
+    # Build the default configuration
+    config = {
+        "needs_sphinx": "8",
+        "language": lang["code"],
+        "root_doc": toc["root"],
+        "html_theme": "sphinx_book_theme",
+        "html_theme_options": {},
+        "extensions": ["myst_parser", "sphinx_external_toc", "uedition"],
+        "myst_enable_extensions": [
+            "amsmath",
+            "attrs_inline",
+            "colon_fence",
+            "deflist",
+            "dollarmath",
+            "fieldlist",
+            "html_admonition",
+            "html_image",
+            "replacements",
+            "smartquotes",
+            "strikethrough",
+            "substitution",
+            "tasklist",
+        ],
+    }
+    # Load in any sphinx configuration
+    config.update(settings["sphinx_config"])
+    # Set settings-based
     if lang["code"] in settings["title"]:
-        config["title"] = settings["title"][lang["code"]]
+        config["project"] = settings["title"][lang["code"]]
     elif len(settings["languages"]) > 0 and settings["languages"][0]["code"] in settings["title"]:
-        config["title"] = settings["title"][settings["languages"][0]["code"]]
+        config["project"] = settings["title"][settings["languages"][0]["code"]]
     else:
-        config["title"] = f"Missing title for {lang['label']}"
-    # Set the repository information
-    if settings["repository"]["url"] and "repository" not in config:
-        config["repository"] = {
-            "url": settings["repository"]["url"],
-            "path": lang["path"],
-            "branch": settings["repository"]["branch"],
-        }
-        if "html" not in config:
-            config["html"] = {}
-        if "use_repository_button" not in config["html"]:
-            config["html"]["use_repository_button"] = True
-    # Set the Sphinx language
-    if "sphinx" not in config:
-        config["sphinx"] = {}
-    if "config" not in config["sphinx"]:
-        config["sphinx"]["config"] = {}
-    config["sphinx"]["config"]["language"] = lang["code"]
-    # Add the uEdition extension
-    if "extra_extensions" not in config["sphinx"]:
-        config["sphinx"]["extra_extensions"] = []
-    if "uedition" not in config["sphinx"]["extra_extensions"]:
-        config["sphinx"]["extra_extensions"].append("uedition")
+        config["project"] = f"Missing title for {lang['label']}"
+    config["author"] = settings["author"]["name"]
+    if settings["repository"]["url"]:
+        config["html_theme_options"]["repository_url"] = f"{settings['repository']['url']}"
+        config["html_theme_options"]["use_repository_button"] = True
 
-    with open(path.join(lang["path"], "_config.yml"), "w") as out_f:
-        safe_dump(config, out_f, encoding="utf-8")
+    with open(path.join(lang["path"], "conf.py"), "w") as out_f:
+        for name, value in config.items():
+            out_f.write(f"{name} = {value!a}\n")
 
 
 def static_build(lang: dict) -> None:
@@ -153,41 +162,39 @@ def full_build(lang: dict) -> None:
     toc_build(lang)
     config_build(lang)
     static_build(lang)
-    subprocess.run(
-        [  # noqa: S603, S607
-            "jupyter-book",
-            "build",
-            "--all",
-            "--path-output",
-            path.join("_build", lang["path"]),
+    subprocess.run(  # noqa:S603
+        [  # noqa:  S607
+            "sphinx-build",
+            "--builder",
+            "html",
+            "--fresh-env",
             lang["path"],
+            path.join("_build", lang["path"], "html"),
         ],
         check=False,
+        shell=False,
     )
     if settings["output"]["tei"]:
-        subprocess.run(
-            [  # noqa: S603, S607
-                "jupyter-book",
-                "build",
-                "--all",
-                "--path-output",
-                path.join("_build", lang["path"]),
+        subprocess.run(  # noqa: S603
+            [  # noqa:S607
+                "sphinx-build",
                 "--builder",
-                "custom",
-                "--custom-builder",
                 "tei",
+                "--fresh-env",
                 lang["path"],
+                path.join("_build", lang["path"], "tei"),
             ],
             check=False,
+            shell=False,
         )
     copytree(
-        path.join("_build", lang["path"], "_build", "html"),
+        path.join("_build", lang["path"], "html"),
         path.join(settings["output"]["path"], lang["path"]),
         dirs_exist_ok=True,
     )
     if settings["output"]["tei"]:
         copytree(
-            path.join("_build", lang["path"], "_build", "tei"),
+            path.join("_build", lang["path"], "tei"),
             path.join(settings["output"]["path"], lang["path"]),
             ignore=ignore_patterns("_sphinx_design_static"),
             dirs_exist_ok=True,
@@ -197,39 +204,37 @@ def full_build(lang: dict) -> None:
 def partial_build(lang: dict) -> None:
     """Run the as-needed build process for a single language."""
     landing_build()
-    subprocess.run(
-        [  # noqa: S603, S607
-            "jupyter-book",
-            "build",
-            "--path-output",
-            path.join("_build", lang["path"]),
+    subprocess.run(  # noqa: S603
+        [  # noqa: S607
+            "sphinx-build",
+            "--builder",
+            "html",
             lang["path"],
+            path.join("_build", lang["path"], "html"),
         ],
         check=False,
+        shell=False,
     )
     if settings["output"]["tei"]:
-        subprocess.run(
-            [  # noqa: S603, S607
-                "jupyter-book",
-                "build",
-                "--path-output",
-                path.join("_build", lang["path"]),
+        subprocess.run(  # noqa:S603
+            [  # noqa: S607
+                "sphinx-build",
                 "--builder",
-                "custom",
-                "--custom-builder",
                 "tei",
                 lang["path"],
+                path.join("_build", lang["path"], "tei"),
             ],
             check=False,
+            shell=False,
         )
     copytree(
-        path.join("_build", lang["path"], "_build", "html"),
+        path.join("_build", lang["path"], "html"),
         path.join(settings["output"]["path"], lang["path"]),
         dirs_exist_ok=True,
     )
     if settings["output"]["tei"]:
         copytree(
-            path.join("_build", lang["path"], "_build", "tei"),
+            path.join("_build", lang["path"], "tei"),
             path.join(settings["output"]["path"], lang["path"]),
             ignore=ignore_patterns("_sphinx_design_static"),
             dirs_exist_ok=True,
