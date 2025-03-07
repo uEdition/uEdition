@@ -63,13 +63,15 @@ style = [
   "ruff format --check {args:.}",
 ]
 
+
 [tool.ruff]
 target-version = "py37"
 line-length = 120
+
+[tool.ruff.lint]
 select = [
   "A",
   "ARG",
-  "ANN",
   "B",
   "C",
   "D",
@@ -110,22 +112,22 @@ ignore = [
   "PLR0912",
   "PLR0913",
   "PLR0915",
-  # Ignore conflicting documentation options
+  # Pydocstyle settings
   "D203",
-  "D213",
+  "D212",
 ]
 unfixable = [
   # Don't touch unused imports
   "F401",
 ]
 
-[tool.ruff.isort]
-known-first-party = ["uedition"]
+[tool.ruff.lint.isort]
+known-first-party = ["uedition_editor"]
 
-[tool.ruff.flake8-tidy-imports]
+[tool.ruff.lint.flake8-tidy-imports]
 ban-relative-imports = "all"
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 # Tests can use magic values, assertions, and relative imports
 "tests/**/*" = ["PLR2004", "S101", "TID252"]
 
