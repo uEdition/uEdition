@@ -12,8 +12,10 @@ from lxml import etree
 from sphinx import addnodes
 from sphinx.application import Sphinx
 from sphinx.parsers import Parser as SphinxParser
+from sphinx.util import logging
 from sphinx.writers.html import HTMLWriter
 
+logger = logging.getLogger(__name__)
 namespaces = {"tei": "http://www.tei-c.org/ns/1.0", "uedition": "https://uedition.readthedocs.org"}
 
 
@@ -35,7 +37,7 @@ class TeiElement(nodes.Element):
 def tei_element_html_enter(self: "HTMLWriter", node: TeiElement) -> None:
     """Visit a TeiElement and generate the correct HTML."""
     if node.get("html_tag") is not None:
-        buffer = [f'<{node.get("html_tag")} data-tei-tag="{node.get("tei_tag")[29:]}"']
+        buffer = [f"<{node.get('html_tag')}"]
         if node.get("ids"):
             buffer.append(f' id="{node.get("ids")[0]}"')
         for key, value in node.get("tei_attributes").items():
@@ -80,19 +82,21 @@ class TEIParser(SphinxParser):
         doc_section.append(doc_title)
         for conf_section in self.config.tei["sections"]:
             section = nodes.section(ids=[nodes.make_id(conf_section["name"])])
-            section_title = nodes.title()
-            section_title.append(nodes.Text(conf_section["title"]))
-            section.append(section_title)
+            if conf_section["title"]:
+                section_title = nodes.title()
+                section_title.append(nodes.Text(conf_section["title"]))
+                section.append(section_title)
             if conf_section["type"] == "text":
                 # Process a text section
-                source = root.xpath(conf_section["selector"], namespaces=namespaces)
-                if len(source) > 0:
+                sources = root.xpath(conf_section["selector"], namespaces=namespaces)
+                if len(sources) > 0:
                     # if conf_section["sort"]:
                     #     source.sort(key=self._sort_key(conf_section["sort"]))
                     doc_section.append(section)
                     tmp = nodes.section()
-                    for child in source:
-                        self._walk_tree(child, tmp)
+                    for source in sources:
+                        for child in source:
+                            self._walk_tree(child, tmp)
                     self._wrap_sections(section, tmp)
             elif conf_section["type"] == "fields":
                 # Process a field or metadata section
@@ -134,7 +138,27 @@ class TEIParser(SphinxParser):
 
     def _walk_tree(self: "TEIParser", node: etree.Element, parent: nodes.Element) -> None:
         """Walk the XML tree and create the appropriate AST nodes."""
-        parent.append(TeiElement(html_tag="div", tei_tag=node.tag, tei_attributes={}))
+        for conf in self.config.tei["blocks"]:
+            if len(node.xpath(f"self::{conf['selector']}", namespaces=namespaces)) > 0:
+                element = TeiElement(
+                    html_tag=conf["tag"] if conf["tag"] else "div",
+                    tei_tag=node.tag,
+                    tei_attributes={f"data-tei-block-{node.tag[29:]}": ""},
+                )
+                for child in node:
+                    self._walk_tree(child, element)
+                parent.append(element)
+                return
+        for conf in self.config.tei["marks"]:
+            if len(node.xpath(f"self::{conf['selector']}", namespaces=namespaces)) > 0:
+                element = TeiElement(html_tag="div", tei_tag=node.tag, tei_attributes={})
+                for child in node:
+                    self._walk_tree(child, element)
+                parent.append(element)
+                return
+        if len(node) == 0:
+            parent.append(nodes.Text(node.text))
+        logger.warning(f"No block or mark configured for {node.tag}")
         # is_leaf = len(node) == 0
         # # text_only_in_leaf_nodes = (
         # #     self.config.uEdition["tei"]["text_only_in_leaf_nodes"] if "tei" in self.config.uEdition else False
