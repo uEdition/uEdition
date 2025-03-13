@@ -90,26 +90,39 @@ class TEIParser(SphinxParser):
                 # Process a text section
                 sources = root.xpath(conf_section["selector"], namespaces=namespaces)
                 if len(sources) > 0:
-                    # if conf_section["sort"]:
-                    #     source.sort(key=self._sort_key(conf_section["sort"]))
                     doc_section.append(section)
                     tmp = nodes.section()
                     for source in sources:
                         for child in source:
                             self._walk_tree(child, tmp)
                     self._wrap_sections(section, tmp)
-            elif conf_section["type"] == "fields":
+            elif conf_section["type"] == "textlist":
+                # Process a text section
+                sources = root.xpath(conf_section["selector"], namespaces=namespaces)
+                if len(sources) > 0:
+                    if conf_section["sort"]:
+                        source.sort(key=self._sort_key(conf_section["sort"]))
+                    doc_section.append(section)
+                    for source in sources:
+                        tmp = nodes.section(ids=[source.attrib["id"]])
+                        for child in source:
+                            self._walk_tree(child, tmp)
+                        section.append(tmp)
+                    # self._wrap_sections(section, tmp)
+            elif conf_section["type"] == "metadata":
                 # Process a field or metadata section
-                doc_section.append(section)
-                fields = nodes.definition_list()
-                section.append(fields)
-                for field in conf_section["fields"]:
-                    if field["type"] == "single":
-                        self._parse_single_field(fields, field, root)
-                    elif field["type"] == "list":
-                        self._parse_list_field(fields, field, root)
-                    elif field["type"] == "download":
-                        self._parse_download_field(fields, field, root)
+                sources = root.xpath(conf_section["selector"], namespaces=namespaces)
+                if len(sources) > 0:
+                    doc_section.append(section)
+                    fields = nodes.definition_list()
+                    section.append(fields)
+                    for field in conf_section["fields"]:
+                        if field["type"] == "single":
+                            self._parse_single_field(fields, field, sources[0])
+                        elif field["type"] == "list":
+                            self._parse_list_field(fields, field, sources[0])
+                        elif field["type"] == "download":
+                            self._parse_download_field(fields, field, sources[0])
         document.append(doc_section)
 
     def _sort_key(self: "TEIParser", xpath: str) -> Callable[[etree.Element], tuple[tuple[int, ...], ...]]:
@@ -140,10 +153,10 @@ class TEIParser(SphinxParser):
         """Walk the XML tree and create the appropriate AST nodes."""
         for conf in self.config.tei["blocks"]:
             if len(node.xpath(f"self::{conf['selector']}", namespaces=namespaces)) > 0:
+                attrs = self._parse_attributes(node, conf["attributes"])
+                attrs.update({f"data-tei-block-{conf['name']}": ""})
                 element = TeiElement(
-                    html_tag=conf["tag"] if conf["tag"] else "div",
-                    tei_tag=node.tag,
-                    tei_attributes={f"data-tei-block-{node.tag[29:]}": ""},
+                    html_tag=conf["tag"] if conf["tag"] else "div", tei_tag=node.tag, tei_attributes=attrs
                 )
                 for child in node:
                     self._walk_tree(child, element)
@@ -151,72 +164,38 @@ class TEIParser(SphinxParser):
                 return
         for conf in self.config.tei["marks"]:
             if len(node.xpath(f"self::{conf['selector']}", namespaces=namespaces)) > 0:
-                element = TeiElement(html_tag="div", tei_tag=node.tag, tei_attributes={})
-                for child in node:
-                    self._walk_tree(child, element)
+                attrs = self._parse_attributes(node, conf["attributes"])
+                attrs.update({f"data-tei-mark-{conf['name']}": ""})
+                element = TeiElement(
+                    html_tag=conf["tag"] if conf["tag"] else "span", tei_tag=node.tag, tei_attributes=attrs
+                )
+                if len(node) == 0 and node.text:
+                    element.append(nodes.Text(node.text))
+                else:
+                    for child in node:
+                        self._walk_tree(child, element)
                 parent.append(element)
                 return
         if len(node) == 0:
             parent.append(nodes.Text(node.text))
-        logger.warning(f"No block or mark configured for {node.tag}")
-        # is_leaf = len(node) == 0
-        # # text_only_in_leaf_nodes = (
-        # #     self.config.uEdition["tei"]["text_only_in_leaf_nodes"] if "tei" in self.config.uEdition else False
-        # # )
-        # attributes = {}
-        # # Get the first matching rule for the current node
-        # rule = self._rule_for_node(node)
-        # # Loop over the XML node attributes and apply any attribute transforms defined in the matching rule
-        # for key, value in node.attrib.items():
-        #     # Always strip the namespace from the `id` attribute
-        #     if key == "{http://www.w3.org/XML/1998/namespace}id":
-        #         key = "id"
-        #     if rule and "attributes" in rule:
-        #         processed = False
-        #         for attr_rule in rule["attributes"]:
-        #             if attr_rule["action"] == "copy":
-        #                 if key == attr_rule["source"]:
-        #                     # Copied attributes are added without a `data-` prefix
-        #                     attributes[attr_rule["attr"]] = value
-        #             elif attr_rule["action"] == "delete":
-        #                 if key == attr_rule["attr"]:
-        #                     processed = True
-        #             elif attr_rule["action"] == "set":
-        #                 if key == attr_rule["attr"]:
-        #                     value = attr_rule["value"]
-        #         # if the attribute did not match any attribute transform
-        #         if not processed:
-        #             # The id attribute is always output as is, all other attributes are prefixed with `data-`
-        #             if key == "id":
-        #                 attributes["id"] = value
-        #             else:
-        #                 attributes[f"data-{key}"] = value
-        #     else:
-        #         # The id attribute is always output as is, all other attributes are prefixed with `data-`
-        #         if key == "id":
-        #             attributes["id"] = value
-        #         else:
-        #             attributes[f"data-{key}"] = value
-        # # Create the docutils AST element
-        # new_element = TeiElement(
-        #     html_tag=rule["tag"] if rule is not None and "tag" in rule else "div",
-        #     tei_tag=node.tag,
-        #     tei_attributes=attributes,
-        # )
-        # parent.append(new_element)
-        # if rule is not None and "text" in rule and rule["text"]:
-        #     # If there is a `text` key in the rule, use that to set the text
-        #     if rule["text"]["action"] == "from-attribute" and rule["text"]["attr"] in node.attrib:
-        #         new_element.append(nodes.Text(node.attrib[rule["text"]["attr"]]))
-        # elif node.text and (is_leaf or not text_only_in_leaf_nodes):
-        #     # Only create text content if there is text and we either are in a leaf node or are adding all text
-        #     new_element.append(nodes.Text(node.text))
-        # # Process any children
-        # for child in node:
-        #     self._walk_tree(child, new_element)
-        # # If there is text after this XML node and we are adding all text, then add text content to the parent
-        # if node.tail and not text_only_in_leaf_nodes:
-        #     parent.append(nodes.Text(node.tail))
+        else:
+            logger.warning(f"No block or mark configured for {node.tag}")
+
+    def _parse_attributes(self, node: etree.Element, attribute_configs: list) -> dict:
+        attrs = {}
+        for conf in attribute_configs:
+            if conf["name"] in node.attrib:
+                if conf["type"] == "id-ref" and node.attrib[conf["name"]].startswith("#"):
+                    attrs[f"data-tei-attribute-{conf['name']}"] = node.attrib[conf["name"]][1:]
+                elif conf["type"] == "static":
+                    attrs[f"data-tei-attribute-{conf['name']}"] = conf["value"]
+                elif conf["type"] == "html-attribute":
+                    attrs[conf["target"]] = node.attrib[conf["name"]]
+                else:
+                    attrs[f"data-tei-attribute-{conf['name']}"] = node.attrib[conf["name"]]
+            elif conf["default"]:
+                attrs[f"data-tei-attribute-{conf['name']}"] = conf["default"]
+        return attrs
 
     def _wrap_sections(self: "TEIParser", section: nodes.Element, tmp: nodes.Element) -> None:
         """Ensure that sections are correctly wrapped."""
@@ -234,7 +213,7 @@ class TEIParser(SphinxParser):
                 while section_level <= section_stack[-1][0]:
                     section_stack.pop()
                 new_section = nodes.section(ids=[nodes.make_id(node.astext())])
-                title = nodes.title()
+                title = nodes.title(attributes={"data-test": ""})
                 title.children = node.children
                 new_section.append(title)
                 section_stack[-1][1].append(new_section)
@@ -260,28 +239,9 @@ class TEIParser(SphinxParser):
                 if not in_heading:
                     section_stack[-1][1].append(node)
 
-    def _rule_for_node(self: "TEIParser", node: etree.Element) -> dict:
-        """Determine the first matching mapping rule for the node from the configured rules."""
-        # tei_tag = node.tag
-        for rule in self.tei["blocks"] + self.tei["marks"]:
-            if len(node.xpath(f"self::{rule['selector']}", namespaces=namespaces)) > 0:
-                return rule
-            # if rule["selector"]["tag"] == tei_tag:
-            #     if "attributes" in rule["selector"]:
-            #         attr_match = True
-            #         for attr_rule in rule["selector"]["attributes"]:
-            #         if attr_rule["attr"] not in node.attrib or node.attrib[attr_rule["attr"]] != attr_rule["value"]:
-            #                 attr_match = False
-            #                 break
-            #         if not attr_match:
-            #             continue
-            #     return rule
-        error_msg = f"No block or mark for {node.tag}"
-        raise Exception(error_msg)
-
     def _parse_single_field(self: "TEIParser", parent: etree.Element, field: dict, root: etree.Element) -> None:
         """Parse a single metadata field."""
-        content = root.xpath(field["content"], namespaces=namespaces)
+        content = root.xpath(field["selector"], namespaces=namespaces)
         if len(content) > 0:
             if isinstance(content, list):
                 content = content[0]

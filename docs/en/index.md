@@ -13,10 +13,10 @@ adding documentation on how to do things, fixing broken things, or adding extra 
 and then we can make it better.
 
 If you have any questions about anything related to the μEdition, please use our GitHub Discussions forum to ask:
-https://github.com/uEdition/uEdition/discussions.
+[https://github.com/uEdition/uEdition/discussions](https://github.com/uEdition/uEdition/discussions).
 
 If you run into any bugs, then please report these via the GitHub Issues and we can get them fixed:
-https://github.com/uEdition/uEdition/issues.
+[https://github.com/uEdition/uEdition/issues](https://github.com/uEdition/uEdition/issues).
 :::
 
 ## Contents

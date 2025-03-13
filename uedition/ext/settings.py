@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2023-present Mark Hall <mark.hall@work.room3b.eu>
+#
+# SPDX-License-Identifier: MIT
 """Additional settings validation."""
 
 from typing import Literal
@@ -21,10 +24,14 @@ class TEINodeAttribute(BaseModel):
     """The name of the attribute."""
     value: str | None = None
     """A fixed value to use for the attribute."""
-    type: Literal["string"] | Literal["static"] | Literal["id-ref"] | Literal["text"] = "string"
+    type: Literal["string"] | Literal["static"] | Literal["id-ref"] | Literal["text"] | Literal["html-attribute"] = (
+        "string"
+    )
     """The type of attribute this is."""
     default: str = ""
     """The default value to use if none is set."""
+    target: str | None = None
+    """The target HTML attribute."""
 
 
 class TEINode(BaseModel):
@@ -44,6 +51,31 @@ class TEINode(BaseModel):
     """Allowed child nodes. Only relevant for block nodes."""
 
 
+class TEIMetadataSectionSingleFieldRule(BaseModel):
+    """Validation model for a TEI field rule with a single value."""
+
+    title: str
+    type: Literal["single"] = "single"
+    selector: str
+
+
+class TEIMetadataSectionListFieldRule(BaseModel):
+    """Validation model for a TEI field rule with a list of values."""
+
+    title: str
+    type: Literal["list"]
+    selector: str
+
+
+class TEIMetadataSectionDownloadFieldRule(BaseModel):
+    """Validation model for a TEI field rule that creates a download link."""
+
+    title: str
+    type: Literal["download"]
+    selector: str
+    target: str
+
+
 class TEIMetadataSection(BaseModel):
     """A metadata section in the TEI document."""
 
@@ -55,6 +87,10 @@ class TEIMetadataSection(BaseModel):
     """The type must be set to metadata."""
     selector: str
     """The XPath selector to retrieve this section."""
+    fields: list[
+        TEIMetadataSectionSingleFieldRule | TEIMetadataSectionListFieldRule | TEIMetadataSectionDownloadFieldRule
+    ]
+    """Fields to display."""
 
 
 class TEITextSection(BaseModel):
@@ -81,6 +117,7 @@ class TEITextListSection(BaseModel):
     """The type must be set to textlist."""
     selector: str
     """The XPath selector to retrieve the texts in this section."""
+    sort: str | None = None
 
 
 class TEISettings(BaseModel):
