@@ -26,7 +26,7 @@ jobs:
 
     - name: Install Base Dependencies
       run: |
-        sudo apt-get install python3-build
+        pip install --user build
 
     - name: Build the package
       run: |
