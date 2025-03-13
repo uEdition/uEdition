@@ -27,11 +27,11 @@ jobs:
     - name: Install Base Dependencies
       run: |
         sudo apt-get install python3-venv
-        sudo pip install hatch
+        sudo pip install build
 
     - name: Build the package
       run: |
-        hatch build
+        python -m build
 
     - name: Publish package distributions to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
