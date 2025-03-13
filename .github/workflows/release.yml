@@ -26,8 +26,7 @@ jobs:
 
     - name: Install Base Dependencies
       run: |
-        sudo apt-get install python3-venv
-        sudo pip install build
+        sudo apt-get install python3-build
 
     - name: Build the package
       run: |
