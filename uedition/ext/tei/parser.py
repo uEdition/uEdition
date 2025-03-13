@@ -169,8 +169,12 @@ class TEIParser(SphinxParser):
                 element = TeiElement(
                     html_tag=conf["tag"] if conf["tag"] else "span", tei_tag=node.tag, tei_attributes=attrs
                 )
-                if len(node) == 0 and node.text:
-                    element.append(nodes.Text(node.text))
+                if len(node) == 0:
+                    if conf["text"]:
+                        for match in node.xpath(conf["text"], namespaces=namespaces):
+                            element.append(nodes.Text(match))
+                    elif node.text:
+                        element.append(nodes.Text(node.text))
                 else:
                     for child in node:
                         self._walk_tree(child, element)
