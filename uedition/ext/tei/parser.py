@@ -104,10 +104,15 @@ class TEIParser(SphinxParser):
                         source.sort(key=self._sort_key(conf_section["sort"]))
                     doc_section.append(section)
                     for source in sources:
-                        tmp = nodes.section(ids=[source.attrib["id"]])
-                        for child in source:
-                            self._walk_tree(child, tmp)
-                        section.append(tmp)
+                        tmp = None
+                        if "id" in source.attrib:
+                            tmp = nodes.section(ids=[source.attrib["id"]])
+                        elif "{http://www.w3.org/XML/1998/namespace}id" in source.attrib:
+                            tmp = nodes.section(ids=[source.attrib["{http://www.w3.org/XML/1998/namespace}id"]])
+                        if tmp is not None and len(source) > 0:
+                            for child in source:
+                                self._walk_tree(child, tmp)
+                            section.append(tmp)
                     # self._wrap_sections(section, tmp)
             elif conf_section["type"] == "metadata":
                 # Process a field or metadata section
@@ -183,7 +188,7 @@ class TEIParser(SphinxParser):
         if len(node) == 0:
             parent.append(nodes.Text(node.text))
         else:
-            logger.warning(f"No block or mark configured for {node.tag}")
+            logger.warning(f"No block or mark configured for {node.tag} ({node.attrib})")
 
     def _parse_attributes(self, node: etree.Element, attribute_configs: list) -> dict:
         attrs = {}
