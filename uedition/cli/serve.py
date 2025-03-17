@@ -2,11 +2,13 @@
 #
 # SPDX-License-Identifier: MIT
 """Local server that automatically rebuilds on changes."""
+
 from os import path
 from typing import Callable
 
 from livereload import Server
 
+from uedition.cli.base import app
 from uedition.cli.build import full_build, partial_build
 from uedition.settings import NoConfigError, settings
 
@@ -27,7 +29,8 @@ def build_cmd(lang: dict, full: bool = True) -> Callable[[], None]:  # noqa: FBT
         return cmd
 
 
-def run() -> None:
+@app.command()
+def serve() -> None:
     """Run the development server."""
     if not path.exists("uEdition.yml") and not path.exists("uEdition.yaml"):
         raise NoConfigError()
