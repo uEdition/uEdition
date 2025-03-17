@@ -187,18 +187,19 @@ def full_build(lang: dict) -> None:
             check=False,
             shell=False,
         )
-    copytree(
-        path.join("_build", lang["path"], "html"),
-        path.join(settings["output"]["path"], lang["path"]),
-        dirs_exist_ok=True,
-    )
-    if settings["output"]["tei"]:
+    if path.isdir(path.join("_build", lang["path"], "html")):
         copytree(
-            path.join("_build", lang["path"], "tei"),
+            path.join("_build", lang["path"], "html"),
             path.join(settings["output"]["path"], lang["path"]),
-            ignore=ignore_patterns("_sphinx_design_static"),
             dirs_exist_ok=True,
         )
+        if settings["output"]["tei"] and path.isdir(path.join("_build", lang["path"], "tei")):
+            copytree(
+                path.join("_build", lang["path"], "tei"),
+                path.join(settings["output"]["path"], lang["path"]),
+                ignore=ignore_patterns("_sphinx_design_static"),
+                dirs_exist_ok=True,
+            )
 
 
 def partial_build(lang: dict) -> None:
@@ -227,18 +228,19 @@ def partial_build(lang: dict) -> None:
             check=False,
             shell=False,
         )
-    copytree(
-        path.join("_build", lang["path"], "html"),
-        path.join(settings["output"]["path"], lang["path"]),
-        dirs_exist_ok=True,
-    )
-    if settings["output"]["tei"]:
+    if path.isdir(path.join("_build", lang["path"], "html")):
         copytree(
-            path.join("_build", lang["path"], "tei"),
+            path.join("_build", lang["path"], "html"),
             path.join(settings["output"]["path"], lang["path"]),
-            ignore=ignore_patterns("_sphinx_design_static"),
             dirs_exist_ok=True,
         )
+        if settings["output"]["tei"] and path.isdir(path.join("_build", lang["path"], "tei")):
+            copytree(
+                path.join("_build", lang["path"], "tei"),
+                path.join(settings["output"]["path"], lang["path"]),
+                ignore=ignore_patterns("_sphinx_design_static"),
+                dirs_exist_ok=True,
+            )
 
 
 def run() -> None:
