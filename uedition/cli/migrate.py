@@ -6,14 +6,15 @@
 import os
 from os import path
 
+import tomlkit
 from rich import print as output
 
 from uedition.cli.base import app
 from uedition.settings import NoConfigError
 
 
-def cleanup_old_configuration() -> None:
-    """Remove old configuration."""
+def cleanup_old_files() -> None:
+    """Cleanup any old files."""
     # Scan for old files to remove
     old_copier_files = []
     old_config_files = []
@@ -33,6 +34,10 @@ def cleanup_old_configuration() -> None:
         output(":broom: Removing old configuration files")
         for filename in old_config_files:
             os.unlink(filename)
+
+
+def cleanup_gitignore() -> None:
+    """Cleanup the gitignore."""
     # Update .gitignore (v2.0.0)
     if path.isfile(".gitignore"):
         with open(".gitignore") as in_f:
@@ -52,11 +57,46 @@ def cleanup_old_configuration() -> None:
                     out_f.write(line)
 
 
+def cleanup_pyproject() -> None:
+    """Cleanup the pyproject file."""
+    if not path.exists("pyproject.toml"):
+        raise NoConfigError()
+    with open("pyproject.toml") as in_f:
+        pyproject = tomlkit.parse(in_f.read())
+    updated = False
+    if "tool" not in pyproject:
+        pyproject["tool"] = tomlkit.table()
+    if "hatch" not in pyproject["tool"]:
+        pyproject["tool"]["hatch"] = tomlkit.table()
+    if "envs" not in pyproject["tool"]["hatch"]:
+        pyproject["tool"]["hatch"]["envs"] = tomlkit.table()
+    if "default" not in pyproject["tool"]["hatch"]["envs"]:
+        pyproject["tool"]["hatch"]["envs"]["default"] = tomlkit.table()
+    if "scripts" not in pyproject["tool"]["hatch"]["envs"]["default"]:
+        pyproject["tool"]["hatch"]["envs"]["default"]["scripts"] = tomlkit.table()
+        updated = True
+    if "add-language" in pyproject["tool"]["hatch"]["envs"]["default"]["scripts"]:
+        del pyproject["tool"]["hatch"]["envs"]["default"]["scripts"]["add-language"]
+        updated = True
+    if "update-language" in pyproject["tool"]["hatch"]["envs"]["default"]["scripts"]:
+        del pyproject["tool"]["hatch"]["envs"]["default"]["scripts"]["update-language"]
+        updated = True
+    if "migrate" not in pyproject["tool"]["hatch"]["envs"]["default"]["scripts"]:
+        pyproject["tool"]["hatch"]["envs"]["default"]["scripts"]["migrate"] = "uEdition migrate {args}"
+        updated = True
+    if updated:
+        output(":broom: Updating the pyproject.toml")
+    with open("pyproject.toml", "w") as out_f:
+        tomlkit.dump(pyproject, out_f)
+
+
 @app.command()
 def migrate() -> None:
     """Migrate the μEdition to the latest version."""
     if not path.exists("uEdition.yml") and not path.exists("uEdition.yaml") and not path.exists("pyproject.toml"):
         raise NoConfigError()
     output(":hammer: Migrating the μEdition")
-    cleanup_old_configuration()
+    cleanup_old_files()
+    cleanup_gitignore()
+    cleanup_pyproject()
     output(":checkered_flag: Migration complete")
