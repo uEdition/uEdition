@@ -84,6 +84,9 @@ def cleanup_pyproject() -> None:
     if "migrate" not in pyproject["tool"]["hatch"]["envs"]["default"]["scripts"]:
         pyproject["tool"]["hatch"]["envs"]["default"]["scripts"]["migrate"] = "uEdition migrate {args}"
         updated = True
+    if "language" not in pyproject["tool"]["hatch"]["envs"]["default"]["scripts"]:
+        pyproject["tool"]["hatch"]["envs"]["default"]["scripts"]["language"] = "uEdition language {args}"
+        updated = True
     if updated:
         output(":broom: Updating the pyproject.toml")
     with open("pyproject.toml", "w") as out_f:

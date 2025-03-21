@@ -3,19 +3,19 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "uedition_docs"
-description = 'The μEdition Documentation'
+name = "edition_name"
+description = "edition_title"
 requires-python = ">=3.10"
 keywords = []
-authors = [{ name = "Mark Hall", email = "mark.hall@work.room3b.eu" }]
+authors = [{ name = "author_name", email = "author_email@example.com" }]
 classifiers = []
 dependencies = []
 version = "1.0.0"
 
 [project.urls]
-Documentation = "https://github.com/uEdition/uEdition/-#readme"
-Issues = "https://github.com/uEdition/uEdition/-/issues"
-Source = "https://github.com/uEdition/uEdition/-"
+Documentation = "http://edition.com"
+Issues = "http://edition.com"
+Source = "http://edition.com"
 
 [tool.hatch.envs.default]
 dependencies = ["uEdition<2.1,>=2.0.0a2"]

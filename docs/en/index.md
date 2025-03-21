@@ -26,45 +26,21 @@ If you run into any bugs, then please report these via the GitHub Issues and we 
 
 ## Quickstart
 
-To quickly get started with the μEdition, follow these steps (assuming you already have Python 3.10 or newer and pipx installed):
+To quickly get started with the μEdition follow these steps:
 
-:::{code} console
-$ pipx install hatch
-$ pipx install copier
-$ copier copy https://github.com/uEdition/uEdition-project-template my-edition
-🎤 What is the name of your μEdition?
-   My Edition
-🎤 What is the μEdition author's name?
-   A.N. Editor
-🎤 What is the μEdition author's address?
-   a.n.editor@example.com
-🎤 Do you wish to automatically publish your μEdition?
-   (Use arrow keys)
- » Disable automatic publishing
-   Via GitHub Pages
-   Via Read the Docs
-🎤 What is the URL of the repository containing your μEdition?
-   https://github.com/aneditor/my-edition
-🎤 What is the repository branch containing your μEdition?
-   main
+1. Install [Hatch](https://hatch.pypa.io/latest/install/) for your operating system.
+2. Create a new folder for your μEdition.
+3. Download the default {download}`_static/pyproject.toml` and move that into your new folder.
+4. Open a new terminal, change into your new folder and run the following command:
 
-Copying from template version 0.6.1
-    create  .
-    create  toc.yml
-    create  uEdition.yml
-    create  .uEdition.answers
-    create  .github
-    create  .github/workflows
-    create  .github/workflows/pages.yml
-    create  .gitignore
-    create  pyproject.toml
-$ cd my-edition
-$ hatch run add-language cy
-🎤 What is the language code?
-   cy
-🎤 What is the name of the language?
-   Cymraeg
-$ hatch run serve
-:::
+   :::{code-block} console
+   hatch run language add
+   :::
 
-Your new digital edition will be available at http://localhost:8000.
+5. Then run the following command:
+
+   :::{code-block} console
+   hatch run serve
+   :::
+
+Your new μEdition will be available at http://localhost:8000.
