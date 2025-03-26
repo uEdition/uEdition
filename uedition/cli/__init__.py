@@ -6,7 +6,7 @@
 from rich import print as output
 
 from uedition.__about__ import __version__
-from uedition.cli import build, language, migrate, serve, update  # noqa:F401
+from uedition.cli import build, init, language, migrate, serve, update  # noqa:F401
 from uedition.cli.base import app
 from uedition.settings import settings
 
