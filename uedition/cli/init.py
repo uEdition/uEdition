@@ -13,8 +13,10 @@ from uedition.settings import NoConfigError
 
 @app.command()
 def init(force: bool = False) -> None:  # noqa: ARG001 FBT001 FBT002
-    """Run the development server."""
+    """Initialise a new μEdition."""
     if path.exists("uEdition.yml") and path.exists("uEdition.yaml"):
         raise NoConfigError()
     with open("uEdition.yml", "w") as out_f:
         safe_dump({"version": "2", "output": "site"}, out_f)
+    with open("toc.yml", "w") as out_f:
+        safe_dump({"format": "jb-book", "root": "index"}, out_f)

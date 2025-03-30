@@ -23,6 +23,7 @@ skip-install = true
 
 [tool.hatch.envs.default.scripts]
 build = "uEdition build {args}"
+init = "uEdition init {args}"
 serve = "uEdition serve {args}"
 update = "uEdition update {args}"
 migrate = "uEdition migrate {args}"

@@ -59,3 +59,5 @@ def add(
     config["title"][code] = title
     with open("uEdition.yml", "w") as out_f:
         safe_dump(config, out_f)
+    with open(os.path.join(path, "index.md"), "w") as out_f:
+        out_f.write(f"# {title}\n")

@@ -34,10 +34,20 @@ To quickly get started with the μEdition follow these steps:
 4. Open a new terminal, change into your new folder and run the following command:
 
    :::{code-block} console
+   hatch run init
+   :::
+
+   This creates the configuration file ({file}`uEdition.yml`) and table of contents ({file}`toc.yml`).
+
+5. Then run the following command to add content in a new language:
+
+   :::{code-block} console
    hatch run language add
    :::
 
-5. Then run the following command:
+   This will ask you a few questions about the new language and then create the required files.
+
+5. Then run the following command to start the writing server:
 
    :::{code-block} console
    hatch run serve
