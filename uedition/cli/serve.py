@@ -31,7 +31,7 @@ def build_cmd(lang: dict, full: bool = True) -> Callable[[], None]:  # noqa: FBT
 
 @app.command()
 def serve() -> None:
-    """Run the development server."""
+    """Run the local μEdition writing server."""
     if not path.exists("uEdition.yml") and not path.exists("uEdition.yaml"):
         raise NoConfigError()
     full_rebuilds = [build_cmd(lang, full=True) for lang in settings["languages"]]

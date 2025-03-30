@@ -246,7 +246,7 @@ def partial_build(lang: dict) -> None:
 
 @app.command()
 def build() -> None:
-    """Build the full uEdition."""
+    """Build the full μEdition."""
     if not path.exists("uEdition.yml") and not path.exists("uEdition.yaml"):
         raise NoConfigError()
     if path.exists(settings["output"]["path"]):
