@@ -31,7 +31,6 @@ def update(allow_versions: UpdateVersionOptions = UpdateVersionOptions.RELEASES.
             raise NoConfigError()
         with open("pyproject.toml") as in_f:
             pyproject = tomlkit.parse(in_f.read())
-        found = False
         output(":hourglass_flowing_sand: Determining latest version")
         response = httpx.get(
             "https://pypi.org/simple/uedition/", headers={"Accept": "application/vnd.pypi.simple.v1+json"}
@@ -64,6 +63,9 @@ def update(allow_versions: UpdateVersionOptions = UpdateVersionOptions.RELEASES.
         if "dependencies" not in pyproject["tool"]["hatch"]["envs"]["default"]:
             pyproject["tool"]["hatch"]["envs"]["default"]["dependencies"] = []
         pyproject["tool"]["hatch"]["envs"]["default"]["skip-install"] = True
+        # Upgrade the uEdition/uEditor version
+        found_uedition = False
+        found_ueditor = False
         for idx, dep in enumerate(pyproject["tool"]["hatch"]["envs"]["default"]["dependencies"]):
             dep = dep.lower()  # noqa:PLW2901
             if (
@@ -73,10 +75,19 @@ def update(allow_versions: UpdateVersionOptions = UpdateVersionOptions.RELEASES.
                 or dep.startswith("uedition>")
             ):
                 pyproject["tool"]["hatch"]["envs"]["default"]["dependencies"][idx] = f"uEdition{target_specifier}"
-                found = True
-                break
-        if not found:
+                found_uedition = True
+            if (
+                dep == "ueditor"
+                or dep.startswith("ueditor=")
+                or dep.startswith("ueditor<")
+                or dep.startswith("ueditor>")
+            ):
+                pyproject["tool"]["hatch"]["envs"]["default"]["dependencies"][idx] = f"uEditor{target_specifier}"
+                found_ueditor = True
+        if not found_uedition:
             pyproject["tool"]["hatch"]["envs"]["default"]["dependencies"].append(f"uEdition{target_specifier}")
+        if not found_ueditor:
+            pyproject["tool"]["hatch"]["envs"]["default"]["dependencies"].append(f"uEditor{target_specifier}")
         with open("pyproject.toml", "w") as out_f:
             tomlkit.dump(pyproject, out_f)
         output(":checkered_flag: Upgrade complete")
