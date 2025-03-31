@@ -77,17 +77,19 @@ def update(allow_versions: UpdateVersionOptions = UpdateVersionOptions.RELEASES.
                 pyproject["tool"]["hatch"]["envs"]["default"]["dependencies"][idx] = f"uEdition{target_specifier}"
                 found_uedition = True
             if (
-                dep == "ueditor"
-                or dep.startswith("ueditor=")
-                or dep.startswith("ueditor<")
-                or dep.startswith("ueditor>")
+                dep == "uedition_editor"
+                or dep.startswith("uedition_editor=")
+                or dep.startswith("uedition_editor<")
+                or dep.startswith("uedition_editor>")
             ):
-                pyproject["tool"]["hatch"]["envs"]["default"]["dependencies"][idx] = f"uEditor{target_specifier}"
+                pyproject["tool"]["hatch"]["envs"]["default"]["dependencies"][idx] = (
+                    f"uEdition_editor{target_specifier}"
+                )
                 found_ueditor = True
         if not found_uedition:
             pyproject["tool"]["hatch"]["envs"]["default"]["dependencies"].append(f"uEdition{target_specifier}")
         if not found_ueditor:
-            pyproject["tool"]["hatch"]["envs"]["default"]["dependencies"].append(f"uEditor{target_specifier}")
+            pyproject["tool"]["hatch"]["envs"]["default"]["dependencies"].append(f"uEdition_editor{target_specifier}")
         with open("pyproject.toml", "w") as out_f:
             tomlkit.dump(pyproject, out_f)
         output(":checkered_flag: Upgrade complete")
