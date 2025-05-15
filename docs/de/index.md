@@ -26,45 +26,32 @@ https://github.com/uEdition/uEdition/issues.
 
 ## Schnellstart
 
-Für einen Schnellstart mit der μEdition, folgens sie diesen Schritten (Python 3.10 oder neuer und pipx müssen bereits installiert sein):
+Für einen Schnellstart mit der μEdition, folgens sie diesen Schritten (Python 3.10 oder neuer muss bereits installiert sein):
 
-:::{code} console
-$ pipx install hatch
-$ pipx install copier
-$ copier copy https://github.com/uEdition/uEdition-project-template my-edition
-🎤 What is the name of your μEdition?
-   My Edition
-🎤 What is the μEdition author's name?
-   A.N. Editor
-🎤 What is the μEdition author's address?
-   a.n.editor@example.com
-🎤 Do you wish to automatically publish your μEdition?
-   (Use arrow keys)
- » Disable automatic publishing
-   Via GitHub Pages
-   Via Read the Docs
-🎤 What is the URL of the repository containing your μEdition?
-   https://github.com/aneditor/my-edition
-🎤 What is the repository branch containing your μEdition?
-   main
+1. [Hatch](https://hatch.pypa.io/latest/install/) für das korrekte Betriebssystem installieren.
+2. Einen neuen Dateiordner für die μEdition anlegen.
+3. Die Projektkonfiguration {download}`_static/pyproject.toml` herunterladen und im neuen Dateiordner abspeichern.
+4. Auf der Kommandozeile in den neuen Dateiordner wechseln und dort folgenden Befehl ausführen:
 
-Copying from template version 0.6.1
-    create  .
-    create  toc.yml
-    create  uEdition.yml
-    create  .uEdition.answers
-    create  .github
-    create  .github/workflows
-    create  .github/workflows/pages.yml
-    create  .gitignore
-    create  pyproject.toml
-$ cd my-edition
-$ hatch run add-language cy
-🎤 What is the language code?
-   cy
-🎤 What is the name of the language?
-   Cymraeg
-$ hatch run serve
-:::
+   :::{code-block} console
+   hatch run init
+   :::
+
+   Dies erzeugt die notwendige Konfigurationsdatei ({file}`uEdition.yml`) und das Inhaltsverzeichnis ({file}`toc.yml`).
+
+5. Dann folgenden Befehl ausführen um eine neue Sprache hinzuzufügen
+
+   :::{code-block} console
+   hatch run language add
+   :::
+
+   Nach dem Beantworten von ein paar Fragen über die neue Sprache werden die notwendigen Dateien erzeugt.
+
+5. Abschließend folgenden Befehl ausführen um den lokalen Server zu starten:
+
+   :::{code-block} console
+   hatch run serve
+   :::
+
 
 Die neue, digitale Edition ist dann unter http://localhost:8000 verfügbar.
