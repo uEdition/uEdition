@@ -11,6 +11,7 @@ import tomlkit
 from packaging.specifiers import SpecifierSet
 from packaging.version import Version
 from rich import print as output
+from typer import Exit
 
 from uedition.cli.base import app
 from uedition.settings import NoConfigError
@@ -82,3 +83,4 @@ def update(allow_versions: UpdateVersionOptions = UpdateVersionOptions.RELEASES.
         output(":checkered_flag: Upgrade complete")
     except Exception as e:
         output(f":cross_mark: Update failed: {e}")
+        raise Exit(code=1) from e
