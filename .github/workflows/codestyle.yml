@@ -32,6 +32,10 @@ jobs:
         sudo apt-get install python3-venv pipx
         pipx install hatch
 
-    - name: Run Tests
+    - name: Run Ruff check
       run: |
-        hatch run style
+        hatch run ruff-check
+
+    - name: Run Ruff format check
+      run: |
+        hatch run ruff-check-format

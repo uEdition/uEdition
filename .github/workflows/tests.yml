@@ -34,8 +34,4 @@ jobs:
 
     - name: Run Ruff check
       run: |
-        hatch run ruff-check
-
-    - name: Run Ruff format check
-      run: |
-        hatch run ruff-check-format
+        hatch run cov
