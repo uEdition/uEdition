@@ -2,6 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 """Sphinx extensions for the uEdition."""
+
 from sphinx.application import Sphinx
 
 from uedition.ext import config, language_switcher, tei

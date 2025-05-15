@@ -2,6 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 """The Language Switcher extension."""
+
 import json
 from importlib.resources import as_file, files
 from os import path

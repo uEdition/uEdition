@@ -1,7 +1,8 @@
 # SPDX-FileCopyrightText: 2023-present Mark Hall <mark.hall@work.room3b.eu>
 #
 # SPDX-License-Identifier: MIT
-"""Application settings.
+"""
+Application settings.
 
 All application settings are accessed via the `settings` dictionary.
 """
@@ -51,9 +52,9 @@ class YAMLConfigSettingsSource(PydanticBaseSettingsSource):
         self: "YAMLConfigSettingsSource",
         field_name: str,  # noqa: ARG002
         field: FieldInfo,  # noqa: ARG002
-        value: Any,  # noqa: ANN401
+        value: Any,
         value_is_complex: bool,  # noqa: ARG002, FBT001
-    ) -> Any:  # noqa: ANN401
+    ) -> Any:
         """Just return the value."""
         return value
 

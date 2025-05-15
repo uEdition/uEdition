@@ -2,6 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 """The uEdition toolkit."""
+
 from sphinx.application import Sphinx
 
 from uedition import ext
