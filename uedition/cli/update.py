@@ -63,9 +63,8 @@ def update(allow_versions: UpdateVersionOptions = UpdateVersionOptions.RELEASES.
         if "dependencies" not in pyproject["tool"]["hatch"]["envs"]["default"]:
             pyproject["tool"]["hatch"]["envs"]["default"]["dependencies"] = []
         pyproject["tool"]["hatch"]["envs"]["default"]["skip-install"] = True
-        # Upgrade the uEdition/uEditor version
+        # Upgrade the uEdition version
         found_uedition = False
-        found_ueditor = False
         for idx, dep in enumerate(pyproject["tool"]["hatch"]["envs"]["default"]["dependencies"]):
             dep = dep.lower()  # noqa:PLW2901
             if (
@@ -74,22 +73,10 @@ def update(allow_versions: UpdateVersionOptions = UpdateVersionOptions.RELEASES.
                 or dep.startswith("uedition<")
                 or dep.startswith("uedition>")
             ):
-                pyproject["tool"]["hatch"]["envs"]["default"]["dependencies"][idx] = f"uEdition{target_specifier}"
+                pyproject["tool"]["hatch"]["envs"]["default"]["dependencies"][idx] = f"uedition{target_specifier}"
                 found_uedition = True
-            if (
-                dep == "uedition_editor"
-                or dep.startswith("uedition_editor=")
-                or dep.startswith("uedition_editor<")
-                or dep.startswith("uedition_editor>")
-            ):
-                pyproject["tool"]["hatch"]["envs"]["default"]["dependencies"][idx] = (
-                    f"uEdition_editor{target_specifier}"
-                )
-                found_ueditor = True
         if not found_uedition:
-            pyproject["tool"]["hatch"]["envs"]["default"]["dependencies"].append(f"uEdition{target_specifier}")
-        if not found_ueditor:
-            pyproject["tool"]["hatch"]["envs"]["default"]["dependencies"].append(f"uEdition_editor{target_specifier}")
+            pyproject["tool"]["hatch"]["envs"]["default"]["dependencies"].append(f"uedition{target_specifier}")
         with open("pyproject.toml", "w") as out_f:
             tomlkit.dump(pyproject, out_f)
         output(":checkered_flag: Upgrade complete")

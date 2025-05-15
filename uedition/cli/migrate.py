@@ -101,6 +101,29 @@ def cleanup_pyproject() -> None:
         tomlkit.dump(pyproject, out_f)
 
 
+def migrate_ueditor() -> None:
+    """Migrate the μEditor to the latest supported version."""
+    ueditor_version = "uedition_editor>=2.0.0b5,<2.1"
+    output(":hammer: Updating the μEditor")
+    with open("pyproject.toml") as in_f:
+        pyproject = tomlkit.parse(in_f.read())
+    found_ueditor = False
+    for idx, dep in enumerate(pyproject["tool"]["hatch"]["envs"]["default"]["dependencies"]):
+        dep = dep.lower()  # noqa:PLW2901
+        if (
+            dep == "uedition_editor"
+            or dep.startswith("uedition_editor=")
+            or dep.startswith("uedition_editor<")
+            or dep.startswith("uedition_editor>")
+        ):
+            pyproject["tool"]["hatch"]["envs"]["default"]["dependencies"][idx] = ueditor_version
+            found_ueditor = True
+    if not found_ueditor:
+        pyproject["tool"]["hatch"]["envs"]["default"]["dependencies"].append(ueditor_version)
+    with open("pyproject.toml", "w") as out_f:
+        tomlkit.dump(pyproject, out_f)
+
+
 @app.command()
 def migrate() -> None:
     """Migrate the μEdition to the latest version."""
@@ -110,4 +133,5 @@ def migrate() -> None:
     cleanup_old_files()
     cleanup_gitignore()
     cleanup_pyproject()
+    migrate_ueditor()
     output(":checkered_flag: Migration complete")
