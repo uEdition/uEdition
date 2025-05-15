@@ -32,6 +32,6 @@ jobs:
         sudo apt-get install python3-venv pipx
         pipx install hatch
 
-    - name: Run Ruff check
+    - name: Run Tests
       run: |
         hatch run cov
