@@ -10,16 +10,16 @@ jobs:
   tests:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        python_version: ["3.10", "3.11", "3.12", "3.13"]
+
     steps:
     - uses: actions/checkout@v4
 
     - uses: actions/setup-python@v5
       with:
-        python-version: |
-          3.10
-          3.11
-          3.12
-          3.13
+        python-version: ${{ matrix.python_version }}
 
     - name: Add .local path
       run: |
@@ -32,6 +32,10 @@ jobs:
         sudo apt-get install python3-venv pipx
         pipx install hatch
 
-    - name: Run Tests
+    - name: Run Ruff check
       run: |
-        hatch run cov
+        hatch run ruff-check
+
+    - name: Run Ruff format check
+      run: |
+        hatch run ruff-check-format

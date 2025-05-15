@@ -61,11 +61,13 @@ test = "pytest {args:tests}"
 test-cov = "coverage run -m pytest {args:tests}"
 cov-report = ["- coverage combine", "coverage report"]
 cov = ["test-cov", "cov-report"]
-style = [
-  "ruff check --fix --exit-non-zero-on-fix {args:.}",
-  "ruff format --check {args:.}",
+ruff-check = "ruff check --exit-non-zero-on-fix {args:.}"
+ruff-format-check = "ruff format --check {args:.}"
+style-check = ["ruff-check", "ruff-format-check"]
+style-fix = [
+  "ruff check --fix {args:.}",
+  "ruff format {args:.}"
 ]
-
 
 [tool.ruff]
 target-version = "py37"
