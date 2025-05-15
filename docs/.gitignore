@@ -1,5 +1,5 @@
 _build
 site
 _toc.yml
-_config.yml
+conf.py
 _static

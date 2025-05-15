@@ -6,7 +6,6 @@ import xml.sax.saxutils
 from collections.abc import Iterator
 
 import sphinx
-import sphinx_jupyterbook_latex
 from docutils import nodes
 from docutils.io import StringOutput
 from sphinx.application import Sphinx
@@ -14,6 +13,8 @@ from sphinx.builders.xml import XMLBuilder
 from sphinx.locale import __
 from sphinx.util.osutil import ensuredir, os_path
 from sphinx.writers.xml import XMLWriter
+
+from uedition.ext.tei.parser import TeiElement
 
 logger = logging.getLogger(__name__)
 
@@ -37,6 +38,14 @@ MAPPINGS = [
         "attrs": [{"target": "type", "value": "literal-block"}, {"source": "language", "target": "subtype"}],
     },
     {"cls": nodes.compound, "tagname": "div", "type": "block"},
+    {"cls": nodes.admonition, "tagname": "div", "type": "block"},
+    {
+        "cls": nodes.definition_list,
+        "tagname": "list",
+        "type": "block",
+        "attrs": [{"target": "type", "value": "definition"}],
+    },
+    {"cls": nodes.definition_list_item, "tagname": "item", "type": "block"},
     {"cls": sphinx.addnodes.toctree},
     {
         "cls": nodes.footnote,
@@ -47,7 +56,6 @@ MAPPINGS = [
             {"target": "target", "source": "backrefs", "format": "#{value}", "join": " "},
         ],
     },
-    {"cls": sphinx_jupyterbook_latex.nodes.HiddenCellNode},
     {
         "cls": nodes.transition,
         "tagname": "div",
@@ -106,6 +114,16 @@ class TEITranslator(nodes.GenericNodeVisitor):
         for rule in MAPPINGS:
             if isinstance(node, rule["cls"]):
                 return rule
+        if isinstance(node, TeiElement):
+            tag = node.get("tei_tag")
+            tag = tag[tag.find("}") + 1 :]
+            attrs = []
+            for key, value in node.get("tei_attributes").items():
+                if key.startswith("data-tei-block-") or key.startswith("data-tei-mark-"):
+                    continue
+                elif key.startswith("data-tei-attribute-"):
+                    attrs.append({"target": key[19:], "value": value})
+            return {"tagname": tag, "type": "block", "attrs": attrs}
         self.warn(f"Unknown node {node.__class__.__module__}.{node.__class__.__qualname__} ({node.attlist()})")
         return {"tagname": "div", "type": "block"}
 
@@ -204,7 +222,7 @@ class TEITranslator(nodes.GenericNodeVisitor):
             else:
                 self.output.append(text)
         else:
-            self.output.append(f"{self.indent*self.level}<tei:span>{text}</tei:span>\n")
+            self.output.append(f"{self.indent * self.level}<tei:span>{text}</tei:span>\n")
 
     def depart_Text(self, node: nodes.TextElement) -> None:  # noqa: N802
         """Unused."""

@@ -18,12 +18,14 @@ Issues = "https://github.com/uEdition/uEdition/-/issues"
 Source = "https://github.com/uEdition/uEdition/-"
 
 [tool.hatch.envs.default]
-dependencies = ["uedition>=1.3.0,<2",]
+dependencies = ["uedition<2.1,>=2.0.0b1", "uedition_editor>=2.0.0b5,<2.1"]
 skip-install = true
 
 [tool.hatch.envs.default.scripts]
 build = "uEdition build {args}"
+init = "uEdition init {args}"
 serve = "uEdition serve {args}"
 update = "uEdition update {args}"
-add-language = "uEdition language add {args}"
-update-language = "uEdition language update {args}"
+migrate = "uEdition migrate {args}"
+language = "uEdition language {args}"
+edit = "uvicorn --port 8000 uedition_editor:app {args} {args}"

@@ -10,26 +10,41 @@ The μEdition is a micro framwork for quickly building Editions.
 
 -----
 
-**Important**: The μEdition is currently preparing for version 2, which will simplify its use and align it with the upcoming release of the [μEditor](https://github.com/uEdition/uEditor). If you are just starting a new μEdition, then please [look at the v2 branch](https://github.com/uEdition/uEdition/tree/feature/v2) and follow the instructions there to set up a v2 μEdition.
-
 **Table of Contents**
 
-- [Installation](#installation)
+- [Quickstart](#quickstart)
+- [Documentation](#documentation)
 - [License](#license)
 
-## Installation
+## Quickstart
 
-The recommended installation for use is via `pipx`:
+To quickly get started with the μEdition follow these steps:
 
-```console
-pipx install uedition
-```
+1. Install [Hatch](https://hatch.pypa.io/latest/install/) for your operating system.
+2. Create a new folder for your μEdition.
+3. Download the default {download}`https://uedition.readthedocs.io/latest/en_static/pyproject.toml` and move that into
+   your new folder.
+4. Open a new terminal, change into your new folder and run the following command:
 
-All commands can then be run via
+   :::{code-block} console
+   hatch run init
+   :::
 
-```console
-uEdition {command}
-```
+   This creates the configuration file ({file}`uEdition.yml`) and table of contents ({file}`toc.yml`).
+
+5. Then run the following command to add content in a new language:
+
+   :::{code-block} console
+   hatch run language add
+   :::
+
+   This will ask you a few questions about the new language and then create the required files.
+
+5. Then run the following command to start the writing server:
+
+   :::{code-block} console
+   hatch run serve
+   :::
 
 ## Documentation
 

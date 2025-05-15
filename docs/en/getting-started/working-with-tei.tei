@@ -1,0 +1,46 @@
+<tei:TEI xmlns:tei="http://www.tei-c.org/ns/1.0">
+  <tei:teiHeader>
+    <tei:fileDesc>
+      <tei:titleStmt>
+        <tei:title>Working with TEI</tei:title>
+        <tei:author>
+          <tei:persName>Hall, Mark</tei:persName>
+        </tei:author>
+      </tei:titleStmt>
+    </tei:fileDesc>
+  </tei:teiHeader>
+  <tei:text>
+    <tei:body>
+      <tei:p>
+        <tei:seg>This is an example section.</tei:seg>
+      </tei:p>
+      <tei:p style="align-right">
+        <tei:seg>This paragraph is aligned to the </tei:seg>
+        <tei:hi style="italic">right</tei:hi>
+        <tei:seg>.</tei:seg>
+      </tei:p>
+      <tei:p>
+        <tei:seg>It is also possible to reference elements in another section using </tei:seg>
+        <tei:ref target="#annotation-1">references</tei:ref>
+        <tei:seg>.</tei:seg>
+      </tei:p>
+      <tei:head id="tei-configuration" type="level-1">
+        <tei:seg>Configuring the TEI mapping</tei:seg>
+      </tei:head>
+    </tei:body>
+    <tei:interpGrp>
+      <tei:interp id="annotation-1">
+        <tei:p>
+          <tei:seg>This is the first annotation.</tei:seg>
+        </tei:p>
+      </tei:interp>
+      <tei:interp id="annotation-2">
+        <tei:p>
+          <tei:seg>This is the second annotation. It has a </tei:seg>
+          <tei:ref target="#annotation-1">cross-reference</tei:ref>
+          <tei:seg> to another annotation.</tei:seg>
+        </tei:p>
+      </tei:interp>
+    </tei:interpGrp>
+  </tei:text>
+</tei:TEI>

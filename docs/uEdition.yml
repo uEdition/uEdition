@@ -2,17 +2,72 @@ author:
   email: mark.hall@work.room3b.eu
   name: Mark Hall
 languages:
-- code: en
-  label: English
-  path: en
-- code: de
-  label: Deutsch
-  path: de
+  - code: en
+    label: English
+    path: en
+  - code: de
+    label: Deutsch
+    path: de
 output: site
 repository:
-  branch: main
   url: https://github.com/uEdition/uEdition
 title:
   de: "\u03BCEdition"
   en: "\u03BCEdition"
-version: '1'
+sphinx_config:
+  html_static_path:
+    - _static
+  html_css_files:
+    - overrides.css
+  tei:
+    blocks:
+      - name: paragraph
+        selector: tei:p
+        tag: p
+        attributes:
+          - type: text
+            name: style
+      - name: heading-1
+        selector: tei:head[@type="level-1"]
+        tag: h1
+        attributes:
+          - type: static
+            name: type
+            value: level-1
+      - name: heading-2
+        selector: tei:head[@type="level-2"]
+        tag: h2
+        attributes:
+          - type: static
+            name: type
+            value: level-1
+    marks:
+      - name: emphasis
+        selector: tei:hi[@style="italic"]
+        tag: em
+      - name: annotation-ref
+        selector: tei:ref
+        tag: a
+        attributes:
+          - type: id-ref
+            name: target
+          - type: html-attribute
+            name: target
+            target: href
+    sections:
+      - name: metadata
+        type: metadata
+        selector: /tei:TEI/tei:teiHeader
+        fields:
+          - title: Author
+            type: single
+            selector: tei:fileDesc/tei:titleStmt/tei:author/tei:persName/text()
+      - name: bodytext
+        title: Main text
+        type: text
+        selector: /tei:TEI/tei:text/tei:body
+      - name: annotations
+        type: textlist
+        title: Annotations
+        selector: /tei:TEI/tei:text/tei:interpGrp/tei:interp
+version: "2"

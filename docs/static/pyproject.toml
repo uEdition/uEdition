@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "edition_name"
+description = "edition_title"
+requires-python = ">=3.10"
+keywords = []
+authors = [{ name = "author_name", email = "author_email@example.com" }]
+classifiers = []
+dependencies = []
+version = "1.0.0"
+
+[project.urls]
+Documentation = "http://edition.com"
+Issues = "http://edition.com"
+Source = "http://edition.com"
+
+[tool.hatch.envs.default]
+dependencies = ["uEdition<2.1,>=2.0.0b1", "uEditor<2.1,>=2.0.0b6"]
+skip-install = true
+
+[tool.hatch.envs.default.scripts]
+build = "uEdition build {args}"
+serve = "uEdition serve {args}"
+update = "uEdition update {args}"
+migrate = "uEdition migrate {args}"
+language = "uEdition language {args}"
