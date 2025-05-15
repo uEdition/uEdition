@@ -103,7 +103,7 @@ def cleanup_pyproject() -> None:
 
 def migrate_ueditor() -> None:
     """Migrate the μEditor to the latest supported version."""
-    ueditor_version = "uedition_editor>=2.0.0b5,<2.1"
+    ueditor_version = "uedition_editor<2.1,>=2.0.0b5"
     output(":hammer: Updating the μEditor")
     with open("pyproject.toml") as in_f:
         pyproject = tomlkit.parse(in_f.read())
