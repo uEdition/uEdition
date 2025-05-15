@@ -10,11 +10,10 @@ The μEdition is a micro framwork for quickly building Editions.
 
 -----
 
-**Important**: The μEdition is currently preparing for version 2, which will simplify its use and align it with the upcoming release of the [μEditor](https://github.com/uEdition/uEditor). If you are just starting a new μEdition, then please [look at the v2 branch](https://github.com/uEdition/uEdition/tree/feature/v2) and follow the instructions there to set up a v2 μEdition.
-
 **Table of Contents**
 
-- [Installation](#installation)
+- [Quickstart](#quickstart)
+- [Documentation](#documentation)
 - [License](#license)
 
 ## Quickstart
