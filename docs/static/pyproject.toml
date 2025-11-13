@@ -18,7 +18,7 @@ Issues = "http://edition.com"
 Source = "http://edition.com"
 
 [tool.hatch.envs.default]
-dependencies = ["uEdition<3,>=2.0.0b1", "uEditon-Editor<3,>=2.0.0b6"]
+dependencies = ["uEdition<3,>=2.0.0b1", "uEdition-Editor<3,>=2.0.0b6"]
 skip-install = true
 
 [tool.hatch.envs.default.scripts]
