@@ -18,10 +18,11 @@ Issues = "http://edition.com"
 Source = "http://edition.com"
 
 [tool.hatch.envs.default]
-dependencies = ["uEdition<2.1,>=2.0.0b1", "uEditor<2.1,>=2.0.0b6"]
+dependencies = ["uEdition<3,>=2.0.0b1", "uEditon-Editor<3,>=2.0.0b6"]
 skip-install = true
 
 [tool.hatch.envs.default.scripts]
+init = "uEdition init {args}"
 build = "uEdition build {args}"
 serve = "uEdition serve {args}"
 update = "uEdition update {args}"
