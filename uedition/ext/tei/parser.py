@@ -101,7 +101,7 @@ class TEIParser(SphinxParser):
                 sources = root.xpath(conf_section["selector"], namespaces=namespaces)
                 if len(sources) > 0:
                     if conf_section["sort"]:
-                        source.sort(key=self._sort_key(conf_section["sort"]))
+                        source.sort(key=self._sort_key(conf_section["sort"], conf_section["sort_order"]))
                     doc_section.append(section)
                     for source in sources:
                         tmp = None
@@ -130,10 +130,10 @@ class TEIParser(SphinxParser):
                             self._parse_download_field(fields, field, sources[0])
         document.append(doc_section)
 
-    def _sort_key(self: "TEIParser", xpath: str) -> Callable[[etree.Element], tuple[tuple[int, ...], ...]]:
+    def _sort_key(self: "TEIParser", xpath: str, sort_order: str) -> Callable[[etree.Element], tuple]:
         """Create a sortkey that understands about `page,line` patterns for sorting."""
 
-        def sorter(node: etree.Element) -> tuple[tuple[int, ...], ...]:
+        def sorter(node: etree.Element) -> tuple:
             value = node.xpath(xpath, namespaces=namespaces)
             if value is not None and len(value) > 0:
                 if isinstance(value, list):
@@ -150,7 +150,10 @@ class TEIParser(SphinxParser):
                         else:
                             order.append(tpl)
                     return tuple(order)
-            return ((0,),)
+            if sort_order == "page,line":
+                return ((0,),)
+            else:
+                return ("",)
 
         return sorter
 
