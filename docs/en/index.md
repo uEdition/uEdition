@@ -28,10 +28,12 @@ If you run into any bugs, then please report these via the GitHub Issues and we 
 
 To quickly get started with the μEdition follow these steps:
 
-1. Install [Hatch](https://hatch.pypa.io/latest/install/) for your operating system.
-2. Create a new folder for your μEdition.
-3. Download the default {download}`_static/pyproject.toml` and move that into your new folder.
-4. Open a new terminal, change into your new folder and run the following command:
+1. Install [Python](https://www.python.org/downloads) for your operating system, if it is not yet installed. The μEdition
+   supports all Python versions that are [currently supported](https://devguide.python.org/versions/).
+3. Install [Hatch](https://hatch.pypa.io/latest/install/) for your operating system.
+4. Create a new folder for your μEdition.
+5. Download the default {download}`_static/pyproject.toml` and move that into your new folder.
+6. Open a new terminal, change into your new folder and run the following command:
 
    :::{code-block} console
    hatch run init
@@ -39,7 +41,7 @@ To quickly get started with the μEdition follow these steps:
 
    This creates the configuration file ({file}`uEdition.yml`) and table of contents ({file}`toc.yml`).
 
-5. Then run the following command to add content in a new language:
+7. Then run the following command to add content in a new language:
 
    :::{code-block} console
    hatch run language add
@@ -47,10 +49,20 @@ To quickly get started with the μEdition follow these steps:
 
    This will ask you a few questions about the new language and then create the required files.
 
-5. Then run the following command to start the writing server:
+8. Then run the following command to start the writing server:
 
    :::{code-block} console
    hatch run serve
    :::
 
-Your new μEdition will be available at http://localhost:8000.
+   Your new μEdition will be available at http://localhost:8000.
+
+9. To use the [μEditor](https://ueditor.readthedocs.org) for editing the μEdition, run the following command in a separate
+   terminal:
+
+   :::{code-block} console
+   hatch run edit
+   :::
+
+   Your μEditor will be available at http://localhost:8080.
+   

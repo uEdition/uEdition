@@ -49,12 +49,12 @@ format: jb-book
 root: index
 parts:
   - caption:
-      en: Name of Part 1
-      de: Name von Teil 1
+      en: Part 1
+      de: Teil 1
     chapters:
     - title:
         en: Chapter 1
-        de: Chapter 2
+        de: Kapitel 1
       file: path/to/part1/chapter1
     - file: path/to/part1/chapter2
 :::
@@ -78,3 +78,14 @@ $ hatch run serve
 
 This generiert die μEdition und macht sie dann unter http://localhost:8000 verfügbar. Wenn die Inhalte geändert werden,
 wird die μEdition automatisch neugeneriert und die Seite im Browser automatisch neugeladen.
+
+## μEditor
+
+Zum Bearbeiten der μEdition kann jeder Texteditor verwendet werden. Die μEdition kommt aber auch mit einem web-basierten Editor,
+welcher mittels des folgenden Befehls (in einem zweiten Terminal) gestartet werden:
+
+:::{code-block} console
+$ hatch run edit
+:::
+
+Dies startet den μEditor Server, welcher dann unter http://localhost:8080 verfügbar ist.

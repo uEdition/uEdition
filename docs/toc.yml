@@ -10,6 +10,9 @@ chapters:
       - file: getting-started/configuration
       - file: getting-started/publish
       - file: getting-started/update
+  - file: tutorial/index
+    sections:
+      - file: tutorial/installation
   - file: tei/index
     sections:
       - file: tei/sections
