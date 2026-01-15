@@ -49,6 +49,8 @@ class TEINode(BaseModel):
     """Where to get the text from."""
     content: str | None = None
     """Allowed child nodes. Only relevant for block nodes."""
+    weight: int | None = None
+    """Weight of the node to determine nesting. Only used for mark nodes."""
 
 
 class TEIMetadataSectionSingleFieldRule(BaseModel):
