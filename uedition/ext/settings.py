@@ -106,6 +106,15 @@ class TEITextSection(BaseModel):
     """The XPath selector to retrieve this section."""
 
 
+class TEITextListSectionSort(BaseModel):
+    """Configuration for sorting a multiple text section."""
+
+    selector: str
+    """The XPath selector for the element to use for sorting."""
+    order: Literal["alpha"] | Literal["numeric"] | Literal["page,line-page,line"] = "alpha"
+    """The sorting algorithm to use"""
+
+
 class TEITextListSection(BaseModel):
     """A section in the TEI document containing multiple texts."""
 
@@ -117,10 +126,7 @@ class TEITextListSection(BaseModel):
     """The type must be set to textlist."""
     selector: str
     """The XPath selector to retrieve the texts in this section."""
-    sort: str | None = None
-    """The XPath selector for the element to use for sorting."""
-    sort_order: Literal["alpha"] | Literal["numeric"] | Literal["page,line-page,line"] = "alpha"
-    """The sorting algorithm to use"""
+    sort: TEITextListSectionSort | None = None
 
 
 class TEISettings(BaseModel):
