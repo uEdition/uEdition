@@ -101,7 +101,7 @@ class TEIParser(SphinxParser):
                 sources = root.xpath(conf_section["selector"], namespaces=namespaces)
                 if len(sources) > 0:
                     if conf_section["sort"]:
-                        source.sort(key=self._sort_key(conf_section["sort"], conf_section["sort_order"]))
+                        sources.sort(key=self._sort_key(conf_section["sort"], conf_section["sort_order"]))
                     doc_section.append(section)
                     for source in sources:
                         tmp = None
@@ -131,7 +131,7 @@ class TEIParser(SphinxParser):
         document.append(doc_section)
 
     def _sort_key(self: "TEIParser", xpath: str, sort_order: str) -> Callable[[etree.Element], tuple]:
-        """Create a sortkey that understands about `page,line` patterns for sorting."""
+        """Create a sortkey that understands about various sorting patterns."""
 
         def sorter(node: etree.Element) -> tuple:
             value = node.xpath(xpath, namespaces=namespaces)
@@ -140,18 +140,31 @@ class TEIParser(SphinxParser):
                     value = value[0]
                 else:
                     value = str(value)
-                match = re.match("[0-9-,]+", value)
-                if match is not None:
-                    order = []
-                    for part in value.split("-"):
-                        tpl = tuple([int(v) for v in part.split(",")])
-                        if len(order) > 0 and len(order[-1]) > len(tpl):
-                            order.append(tuple(list(order[-1][: -len(tpl)]) + list(tpl)))
-                        else:
-                            order.append(tpl)
-                    return tuple(order)
-            if sort_order == "page,line":
+                if sort_order == "page,line-page,line":
+                    match = re.match("([0-9-,]+).*", value)
+                    if match is not None:
+                        order = []
+                        for part in match.group(1).split("-"):
+                            tpl = tuple([int(v) for v in part.split(",")])
+                            if len(order) > 0 and len(order[-1]) > len(tpl):
+                                order.append(tuple(list(order[-1][: -len(tpl)]) + list(tpl)))
+                            else:
+                                order.append(tpl)
+                        return tuple(order)
+                    else:
+                        return ((0,),)
+                elif sort_order == "numeric":
+                    match = re.match("([0-9]+).*", value)
+                    if match is not None:
+                        return (int(match.group(1)),)
+                    else:
+                        return (0,)
+                else:
+                    return (value, "")
+            if sort_order == "page,line-page,line":
                 return ((0,),)
+            elif sort_order == "numeric":
+                return (0,)
             else:
                 return ("",)
 

@@ -119,7 +119,7 @@ class TEITextListSection(BaseModel):
     """The XPath selector to retrieve the texts in this section."""
     sort: str | None = None
     """The XPath selector for the element to use for sorting."""
-    sort_order: Literal["alpha"] | Literal["numeric"] | Literal["page,line"] = "alpha"
+    sort_order: Literal["alpha"] | Literal["numeric"] | Literal["page,line-page,line"] = "alpha"
     """The sorting algorithm to use"""
 
 
