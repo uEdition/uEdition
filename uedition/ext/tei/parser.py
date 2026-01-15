@@ -145,7 +145,7 @@ class TEIParser(SphinxParser):
                     if match is not None:
                         order = []
                         for part in match.group(1).split("-"):
-                            tpl = tuple([int(v) for v in part.split(",")])
+                            tpl = tuple([int(v) for v in part.split(",") if re.match("[0-9]+", v)])
                             if len(order) > 0 and len(order[-1]) > len(tpl):
                                 order.append(tuple(list(order[-1][: -len(tpl)]) + list(tpl)))
                             else:
