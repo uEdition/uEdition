@@ -140,19 +140,16 @@ class TEIParser(SphinxParser):
                     value = value[0]
                 else:
                     value = str(value)
-                if sort_order == "page,line-page,line":
+                if sort_order == "page,line":
                     match = re.match("([0-9-,]+).*", value)
                     if match is not None:
                         order = []
-                        for part in match.group(1).split("-"):
-                            tpl = tuple([int(v) for v in part.split(",")])
-                            if len(order) > 0 and len(order[-1]) > len(tpl):
-                                order.append(tuple(list(order[-1][: -len(tpl)]) + list(tpl)))
-                            else:
-                                order.append(tpl)
+                        for value in match.group(1).split(","):
+                            for value2 in value.split("-"):
+                                order.append(int(value2))
                         return tuple(order)
                     else:
-                        return ((0,),)
+                        return (0,)
                 elif sort_order == "numeric":
                     match = re.match("([0-9]+).*", value)
                     if match is not None:
@@ -161,8 +158,8 @@ class TEIParser(SphinxParser):
                         return (0,)
                 else:
                     return (value, "")
-            if sort_order == "page,line-page,line":
-                return ((0,),)
+            if sort_order == "page,line":
+                return (0,)
             elif sort_order == "numeric":
                 return (0,)
             else:
