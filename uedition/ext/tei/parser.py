@@ -100,8 +100,8 @@ class TEIParser(SphinxParser):
                 # Process a text section
                 sources = root.xpath(conf_section["selector"], namespaces=namespaces)
                 if len(sources) > 0:
-                    if conf_section["sort"]:
-                        sources.sort(key=self._sort_key(conf_section["sort"], conf_section["sort_order"]))
+                    if conf_section["sort"] is not None:
+                        sources.sort(key=self._sort_key(conf_section["sort"]))
                     doc_section.append(section)
                     for source in sources:
                         tmp = None
@@ -130,17 +130,17 @@ class TEIParser(SphinxParser):
                             self._parse_download_field(fields, field, sources[0])
         document.append(doc_section)
 
-    def _sort_key(self: "TEIParser", xpath: str, sort_order: str) -> Callable[[etree.Element], tuple]:
+    def _sort_key(self: "TEIParser", sort: dict) -> Callable[[etree.Element], tuple]:
         """Create a sortkey that understands about various sorting patterns."""
 
         def sorter(node: etree.Element) -> tuple:
-            value = node.xpath(xpath, namespaces=namespaces)
+            value = node.xpath(sort["selector"], namespaces=namespaces)
             if value is not None and len(value) > 0:
                 if isinstance(value, list):
                     value = value[0]
                 else:
                     value = str(value)
-                if sort_order == "page,line":
+                if sort["order"] == "page,line":
                     match = re.match("([0-9-,]+).*", value)
                     if match is not None:
                         order = []
@@ -150,7 +150,7 @@ class TEIParser(SphinxParser):
                         return tuple(order)
                     else:
                         return (0,)
-                elif sort_order == "numeric":
+                elif sort["order"] == "numeric":
                     match = re.match("([0-9]+).*", value)
                     if match is not None:
                         return (int(match.group(1)),)
@@ -158,9 +158,9 @@ class TEIParser(SphinxParser):
                         return (0,)
                 else:
                     return (value, "")
-            if sort_order == "page,line":
+            if sort["order"] == "page,line":
                 return (0,)
-            elif sort_order == "numeric":
+            elif sort["order"] == "numeric":
                 return (0,)
             else:
                 return ("",)
