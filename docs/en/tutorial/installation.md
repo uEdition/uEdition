@@ -27,7 +27,7 @@ to test that Hatch was correctly installed:
 $ hatch --version
 :::
 
-If this outputs a list of commands that Hatch provides, then Hatch has also been successfully installed.
+If this outputs the Hatch version, then Hatch has also been successfully installed.
 
 If either of the two installations did not work correctly, then please check the respective software's documentation and
 support forum. Unfortunately the variety of systems out there means that we cannot provide useful support for these issues.

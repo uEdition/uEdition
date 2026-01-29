@@ -1,38 +1,40 @@
 # Installation
 
 Die μEdition ist in der Python Programmiersprache implementiert, und benötigt eine auf ihrem Computer installierte,
-aktuelle Python Version. Die aktuellste Version führ ihr Betriebsystem können sie unter
+aktuelle Python Version um zu funktionieren. Die aktuellste Version für ihr Betriebsystem können sie unter
 [https://www.python.org/downloads](https://www.python.org/downloads) finden. Folgen sie den Anweisungen für ihr
 Betriebssystem, um Python zu installieren.
 
-If you already have a version of Python installed on your system, then you can just use that. The μEdition supports all
-versions of Python that are currently supported[^python-version]. It is likely that it will also work on older versions,
-but this cannot be guaranteed, so if you have a Python version that is out of date, now is a good time to update that.
+Wenn sie Python bereits installiert haben, dann können sie einfach die bereits installierte Version nutzen. Die μEdition
+ist mit allen zur Zeit unterstützten Versionen kompatibel[^python-version]. Sie sollte in den meisten Fällen auch mit
+älteren Versionen kompatibel sein, aber das kann nicht garantiert werden. Falls ihre Python Version veraltert ist, ist
+jetzt ein guter Moment um zu aktualisieren.
 
-The μEdition uses a number of existing libraries to provide you with the full functionality. To simplify the process of
-installing these dependencies, the μEdition uses [Hatch](https://hatch.pypa.io/latest/install/) to manage the environment
-that the μEdition is installed into. Follow the instructions on [https://hatch.pypa.io/latest/install/](https://hatch.pypa.io/latest/install/)
-to install Hatch for your operating system.
+Die μEdition nutzt eine Reihe an existierenden Softwarekomponenten. Um die Installation dieser zu vereinfachen, nutzt die
+μEdition [Hatch](https://hatch.pypa.io/latest/install/) um die Softwareumgebung zu verwalten. Folgen sie bitte den
+Installationsschritten unter [https://hatch.pypa.io/latest/install/](https://hatch.pypa.io/latest/install/), um Hatch
+für ihr Betriebssystem zu installieren.
 
-Before we move on to actually creating your μEdition, it is a good idea to test that the installations were successful.
-To test that Python is correctly installed, open a terminal and then run the following command[^no-prompt]:
+Bevor wir die μEdition erstellen, ist es sinnvoll zuerst zu testen, dass die Softwareinstallationen erfolgreich waren.
+Um zu testen, dass Python korrekt installiert ist, öffnen sie ein Terminal und führen sie folgenden Befehl aus[^no-prompt]:
 
 :::{code-block} console
 $ python --version
 :::
 
-If this shows the installed Python version, then the Python installation was successful. Next, run the following command
-to test that Hatch was correctly installed:
+Wenn dies die installierte Python Version ausgibt, dann ist Python korrekt installiert. Als nächstes führen sie folgenden
+Befehl aus, um die Hatch Installation zu testen:
 
 :::{code-block} console
 $ hatch --version
 :::
 
-If this outputs a list of commands that Hatch provides, then Hatch has also been successfully installed.
+Wenn dies die Hatch Version ausgibt, dann ist Hatch auch erfolgreich installiert worden.
 
-If either of the two installations did not work correctly, then please check the respective software's documentation and
-support forum. Unfortunately the variety of systems out there means that we cannot provide useful support for these issues.
+Falls eine oder beider der Installationen fehlgeschlagen sind, dann konsultieren sie bitte die Dokumentation der jeweiligen
+Software. Aufgrund der großen Breite an Systemkonfigurationen können wir keinen nützlichen Support für derartige Probleme
+bieten.
 
-[^python-version]: See here for the current [Python version support status](https://devguide.python.org/versions/)
-[^no-prompt]: Do not include the `$` when running the command. The `$` just indicates that the rest of the line is to
-  be entered as a command on the commandline.
+[^python-version]: Die aktuell unterstützten Python versionen [finden sie hier](https://devguide.python.org/versions/)
+[^no-prompt]: Das `$` Zeichen darf nicht in das Terminal kopiert werden. Das `$` Zeichen ist nur da, um anzuzeigen, dass
+  der Rest der Zeile ein Befehl ist, der im Terminal ausgeführt werden muss.
