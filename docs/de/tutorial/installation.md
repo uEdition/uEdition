@@ -1,8 +1,9 @@
 # Installation
 
-The μEdition is built in the Python programmling language, so to use it, you need to download and then install a version of
-Python on your system. Go to [https://www.python.org/downloads](https://www.python.org/downloads) and then download the
-latest version of Python and install it.
+Die μEdition ist in der Python Programmiersprache implementiert, und benötigt eine auf ihrem Computer installierte,
+aktuelle Python Version. Die aktuellste Version führ ihr Betriebsystem können sie unter
+[https://www.python.org/downloads](https://www.python.org/downloads) finden. Folgen sie den Anweisungen für ihr
+Betriebssystem, um Python zu installieren.
 
 If you already have a version of Python installed on your system, then you can just use that. The μEdition supports all
 versions of Python that are currently supported[^python-version]. It is likely that it will also work on older versions,
