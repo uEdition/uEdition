@@ -13,9 +13,10 @@ chapters:
   - file: tutorial/index
     sections:
       - file: tutorial/installation
-  - file: tei/index
-    sections:
-      - file: tei/sections
-      - file: tei/blocks
-      - file: tei/marks
+      - file: tutorial/new-uedition
+  # - file: tei/index
+  #   sections:
+  #     - file: tei/sections
+  #     - file: tei/blocks
+  #     - file: tei/marks
   - file: changelog

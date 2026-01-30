@@ -18,7 +18,7 @@ Issues = "https://github.com/uEdition/uEdition/-/issues"
 Source = "https://github.com/uEdition/uEdition/-"
 
 [tool.hatch.envs.default]
-dependencies = ["uedition<2.1,>=2.0.0b1", "uedition_editor>=2.0.0b5,<2.1"]
+dependencies = ["uedition<2.1,>=2.0.0b1", "uedition_editor>=2.0.1,<2.1"]
 skip-install = true
 
 [tool.hatch.envs.default.scripts]

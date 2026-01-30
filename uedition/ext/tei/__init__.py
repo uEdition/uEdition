@@ -10,7 +10,7 @@ from uedition.ext.tei import parser
 from uedition.settings import settings
 
 
-def add_language_switcher(app: Sphinx) -> None:
+def add_tei_download(app: Sphinx) -> None:
     """Add the language switcher in-line and file JavaScript."""
     app.add_js_file("tei_download.js")
 
@@ -28,5 +28,5 @@ def setup(app: Sphinx) -> None:
     """Set up the TEI Sphinx extension."""
     parser.setup(app)
     if settings["output"]["tei"]:
-        app.connect("builder-inited", add_language_switcher)
+        app.connect("builder-inited", add_tei_download)
         app.connect("build-finished", copy_custom_files)
