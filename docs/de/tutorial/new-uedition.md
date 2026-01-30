@@ -1,7 +1,7 @@
 # Eine μEdition erstellen
 
-Die nächsten Schritte werden die Grundstruktur einer neuen μEdition erstellen und werden in folgendem Video
-gezeigt.
+Jetzt wo alle notwendigen Basiskomponenten installiert sind, zeigt das nächste Video, wie eine neue μEdition erstellt
+wird:
 
 :::{room3b-video} /uedition/tutorial/installation/de
 :::
