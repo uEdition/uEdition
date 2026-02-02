@@ -2,7 +2,7 @@
 
 ## 2.x
 
-### Entwicklung
+### 2.0.1 (02.02.2026)
 
 * **Bugfix**: Textlistensortierung robuster gemacht
 

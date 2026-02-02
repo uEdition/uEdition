@@ -2,7 +2,7 @@
 
 ## 2.1
 
-### Dev
+### 2.0.1 (02.02.2026)
 
 * **Bugfix**: Made the textlist sorter more robust
 
