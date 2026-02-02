@@ -6,7 +6,7 @@ from os import path
 from sphinx.application import Sphinx
 from sphinx.util.fileutil import copy_asset_file
 
-from uedition.ext.tei import parser
+from uedition.ext.tei import base, parser
 from uedition.settings import settings
 
 
@@ -26,6 +26,7 @@ def copy_custom_files(app: Sphinx, exc: bool) -> None:  # noqa: FBT001
 
 def setup(app: Sphinx) -> None:
     """Set up the TEI Sphinx extension."""
+    base.setup(app)
     parser.setup(app)
     if settings["output"]["tei"]:
         app.connect("builder-inited", add_tei_download)

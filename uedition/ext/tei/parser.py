@@ -13,7 +13,8 @@ from sphinx import addnodes
 from sphinx.application import Sphinx
 from sphinx.parsers import Parser as SphinxParser
 from sphinx.util import logging
-from sphinx.writers.html import HTMLWriter
+
+from uedition.ext.tei.base import TeiElement
 
 logger = logging.getLogger(__name__)
 namespaces = {"tei": "http://www.tei-c.org/ns/1.0", "uedition": "https://uedition.readthedocs.org"}
@@ -26,29 +27,6 @@ def format_iso8601_date(dummy: None, text: str) -> str:  # noqa: ARG001
         if match:
             return ".".join(reversed([v for v in match.groups() if v is not None]))
     return ""
-
-
-class TeiElement(nodes.Element):
-    """An abstract TEI element for HTML rendering."""
-
-    pass
-
-
-def tei_element_html_enter(self: "HTMLWriter", node: TeiElement) -> None:
-    """Visit a TeiElement and generate the correct HTML."""
-    if node.get("html_tag") is not None:
-        buffer = [f"<{node.get('html_tag')}"]
-        if node.get("ids"):
-            buffer.append(f' id="{node.get("ids")[0]}"')
-        for key, value in node.get("tei_attributes").items():
-            buffer.append(f' {key}="{value}"')
-        self.body.append(f"{''.join(buffer)}>")
-
-
-def tei_element_html_exit(self: "HTMLWriter", node: TeiElement) -> None:
-    """Close the HTML tag."""
-    if node.get("html_tag") is not None:
-        self.body.append(f"</{node.get('html_tag')}>")
 
 
 class TEIParser(SphinxParser):
@@ -303,6 +281,5 @@ class TEIParser(SphinxParser):
 
 def setup(app: Sphinx) -> None:
     """Set up the TEI Sphinx extension."""
-    app.add_node(TeiElement, html=(tei_element_html_enter, tei_element_html_exit))
     app.add_source_suffix(".tei", "tei")
     app.add_source_parser(TEIParser)
