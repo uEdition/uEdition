@@ -146,14 +146,20 @@ class TEIParser(SphinxParser):
                         order = []
                         for value in match.group(1).split(","):
                             for value2 in value.split("-"):
-                                order.append(int(value2))
+                                try:
+                                    order.append(int(value2.strip()))
+                                except ValueError:
+                                    order.append(0)
                         return tuple(order)
                     else:
                         return (0,)
                 elif sort["order"] == "numeric":
                     match = re.match("([0-9]+).*", value)
                     if match is not None:
-                        return (int(match.group(1)),)
+                        try:
+                            return (int(match.group(1).strip()),)
+                        except ValueError:
+                            return (0,)
                     else:
                         return (0,)
                 else:

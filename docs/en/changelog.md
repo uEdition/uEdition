@@ -1,6 +1,12 @@
 # Changelog
 
-## In Development
+## 2.1
+
+### Dev
+
+* **Bugfix**: Made the textlist sorter more robust
+
+### 2.0.0 (23.01.2026)
 
 * **Breaking**: Use Sphinx directly, rather than via Jupyter Book
 * **Breaking**: Remove the use of Copier
