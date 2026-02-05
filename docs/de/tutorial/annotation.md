@@ -129,7 +129,8 @@ nachgelesen werden.
 
 Wie bei den Textauszeichnungen, bietet die μEdition auch einen Textblock mit dem Namen `{tei}` an, um größere TEI Blöcke
 auszuzeichnen. Dabei wird der Name des gewünschten TEI Tags nach dem `{tei}` angegeben. Zum Beispiel generiert folgender
-Markdownblock ein TEI `lg` Element (Zeilengruppe) und darin ein `l` Element (Zeile):
+Markdownblock ein TEI [`lg`](https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-lg.html) Element (Zeilengruppe)
+und darin ein [`l`](https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-l.html) Element (Zeile):
 
 :::::{code-block} markdown
 ::::{tei} lg
