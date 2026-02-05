@@ -136,10 +136,13 @@ def config_build(lang: dict) -> None:
     # Set settings-based
     if lang["code"] in settings["title"]:
         config["project"] = settings["title"][lang["code"]]
+        config["html_title"] = settings["title"][lang["code"]]
     elif len(settings["languages"]) > 0 and settings["languages"][0]["code"] in settings["title"]:
         config["project"] = settings["title"][settings["languages"][0]["code"]]
+        config["html_title"] = settings["title"][settings["languages"][0]["code"]]
     else:
         config["project"] = f"Missing title for {lang['label']}"
+        config["html_title"] = f"Missing title for {lang['label']}"
     config["author"] = settings["author"]["name"]
     if settings["repository"]["url"]:
         config["html_theme_options"]["repository_url"] = f"{settings['repository']['url']}"
