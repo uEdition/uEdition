@@ -6,7 +6,7 @@ wird:
 :::{room3b-video} /uedition/tutorial/installation/de
 :::
 
-# Zum Mitkopieren
+# Einzelschritte
 
 1. Die {download}`../_static/pyproject.toml` Datei herunterladen.
 2. Einen neuen Ordern für die μEdition erstellen.
@@ -19,6 +19,7 @@ wird:
    :::
 
    Dieser Vorgang kann ein paar Minuten dauern.
+
 6. Folgenden Befehl ausführen, um der μEdition eine neue Sprache hinzuzufügen (jede μEdition braucht mindestens
    eine Sprache):
 
@@ -27,11 +28,10 @@ wird:
    :::
 
    Der Befehl fragt um drei Informationen:
-
-   * **Language code**: ISO Sprachkürzel der neuen Sprache. Dieser wird für den Ordnernamen für die
+   - **Language code**: ISO Sprachkürzel der neuen Sprache. Dieser wird für den Ordnernamen für die
      sprachspezifischen Inhalte genutzt.
-   * **Language name**: Name der neuen Sprache. Diese wird für die Sprachwechselfunktionen der μEdition genutzt.
-   * **Title**: Titel der neuen μEdition in der Sprache.
+   - **Language name**: Name der neuen Sprache. Diese wird für die Sprachwechselfunktionen der μEdition genutzt.
+   - **Title**: Titel der neuen μEdition in der Sprache.
 
 7. Folgenden Befehl ausführen, um die HTML Version der μEdition zu erstellen:
 

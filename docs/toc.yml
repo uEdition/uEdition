@@ -15,6 +15,7 @@ chapters:
       - file: tutorial/installation
       - file: tutorial/new-uedition
       - file: tutorial/ueditor
+      - file: tutorial/edit-page
       - file: tutorial/annotation
       - file: tutorial/next-page
   # - file: tei/index
