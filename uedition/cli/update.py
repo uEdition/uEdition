@@ -51,7 +51,7 @@ def update(allow_versions: UpdateVersionOptions = UpdateVersionOptions.RELEASES.
                 break
         if target_version is None:
             raise Exception("No version found to upgrade to")  # noqa: EM101
-        target_specifier = SpecifierSet(f">={target_version},<{target_version.major}.{target_version.minor + 1}")
+        target_specifier = SpecifierSet(f">={target_version},<{target_version.major + 1}")
         output(f":hammer: Upgrading to {target_version}")
         if "tool" not in pyproject:
             pyproject["tool"] = tomlkit.table()

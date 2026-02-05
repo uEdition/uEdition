@@ -49,6 +49,8 @@ class TEINode(BaseModel):
     """Where to get the text from."""
     content: str | None = None
     """Allowed child nodes. Only relevant for block nodes."""
+    weight: int | None = None
+    """Weight of the node to determine nesting. Only used for mark nodes."""
 
 
 class TEIMetadataSectionSingleFieldRule(BaseModel):
@@ -106,6 +108,15 @@ class TEITextSection(BaseModel):
     """The XPath selector to retrieve this section."""
 
 
+class TEITextListSectionSort(BaseModel):
+    """Configuration for sorting a multiple text section."""
+
+    selector: str
+    """The XPath selector for the element to use for sorting."""
+    order: Literal["alpha"] | Literal["numeric"] | Literal["page,line"] = "alpha"
+    """The sorting algorithm to use"""
+
+
 class TEITextListSection(BaseModel):
     """A section in the TEI document containing multiple texts."""
 
@@ -117,7 +128,7 @@ class TEITextListSection(BaseModel):
     """The type must be set to textlist."""
     selector: str
     """The XPath selector to retrieve the texts in this section."""
-    sort: str | None = None
+    sort: TEITextListSectionSort | None = None
 
 
 class TEISettings(BaseModel):

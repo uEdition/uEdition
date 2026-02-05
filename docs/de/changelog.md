@@ -1,6 +1,12 @@
 # Änderungsgeschichte
 
-## In Entwicklung
+## 2.x
+
+### 2.0.1 (02.02.2026)
+
+* **Bugfix**: Textlistensortierung robuster gemacht
+
+### 2.0.0 (23.01.2026)
 
 * **Bruch**: Direkte Nutzung von Sphinx anstelle über Jupyter Book
 * **Bruch**: Keine Nutzung von Copier mehr
