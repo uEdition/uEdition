@@ -2,6 +2,10 @@
 
 ## 2.x
 
+### In Entwicklung
+
+* **Bugfix**: Titel der HTML Ausgabe korrekt gesetzt
+
 ### 2.0.1 (02.02.2026)
 
 * **Bugfix**: Textlistensortierung robuster gemacht
