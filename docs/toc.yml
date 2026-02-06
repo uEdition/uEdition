@@ -20,6 +20,12 @@ chapters:
       - file: tutorial/new-page
       - file: tutorial/configuration
       - file: tutorial/publishing
+      - file: tutorial/using-git/index
+        sections:
+          - file: tutorial/using-git/initialise
+          - file: tutorial/using-git/using
+          - file: tutorial/using-git/remote
+          - file: tutorial/using-git/publishing
       - file: tutorial/next-page
   # - file: tei/index
   #   sections:
