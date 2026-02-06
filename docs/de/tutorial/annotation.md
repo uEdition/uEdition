@@ -1,4 +1,4 @@
-# Textauszeichnungne
+# Textauszeichnungen
 
 Markdown war ursprünglich als sehr einfaches Format für die Auszeichnung von Text entwickelt worden. Die Markdownversion
 die der μEdition zugrundeliegt, hat diese aber derart signifikant erweitert, dass wir nur einen kleinen Teil davon
