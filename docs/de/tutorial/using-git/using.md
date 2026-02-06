@@ -1,7 +1,5 @@
 # Git verwenden
 
-Nach der Git Initialisierung können Änderungen nur noch in einem Branch ausgeführt werden, wie in folgendem Video
-gezeigt wird:
 
 # Einzelschritte
 

@@ -22,4 +22,4 @@
    Dabei die `URL` durch die URL aus Schritt 4 oder 5 ersetzen.
 7. Den μEditor wieder starten.
 8. In GitHub nachsehen, dass der lokale Inhalt der μEdition jetzt auch remote verfügbar ist.
-9. Nach der Verbindung mit GitHub müssen alle merges in GitHub durchgeführt werden.
+9. Nach der Verbindung mit GitHub müssen alle Merges in GitHub durchgeführt werden.
