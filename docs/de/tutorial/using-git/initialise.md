@@ -12,7 +12,7 @@
    UEDITOR__GIT__DEFAULT_BRANCH=main
    :::
 
-   Dabei `NAME` und ``E-MAIL ADDRESSE` durch den eigenen Namen und E-Mail Addresse ersetzen.
+   Dabei `NAME` und `E-MAIL ADDRESSE` durch den eigenen Namen und E-Mail Addresse ersetzen.
 3. Im Terminal in dem Sie `hatch run edit` ausgeführt haben, den μEditor mittels der Tastenkombination {kbd}`Str+c`
    stoppen.
 4. Folgenden Befehl ausführen, um das Git Repository zu initialisieren:
