@@ -19,6 +19,7 @@ chapters:
       - file: tutorial/annotation
       - file: tutorial/new-page
       - file: tutorial/configuration
+      - file: tutorial/publishing
       - file: tutorial/next-page
   # - file: tei/index
   #   sections:
