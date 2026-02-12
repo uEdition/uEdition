@@ -26,7 +26,12 @@ chapters:
           - file: tutorial/using-git/using
           - file: tutorial/using-git/remote
           - file: tutorial/using-git/publishing
-      - file: tutorial/next-page
+      - file: tutorial/using-tei/index
+        sections:
+          - file: tutorial/using-tei/configuration
+          - file: tutorial/using-tei/create
+          - file: tutorial/using-tei/metadata
+          - file: tutorial/using-tei/main-text
   # - file: tei/index
   #   sections:
   #     - file: tei/sections
