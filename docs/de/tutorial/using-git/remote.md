@@ -23,3 +23,7 @@
 7. Den μEditor wieder starten.
 8. In GitHub nachsehen, dass der lokale Inhalt der μEdition jetzt auch remote verfügbar ist.
 9. Nach der Verbindung mit GitHub müssen alle Merges in GitHub durchgeführt werden.
+
+:::{note}
+Nach dem Verbinden mit GitHub ist es nicht mehr möglich Branches lokal in den Defaultbranch zu mergen.
+:::
