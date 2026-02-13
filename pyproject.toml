@@ -58,6 +58,7 @@ extra-dependencies = ["coverage[toml]>=6.5", "pytest", "ruff==0.9.5"]
 
 [tool.hatch.envs.default.scripts]
 docs-server = "cd docs && uEdition serve"
+build-docs = "cd docs && uEdition build"
 test = "pytest {args:tests}"
 test-cov = "coverage run -m pytest {args:tests}"
 cov-report = ["- coverage combine", "coverage report"]
