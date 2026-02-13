@@ -16,10 +16,10 @@
 6. Folgenden Befehl ausführen, um die lokale μEdition mit dem GitHub Repository verbinden:
 
    :::{code-block} console
-   $ hatch run uEditor git set-remote URL
+   $ hatch run uEditor git set-remote
    :::
 
-   Dabei die `URL` durch die URL aus Schritt 4 oder 5 ersetzen.
+   Dass Nutzerinterface bittet um die gewünschte URL und dort die URL aus Schritt 4 oder 5 eingeben.
 7. Den μEditor wieder starten.
 8. In GitHub nachsehen, dass der lokale Inhalt der μEdition jetzt auch remote verfügbar ist.
 9. Nach der Verbindung mit GitHub müssen alle Merges in GitHub durchgeführt werden.
