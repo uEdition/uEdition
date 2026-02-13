@@ -6,11 +6,11 @@ from os import path
 from sphinx.application import Sphinx
 from sphinx.util.fileutil import copy_asset_file
 
-from uedition.ext.tei import parser
+from uedition.ext.tei import base, parser
 from uedition.settings import settings
 
 
-def add_language_switcher(app: Sphinx) -> None:
+def add_tei_download(app: Sphinx) -> None:
     """Add the language switcher in-line and file JavaScript."""
     app.add_js_file("tei_download.js")
 
@@ -26,7 +26,8 @@ def copy_custom_files(app: Sphinx, exc: bool) -> None:  # noqa: FBT001
 
 def setup(app: Sphinx) -> None:
     """Set up the TEI Sphinx extension."""
+    base.setup(app)
     parser.setup(app)
     if settings["output"]["tei"]:
-        app.connect("builder-inited", add_language_switcher)
+        app.connect("builder-inited", add_tei_download)
         app.connect("build-finished", copy_custom_files)

@@ -18,7 +18,7 @@ Issues = "http://edition.com"
 Source = "http://edition.com"
 
 [tool.hatch.envs.default]
-dependencies = ["uEdition<3,>=2.0.0b5", "uEdition-Editor<3,>=2.0.0b6"]
+dependencies = ["uEdition<3,>=2.0.0", "uEdition-Editor<3,>=2.0.1"]
 skip-install = true
 
 [tool.hatch.envs.default.scripts]
@@ -28,4 +28,4 @@ serve = "uEdition serve {args}"
 update = "uEdition update {args}"
 migrate = "uEdition migrate {args}"
 language = "uEdition language {args}"
-edit = "uvicorn --port 8000 uedition_editor:app {args} {args}"
+edit = "uvicorn --port 8080 uedition_editor:app {args} {args}"
