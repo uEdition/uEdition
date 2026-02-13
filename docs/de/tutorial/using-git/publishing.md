@@ -38,6 +38,7 @@
 
          - name: Install Base Dependencies
            run: |
+             sudo apt-get remove python3-packaging
              sudo pip install hatch
 
          - name: Build the pages

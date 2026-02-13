@@ -24,7 +24,6 @@ Funktionalität genutzt werden kann.
          selector: tei:rdg
          attributes:
            - name: wit
-             type: text
      sections:
        - name: metadata
          type: metadata
