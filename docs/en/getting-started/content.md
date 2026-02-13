@@ -47,12 +47,12 @@ format: jb-book
 root: index
 parts:
   - caption:
-      en: Name of Part 1
-      de: Name von Teil 1
+      en: Part 1
+      de: Teil 1
     chapters:
     - title:
         en: Chapter 1
-        de: Chapter 2
+        de: Kapitel 1
       file: path/to/part1/chapter1
     - file: path/to/part1/chapter2
 :::
@@ -76,3 +76,14 @@ $ hatch run serve
 
 This will build your μEdition and then make it available at http://localhost:8000. When you make changes to the content,
 the μEdition will automatically re-build your μEdition and automatically reload the view in the browser.
+
+## μEditor
+
+You can use any editor you want to use for working on the μEdition's content. The μEdition also comes with a web-based editor,
+which you can use by running the following command in a separate terminal:
+
+:::{code-block} console
+$ hatch run edit
+:::
+
+This will start the μEditor server, which you can then access at http://localhost:8080.

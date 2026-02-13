@@ -26,12 +26,14 @@ https://github.com/uEdition/uEdition/issues.
 
 ## Schnellstart
 
-Für einen Schnellstart mit der μEdition, folgens sie diesen Schritten (Python 3.10 oder neuer muss bereits installiert sein):
+Für einen Schnellstart mit der μEdition, folgens sie diesen Schritten:
 
-1. [Hatch](https://hatch.pypa.io/latest/install/) für das korrekte Betriebssystem installieren.
-2. Einen neuen Dateiordner für die μEdition anlegen.
-3. Die Projektkonfiguration {download}`_static/pyproject.toml` herunterladen und im neuen Dateiordner abspeichern.
-4. Auf der Kommandozeile in den neuen Dateiordner wechseln und dort folgenden Befehl ausführen:
+1. [Python](https://www.python.org/downloads) für das korrekte Betriebssystem installieren, falls noch nicht installiert.
+   Die μEdition unterstützt alle Python Versionen, die [aktuell unterstützt sind](https://devguide.python.org/versions/).
+2. [Hatch](https://hatch.pypa.io/latest/install/) für das korrekte Betriebssystem installieren.
+3. Einen neuen Dateiordner für die μEdition anlegen.
+4. Die Projektkonfiguration {download}`_static/pyproject.toml` herunterladen und im neuen Dateiordner abspeichern.
+5. Auf der Kommandozeile in den neuen Dateiordner wechseln und dort folgenden Befehl ausführen:
 
    :::{code-block} console
    hatch run init
@@ -39,7 +41,7 @@ Für einen Schnellstart mit der μEdition, folgens sie diesen Schritten (Python 
 
    Dies erzeugt die notwendige Konfigurationsdatei ({file}`uEdition.yml`) und das Inhaltsverzeichnis ({file}`toc.yml`).
 
-5. Dann folgenden Befehl ausführen um eine neue Sprache hinzuzufügen
+6. Dann folgenden Befehl ausführen um eine neue Sprache hinzuzufügen
 
    :::{code-block} console
    hatch run language add
@@ -47,11 +49,19 @@ Für einen Schnellstart mit der μEdition, folgens sie diesen Schritten (Python 
 
    Nach dem Beantworten von ein paar Fragen über die neue Sprache werden die notwendigen Dateien erzeugt.
 
-5. Abschließend folgenden Befehl ausführen um den lokalen Server zu starten:
+7. Abschließend folgenden Befehl ausführen um den lokalen Server zu starten:
 
    :::{code-block} console
    hatch run serve
    :::
 
+   Die neue, digitale Edition ist dann unter http://localhost:8000 verfügbar.
 
-Die neue, digitale Edition ist dann unter http://localhost:8000 verfügbar.
+8. Um den [μEditor](https://ueditor.readthedocs.org) für das Bearbeiten der μEdition zu starten, den folgenden Befehl in einem
+   separaten Terminal ausführen:
+
+   :::{code-block} console
+   hatch run edit
+   :::
+
+   Der μEditor ist dann unter http://localhost:8080 verfügbar.

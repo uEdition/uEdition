@@ -5,7 +5,7 @@
 
 from sphinx.application import Sphinx
 
-from uedition.ext import config, language_switcher, tei
+from uedition.ext import config, language_switcher, tei, video
 
 
 def setup(app: Sphinx) -> None:
@@ -13,3 +13,4 @@ def setup(app: Sphinx) -> None:
     config.setup(app)
     tei.setup(app)
     language_switcher.setup(app)
+    video.setup(app)

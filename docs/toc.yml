@@ -10,4 +10,31 @@ chapters:
       - file: getting-started/configuration
       - file: getting-started/publish
       - file: getting-started/update
+  - file: tutorial/index
+    sections:
+      - file: tutorial/installation
+      - file: tutorial/new-uedition
+      - file: tutorial/ueditor
+      - file: tutorial/edit-page
+      - file: tutorial/annotation
+      - file: tutorial/new-page
+      - file: tutorial/configuration
+      - file: tutorial/publishing
+      - file: tutorial/using-git/index
+        sections:
+          - file: tutorial/using-git/initialise
+          - file: tutorial/using-git/using
+          - file: tutorial/using-git/remote
+          - file: tutorial/using-git/publishing
+      - file: tutorial/using-tei/index
+        sections:
+          - file: tutorial/using-tei/configuration
+          - file: tutorial/using-tei/create
+          - file: tutorial/using-tei/metadata
+          - file: tutorial/using-tei/main-text
+  # - file: tei/index
+  #   sections:
+  #     - file: tei/sections
+  #     - file: tei/blocks
+  #     - file: tei/marks
   - file: changelog

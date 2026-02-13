@@ -36,12 +36,17 @@ def serve() -> None:
         raise NoConfigError()
     full_rebuilds = [build_cmd(lang, full=True) for lang in settings["languages"]]
     partial_rebuilds = [build_cmd(lang, full=False) for lang in settings["languages"]]
-    for cmd in full_rebuilds:
-        cmd()
+
+    def complete_rebuild():
+        for cmd in full_rebuilds:
+            cmd()
+
+    complete_rebuild()
+
     server = Server()
-    for lang, full_cmd, partial_cmd in zip(settings["languages"], full_rebuilds, partial_rebuilds):
-        server.watch("*.yml", full_cmd)
-        server.watch(path.join("static", "**", "*.*"), full_cmd)
+    server.watch("*.yml", complete_rebuild)
+    server.watch(path.join("static", "**", "*.*"), complete_rebuild)
+    for lang, partial_cmd in zip(settings["languages"], partial_rebuilds):
         server.watch(path.join(lang["path"], "**", "*.*"), partial_cmd)
     server.watch("uEdition.*", lambda: [cmd() for cmd in full_rebuilds])
     server.serve(root=settings["output"]["path"], port=8000)

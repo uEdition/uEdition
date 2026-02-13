@@ -15,6 +15,11 @@ title:
   de: "\u03BCEdition"
   en: "\u03BCEdition"
 sphinx_config:
+  extensions:
+    - myst_parser
+    - sphinx_external_toc
+    - sphinx_design
+    - uedition
   html_static_path:
     - _static
   html_css_files:

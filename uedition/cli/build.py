@@ -47,7 +47,7 @@ LANDING_PAGE_TEMPLATE = """\
           }
           for (const configLanguage of config.languages) {
             if (code === configLanguage.code) {
-              window.location = window.location.href + configLanguage.path;
+              window.location = window.location.href + configLanguage.path + "/";
               found = true;
               break
             }
@@ -57,7 +57,7 @@ LANDING_PAGE_TEMPLATE = """\
           }
         }
         if (!found) {
-          window.location = window.location.href + config.languages[0].path;
+          window.location = window.location.href + config.languages[0].path + "/";
         }
       }
       redirect();
@@ -74,7 +74,7 @@ def landing_build() -> None:
     with open(path.join(settings["output"]["path"], "config.json"), "w") as out_f:
         json.dump(settings, out_f)
     with open(path.join(settings["output"]["path"], "index.html"), "w") as out_f:
-        language_items = (f'<li><a href="{lang["path"]}">{lang["label"]}</a></li>' for lang in settings["languages"])
+        language_items = (f'<li><a href="{lang["path"]}/">{lang["label"]}</a></li>' for lang in settings["languages"])
         out_f.write(LANDING_PAGE_TEMPLATE.replace("$LANGUAGE_ITEMS", "\n".join(language_items)))
 
 
@@ -136,10 +136,13 @@ def config_build(lang: dict) -> None:
     # Set settings-based
     if lang["code"] in settings["title"]:
         config["project"] = settings["title"][lang["code"]]
+        config["html_title"] = settings["title"][lang["code"]]
     elif len(settings["languages"]) > 0 and settings["languages"][0]["code"] in settings["title"]:
         config["project"] = settings["title"][settings["languages"][0]["code"]]
+        config["html_title"] = settings["title"][settings["languages"][0]["code"]]
     else:
         config["project"] = f"Missing title for {lang['label']}"
+        config["html_title"] = f"Missing title for {lang['label']}"
     config["author"] = settings["author"]["name"]
     if settings["repository"]["url"]:
         config["html_theme_options"]["repository_url"] = f"{settings['repository']['url']}"

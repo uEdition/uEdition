@@ -1,3 +1,8 @@
 [data-tei-attribute-style="align-right"] {
     text-align: right;
 }
+
+.video-js {
+    width: 100%;
+    margin-bottom: 1.15rem;
+}
