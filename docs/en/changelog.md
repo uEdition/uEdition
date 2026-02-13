@@ -2,7 +2,7 @@
 
 ## 2.1
 
-### In Entwicklung
+### 2.0.2 (13.02.2026)
 
 * **Bugfix**: Correctly set the title of the HTML output
 
