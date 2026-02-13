@@ -6,7 +6,7 @@ build:
     python: "3.11"
   commands:
     - "pip install hatch"
-    - "cd docs && hatch run build"
+    - "hatch run build-docs"
     - "mkdir $READTHEDOCS_OUTPUT"
     - "mv docs/site $READTHEDOCS_OUTPUT/html"
 
