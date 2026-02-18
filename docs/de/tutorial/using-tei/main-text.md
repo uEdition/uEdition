@@ -1,5 +1,8 @@
 # Haupttext bearbeiten
 
+:::{room3b-video} /uedition/tutorial/tei/text/de
+:::
+
 ## Einzelschritte
 
 1. Im TEI Editor den {guilabel}`Main text` Reiter auswählen.

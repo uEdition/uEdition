@@ -1,5 +1,9 @@
 # Git verwenden
 
+Die Grundlagen der Nutzung von Git im μEditor sind relativ einfach, wie folgendes Video zeigt.
+
+:::{room3b-video} /uedition/tutorial/git/using/de
+:::
 
 # Einzelschritte
 

@@ -1,5 +1,11 @@
 # Über GitHub veröffentlichen
 
+In diesem letzten Schritt der Arbeit mit GitHub, nutzen wir die eingebaute Funktionalität um die μEdition zu
+veröffentlichen:
+
+:::{room3b-video} /uedition/tutorial/git/publishing/de
+:::
+
 ## Einzelschritte
 
 1. In GitHub unter {menuselection}`Settings --> Pages` für die `Source` den Wert `GitHub Actions` auswählen.
