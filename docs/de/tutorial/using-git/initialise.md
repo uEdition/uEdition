@@ -1,5 +1,10 @@
 # Git initialisieren
 
+Der erste Schritt für die Nutzung von Git mit der μEdition ist die Initialisierung von Git.
+
+:::{room3b-video} /uedition/tutorial/git/initialise/de
+:::
+
 # Einzelschritte
 
 1. Im μEditor im Wurzelverzeichnis eine neue Datei mit dem Namen {file}`.env` erstellen.

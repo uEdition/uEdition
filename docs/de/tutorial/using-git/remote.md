@@ -1,5 +1,11 @@
 # Mit GitHub verbinden
 
+Um Git lokal zu nutzen, ist keine Verbindung mit einem remote Gitserver notwendig. Nur wenn das Service zur Veröffentlichung
+oder zum kollaborativen Arbeiten notwendig ist, dann muss das gemacht werden.
+
+:::{room3b-video} /uedition/tutorial/git/remote/de
+:::
+
 ## Einzelschritte
 
 1. In GitHub einloggen und dort ein neues Repository anlegen.
