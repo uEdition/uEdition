@@ -3,6 +3,9 @@
 Im Gegensatz zum Rest der μEdition müssen sowohl die μEdition und der μEditor konfiguriert werden, bevor die TEI
 Funktionalität genutzt werden kann.
 
+:::{room3b-video} /uedition/tutorial/tei/configuration/de
+:::
+
 ## Einzelschritte
 
 1. Die {file}`uEdition.yml` Datei öffnen und folgenden Code unter dem `sphinx_config` Schlüssel einfügen:

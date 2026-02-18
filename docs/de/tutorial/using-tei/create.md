@@ -1,5 +1,10 @@
 # Eine TEI Seite anlegen
 
+Wie für alle anderen Dateien, wird eine TEI Datei genau gleich wie jede andere Datei angelegt.
+
+:::{room3b-video} /uedition/tutorial/tei/create-page/de
+:::
+
 ## Einzelschritte
 
 1. Im {file}`de` Dateiordner eine neue Datei {file}`text.tei` anlegen. Die `.tei` Dateierweiterung ist notwendig,
