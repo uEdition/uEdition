@@ -51,7 +51,7 @@ Funktionalität genutzt werden kann.
    :::{code-block} yaml
    ui:
      css_files:
-       - static/overrides.css
+       - static/styling.css
        - static/editor.css
    tei:
      sections:
