@@ -1,5 +1,11 @@
 # Die μEdition veröffentlichen
 
+Die μEdition zu veröffentlichen ist der letzte Kernschritt dieses Tutorials. Die zwei weiteren Aspekte der Nutzung
+von Git und TEI sind optional und für die Nutzung der μEdition nicht notwendig.
+
+:::{room3b-video} /uedition/tutorial/publishing/de
+:::
+
 ## Einzelschritte
 
 1. Im Terminal den Server mittels der Tastenkombination {kbd}`Str+c` stoppen.

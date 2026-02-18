@@ -1,5 +1,11 @@
 # Die μEdition konfigurieren
 
+Die μEdition hat eine riesige Menge an Konfigurationsoptionen, die wir im Tutorial nicht alle ansehen können. Daher
+wird in diesem Schritt nur die Konfigurationsoptionen für das Styling ansehen.
+
+:::{room3b-video} /uedition/tutorial/configuration/de
+:::
+
 ## Einzelschritte
 
 1. Die Datei {file}`uEdition.yml` öffnen.
