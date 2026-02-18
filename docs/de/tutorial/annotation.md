@@ -9,6 +9,9 @@ Markdown unterscheidet zwischen Textblöcken und Textauszeichnungen innerhalb ei
 findet sich unter [https://myst-parser.readthedocs.io/en/latest/syntax/typography.html](https://myst-parser.readthedocs.io/en/latest/syntax/typography.html)
 (und den darauf folgenden Seiten).
 
+:::{room3b-video} /uedition/tutorial/edit-page/de
+:::
+
 ## Einfache Textauszeichnungen
 
 Die einfachsten (under vermutlich häufigsten) Textauszeichnungen sind fett-gedruckter und kursiver Text. Fett-gedruckter

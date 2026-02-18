@@ -1,5 +1,10 @@
 # Eine Seite bearbeiten
 
+Der nächste Schritt, der in folgendem Video gezeigt wird, ist es, eine einzelne Seite zu bearbeiten.
+
+:::{room3b-video} /uedition/tutorial/edit-page/de
+:::
+
 ## Einzelschritte
 
 1. Links im Dateibrowser die zu bearbeitende Datei auswählen. In diesem Fall werden wir im Ordner {file}`de`, die Datei

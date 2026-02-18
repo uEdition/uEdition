@@ -1,5 +1,11 @@
 # Eine neue Seite hinzufügen
 
+In den folgenden Schritten werden wir eine neue Seite der μEdition hinzufügen. Die Schritte können dann immer wieder
+durchgeführt werden, um die μEdition wachsen zu lassen.
+
+:::{room3b-video} /uedition/tutorial/new-page/de
+:::
+
 ## Einzelschritte
 
 1. Im Dateibrowser den Ordner auswählen in dem die neue Datei angelegt werden soll.
