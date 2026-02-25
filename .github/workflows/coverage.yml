@@ -25,7 +25,7 @@ jobs:
 
       - name: Install Base Dependencies
         run: |
-          sudo apt-get install python3-virtualenv pipx
+          sudo apt-get install pipx
           pipx install hatch
 
       - name: Run Tests
