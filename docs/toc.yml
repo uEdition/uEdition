@@ -32,6 +32,9 @@ chapters:
           - file: tutorial/using-tei/create
           - file: tutorial/using-tei/metadata
           - file: tutorial/using-tei/main-text
+  - file: recipes/index
+    sections:
+      - file: recipes/mixed-content-xml
   # - file: tei/index
   #   sections:
   #     - file: tei/sections
