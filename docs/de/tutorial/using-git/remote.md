@@ -10,10 +10,10 @@ oder zum kollaborativen Arbeiten notwendig ist, dann muss das gemacht werden.
 
 1. In GitHub einloggen und dort ein neues Repository anlegen.
 2. In GitHub entweder
+   - unter {menuselection}`Settings --> Developer Settings --> Personal access tokens --> Fine-grained tokens`
+     einen neuen Token anlegen und für das neue Repository die Berechtigung `Contents` und `Workflows` zuweisen, mit der Option `Read & Write`.
+   - unter {menuselection}`Settings --> SSH and GPG keys` einen SSH Key anlegen
 
-   * unter {menuselection}`Settings --> Developer Settings --> Personal access tokens --> Fine-grained tokens`
-     einen neuen Token anlegen und für das neue Repository die Berechtigung `Content` zuweisen.
-   * unter {menuselection}`Settings --> SSH and GPG keys` einen SSH Key anlegen
 3. Im Terminal den μEditor stoppen.
 4. Falls ein Token zur Authentifizierung genutzt wird, dann die HTTPS URL auswählen. Die URL wird so aussehen:
    `https://github.com/BENUTZERNAME/REPOSITORY.git`. Die URL modifizieren und den Token einfügen, damit die URL dann
@@ -26,6 +26,7 @@ oder zum kollaborativen Arbeiten notwendig ist, dann muss das gemacht werden.
    :::
 
    Dass Nutzerinterface bittet um die gewünschte URL und dort die URL aus Schritt 4 oder 5 eingeben.
+
 7. Den μEditor wieder starten.
 8. In GitHub nachsehen, dass der lokale Inhalt der μEdition jetzt auch remote verfügbar ist.
 9. Nach der Verbindung mit GitHub müssen alle Merges in GitHub durchgeführt werden.
