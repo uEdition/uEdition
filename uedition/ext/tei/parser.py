@@ -153,6 +153,8 @@ class TEIParser(SphinxParser):
 
     def _walk_tree(self: "TEIParser", node: etree.Element, parent: nodes.Element) -> None:
         """Walk the XML tree and create the appropriate AST nodes."""
+        if not isinstance(node.tag, str):
+            return
         for conf in self.config.tei["blocks"]:
             if len(node.xpath(f"self::{conf['selector']}", namespaces=namespaces)) > 0:
                 attrs = self._parse_attributes(node, conf["attributes"])

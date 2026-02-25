@@ -1,113 +1,115 @@
 # Changelog
 
+- **Bugfix**: Ignore TEI-XML comments, processing instructions, entities.
+
 ## 2.1
 
 ### 2.0.2 (13.02.2026)
 
-* **Bugfix**: Correctly set the title of the HTML output
+- **Bugfix**: Correctly set the title of the HTML output
 
 ### 2.0.1 (02.02.2026)
 
-* **Bugfix**: Made the textlist sorter more robust
+- **Bugfix**: Made the textlist sorter more robust
 
 ### 2.0.0 (23.01.2026)
 
-* **Breaking**: Use Sphinx directly, rather than via Jupyter Book
-* **Breaking**: Remove the use of Copier
-* **Breaking**: Reworked the TEI parser and configuration
-* **Removed**: Removed undocumented "check" command
+- **Breaking**: Use Sphinx directly, rather than via Jupyter Book
+- **Breaking**: Remove the use of Copier
+- **Breaking**: Reworked the TEI parser and configuration
+- **Removed**: Removed undocumented "check" command
 
 ## 1.x
 
 ### 1.3.2 (26.02.2024)
 
-* **Bugfix**: Further bugfix in the sorting by page functionality
+- **Bugfix**: Further bugfix in the sorting by page functionality
 
 ### 1.3.1 (26.02.2024)
 
-* **Bugfix**: Fix a bug in sorting by page
+- **Bugfix**: Fix a bug in sorting by page
 
 ### 1.3.0 (22.02.2024)
 
-* **New**: Support download links in TEI documents
+- **New**: Support download links in TEI documents
 
 ### 1.2.0 (06.02.2024)
 
-* **New**: Added an ISO8601 formatting TEI function
-* **Bugfix**: Fix a bug in parsing TEI metadata that is not a list
+- **New**: Added an ISO8601 formatting TEI function
+- **Bugfix**: Fix a bug in parsing TEI metadata that is not a list
 
 ### 1.1.0 (02.02.2024)
 
-* **New**: Added the ability to sort TEI text sections
-* **Bugfix**: Fix the language page if JavaScript is turned off
+- **New**: Added the ability to sort TEI text sections
+- **Bugfix**: Fix the language page if JavaScript is turned off
 
 ### 1.0.0 (31.01.2024)
 
-* **New**: TEI output optional
-* **Update**: JupyterBook updated to version 1
-* **Update**: Hide the language switcher when only one language is configured
-* **Bugfix**: Fix a bug in the output path naming
-* **Bugfix**: fixed a bug in the language switcher
+- **New**: TEI output optional
+- **Update**: JupyterBook updated to version 1
+- **Update**: Hide the language switcher when only one language is configured
+- **Bugfix**: Fix a bug in the output path naming
+- **Bugfix**: fixed a bug in the language switcher
 
 ### 0.9.0 (26.01.2024)
 
-* **New**: Add TEI Output
-* **Update**: Skip previously answered questions
+- **New**: Add TEI Output
+- **Update**: Skip previously answered questions
 
 ### 0.8.0 (12.01.2024)
 
-* **New**: Support publishing via Read the Docs
-* **Bugfix**: Dependency updates
+- **New**: Support publishing via Read the Docs
+- **Bugfix**: Dependency updates
 
 ### 0.7.0 (04.07.2023)
 
-* **New**: Support shared static files
-* **Bugfix**: Added missing progress update
+- **New**: Support shared static files
+- **Bugfix**: Added missing progress update
 
 ### 0.6.1 (04.07.2023)
 
-* **Update**: Compatability updates
+- **Update**: Compatability updates
 
 ### 0.6.0 (04.07.2023)
 
-* **New**: Move to a shared central configuration and TOC
+- **New**: Move to a shared central configuration and TOC
 
 ### 0.5.0 (30.06.2023)
 
-* **New**: Directly integrate copier
+- **New**: Directly integrate copier
 
 ### 0.4.0 (26.06.2023)
 
-* **New**: Added the language switcher extension
+- **New**: Added the language switcher extension
 
 ### 0.3.1 (22.06.2023)
 
-* **Bugfix**: Ensure that the output folder exists
+- **Bugfix**: Ensure that the output folder exists
 
 ### 0.3.0 (22.06.2023)
 
-* **New**: Add a language-detecting landing page
+- **New**: Add a language-detecting landing page
 
 ### 0.2.1 (16.06.2023)
 
-* **Bugfix**: Fix a section-wrapping bug
+- **Bugfix**: Fix a section-wrapping bug
 
 ### 0.2.0 (16.06.2023)
 
-* **New**: Switch the TEI layout to a vertical structure
+- **New**: Switch the TEI layout to a vertical structure
 
 ### 0.1.0 (13.06.2023)
 
-* **New**: Added basic TEI parsing
+- **New**: Added basic TEI parsing
 
 ### 0.0.3 (17.05.2023)
 
-* **Bugfix**: Fix the release process
+- **Bugfix**: Fix the release process
 
 ### 0.0.2 (17.05.2023)
 
-* **Bugfix**: Fix output path handling
+- **Bugfix**: Fix output path handling
 
 ### 0.0.1 (17.05.2023)
 
-* **New**: Initial release
+- **New**: Initial release
