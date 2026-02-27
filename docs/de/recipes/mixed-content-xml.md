@@ -25,9 +25,9 @@ Beispiel für wie das obrige Beispiel ohne mixed-content aussehen könnte:
 
 :::{code-block} xml
 <tei:p>
-<tei:seg>Der Text wurde am </tei:seg>
-<tei:date when="2026-02-25">26sten Februar 2026<tei:date>
-<tei:seg> erstellt
+  <tei:seg>Der Text wurde am </tei:seg>
+  <tei:date when="2026-02-25">26sten Februar 2026<tei:date>
+  <tei:seg> erstellt
 und hier in zwei Zeilen gebrochen.</tei:seg>
 </tei:p>
 :::
@@ -41,9 +41,9 @@ Fall der konvertierte XML Inhalt derart aussehen würde:
 
 :::{code-block} xml
 <tei:p>
-<tei:seg>Der Text wurde am </tei:seg>
-<tei:date when="2026-02-25">26sten Februar 2026<tei:date>
-<tei:seg> erstellt und hier in zwei Zeilen gebrochen.</tei:seg>
+  <tei:seg>Der Text wurde am </tei:seg>
+  <tei:date when="2026-02-25">26sten Februar 2026<tei:date>
+  <tei:seg> erstellt und hier in zwei Zeilen gebrochen.</tei:seg>
 </tei:p>
 :::
 

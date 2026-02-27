@@ -24,11 +24,10 @@ an example for how this could look:
 
 :::{code-block} xml
 <tei:p>
-<tei:seg>On the </tei:seg>
-<tei:date when="2026-02-25">26sten Februar 2026<tei:date>
-<tei:seg> this text was created
+  <tei:seg>On the </tei:seg>
+  <tei:date when="2026-02-25">26sten Februar 2026<tei:date>
+  <tei:seg> this text was created
 and split into two lines.</tei:seg>
-
 </p>
 :::
 
@@ -41,9 +40,9 @@ XML would look like this:
 
 :::{code-block} xml
 <tei:p>
-<tei:seg>On the </tei:seg>
-<tei:date when="2026-02-25">26sten Februar 2026<tei:date>
-<tei:seg> this text was created and split into two lines.</tei:seg>
+  <tei:seg>On the </tei:seg>
+  <tei:date when="2026-02-25">26sten Februar 2026<tei:date>
+  <tei:seg> this text was created and split into two lines.</tei:seg>
 </tei:p>
 :::
 
