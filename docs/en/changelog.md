@@ -1,8 +1,10 @@
 # Changelog
 
-- **Bugfix**: Ignore TEI-XML comments, processing instructions, entities.
-
 ## 2.1
+
+### 2.0.3 (27.02.2026)
+
+- **Bugfix**: Ignore TEI-XML comments, processing instructions, entities.
 
 ### 2.0.2 (13.02.2026)
 

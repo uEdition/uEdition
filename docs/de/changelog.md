@@ -1,8 +1,10 @@
 # Änderungsgeschichte
 
-- **Bugfix**: TEI-XML Kommentare, Processing Instructions und Entitäten ignorieren
-
 ## 2.x
+
+### 2.0.3 (27.02.2026)
+
+- **Bugfix**: TEI-XML Kommentare, Processing Instructions und Entitäten ignorieren
 
 ### 2.0.2 (13.02.2026)
 
