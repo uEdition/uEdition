@@ -51,7 +51,7 @@ XML would look like this:
 
 For this conversion we provide a simple Python script, which
 {download}`you can download here<../_static/mixed-content-convert.py>`. After downloading the
-{filename}`mixed-content-convert.py` script, move it into the root folder of your μEdition and run it using the
+{file}`mixed-content-convert.py` script, move it into the root folder of your μEdition and run it using the
 following command:
 
 :::{code-block} console

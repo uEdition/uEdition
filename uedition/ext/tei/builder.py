@@ -20,9 +20,13 @@ logger = logging.getLogger(__name__)
 
 MAPPINGS = [
     {"cls": nodes.document, "tagname": "body", "type": "block"},
+    {"cls": nodes.container, "tagname": "div", "type": "block"},
     {"cls": nodes.section, "tagname": "div", "type": "block"},
     {"cls": nodes.paragraph, "tagname": "p", "type": "block"},
     {"cls": nodes.title, "tagname": "head", "type": "block"},
+    {"cls": nodes.note, "tagname": "note", "type": "block", "attrs": [{"target": "type", "value": "note"}]},
+    {"cls": nodes.warning, "tagname": "note", "type": "block", "attrs": [{"target": "type", "value": "warning"}]},
+    {"cls": nodes.important, "tagname": "note", "type": "block", "attrs": [{"target": "type", "value": "important"}]},
     {"cls": nodes.bullet_list, "tagname": "list", "type": "block", "attrs": [{"target": "rend", "value": "bulleted"}]},
     {
         "cls": nodes.enumerated_list,
@@ -46,6 +50,8 @@ MAPPINGS = [
         "attrs": [{"target": "type", "value": "definition"}],
     },
     {"cls": nodes.definition_list_item, "tagname": "item", "type": "block"},
+    {"cls": nodes.term, "tagname": "div", "type": "block", "attrs": [{"target": "type", "value": "term"}]},
+    {"cls": nodes.definition, "tagname": "div", "type": "block", "attrs": [{"target": "type", "value": "definition"}]},
     {"cls": sphinx.addnodes.toctree},
     {
         "cls": nodes.footnote,

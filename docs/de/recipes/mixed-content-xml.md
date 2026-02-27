@@ -51,7 +51,7 @@ Fall der konvertierte XML Inhalt derart aussehen würde:
 
 Für diese Konvertierung bieten wir ein einfaches Python Skript an, welches
 {download}`hier heruntergeladen werden kann<../_static/mixed-content-convert.py>`. Das heruntergeladene
-{filename}`mixed-content-convert.py` Skript in das Wurzelverzeichnis der μEdition verschieben und dann wie folgt
+{file}`mixed-content-convert.py` Skript in das Wurzelverzeichnis der μEdition verschieben und dann wie folgt
 ausführen:
 
 :::{code-block} console
