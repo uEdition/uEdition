@@ -1,113 +1,115 @@
 # Änderungsgeschichte
 
+- **Bugfix**: TEI-XML Kommentare, Processing Instructions und Entitäten ignorieren
+
 ## 2.x
 
 ### 2.0.2 (13.02.2026)
 
-* **Bugfix**: Titel der HTML Ausgabe korrekt gesetzt
+- **Bugfix**: Titel der HTML Ausgabe korrekt gesetzt
 
 ### 2.0.1 (02.02.2026)
 
-* **Bugfix**: Textlistensortierung robuster gemacht
+- **Bugfix**: Textlistensortierung robuster gemacht
 
 ### 2.0.0 (23.01.2026)
 
-* **Bruch**: Direkte Nutzung von Sphinx anstelle über Jupyter Book
-* **Bruch**: Keine Nutzung von Copier mehr
-* **Bruch**: TEI Parser und Konfiguration überarbeitet
-* **Entfernt**: Undokumentierten "check" Kommandozeilenbefehl entfernt
+- **Bruch**: Direkte Nutzung von Sphinx anstelle über Jupyter Book
+- **Bruch**: Keine Nutzung von Copier mehr
+- **Bruch**: TEI Parser und Konfiguration überarbeitet
+- **Entfernt**: Undokumentierten "check" Kommandozeilenbefehl entfernt
 
 ## 1.x
 
 ### 1.3.2 (26.02.2024)
 
-* **Bugfix**: Weiteren Fehler in der Sortierung nach Seitenzahlen behoben
+- **Bugfix**: Weiteren Fehler in der Sortierung nach Seitenzahlen behoben
 
 ### 1.3.1 (26.02.2024)
 
-* **Bugfix**: Fehler in der Sortierung nach Seitenzahlen behoben
+- **Bugfix**: Fehler in der Sortierung nach Seitenzahlen behoben
 
 ### 1.3.0 (22.02.2024)
 
-* **Neu**: Unterstützung für Downloadlinks in TEI Dateien
+- **Neu**: Unterstützung für Downloadlinks in TEI Dateien
 
 ### 1.2.0 (06.02.2024)
 
-* **Neu**: TEI Funktion zum Parsen von ISO8601 Daten
-* **Bugfix**: Fehler im TEI Parsing von Metadaten behoben
+- **Neu**: TEI Funktion zum Parsen von ISO8601 Daten
+- **Bugfix**: Fehler im TEI Parsing von Metadaten behoben
 
 ### 1.1.0 (02.02.2024)
 
-* **Neu**: TEI Textabschnitte können jetzt sortiert werden
-* **Bugfix**: Die Landungsseite funktioniert jetzt auch ohne JavaScript
+- **Neu**: TEI Textabschnitte können jetzt sortiert werden
+- **Bugfix**: Die Landungsseite funktioniert jetzt auch ohne JavaScript
 
 ### 1.0.0 (31.01.2024)
 
-* **Neu**: TEI Output ist optional
-* **Aktualisiert**: JupyterBook auf Version 1 aktualisert
-* **Aktualisert**: Sprachwechsler wird nicht angezeigt, wenn nur eine Sprache konfiguriert ist
-* **Bugfix**: Einen Bug im Ausgabepfadname korrigiert
-* **Bugfix**: Einen Bug im Sprachwechsler behoben
+- **Neu**: TEI Output ist optional
+- **Aktualisiert**: JupyterBook auf Version 1 aktualisert
+- **Aktualisert**: Sprachwechsler wird nicht angezeigt, wenn nur eine Sprache konfiguriert ist
+- **Bugfix**: Einen Bug im Ausgabepfadname korrigiert
+- **Bugfix**: Einen Bug im Sprachwechsler behoben
 
 ### 0.9.0 (26.01.2024)
 
-* **Neu**: TEI Output hinzugefügt
-* **Aktualisiert**: Bereits beantwortet Fragen überspringen
+- **Neu**: TEI Output hinzugefügt
+- **Aktualisiert**: Bereits beantwortet Fragen überspringen
 
 ### 0.8.0 (12.01.2024)
 
-* **Neu**: Unterstützung von Read the Docs als Publikationsplatform
-* **Bugfix**: Softwareabhängigkeiten aktualisiert
+- **Neu**: Unterstützung von Read the Docs als Publikationsplatform
+- **Bugfix**: Softwareabhängigkeiten aktualisiert
 
 ### 0.7.0 (04.07.2023)
 
-* **Neu**: Unterstützung für zentrale, statische Dateien
-* **Bugfix**: Fehlende Fortschrittsanzeige hinzugefügt
+- **Neu**: Unterstützung für zentrale, statische Dateien
+- **Bugfix**: Fehlende Fortschrittsanzeige hinzugefügt
 
 ### 0.6.1 (04.07.2023)
 
-* **Aktualisiert**: Softwareabhängigkeiten aktualisiert
+- **Aktualisiert**: Softwareabhängigkeiten aktualisiert
 
 ### 0.6.0 (04.07.2023)
 
-* **Neu**: Zentrale Konfiguration und Inhaltsverzeichnis
+- **Neu**: Zentrale Konfiguration und Inhaltsverzeichnis
 
 ### 0.5.0 (30.06.2023)
 
-* **Neu**: Copier in die uEdition integriert
+- **Neu**: Copier in die uEdition integriert
 
 ### 0.4.0 (26.06.2023)
 
-* **Neu**: Sprachwechsler hinzugefügt
+- **Neu**: Sprachwechsler hinzugefügt
 
 ### 0.3.1 (22.06.2023)
 
-* **Bugfix**: Sicherstellen dass der Ausgabepfad existiert
+- **Bugfix**: Sicherstellen dass der Ausgabepfad existiert
 
 ### 0.3.0 (22.06.2023)
 
-* **Neu**: Startseite mit automatischer Spracherkennung integriert
+- **Neu**: Startseite mit automatischer Spracherkennung integriert
 
 ### 0.2.1 (16.06.2023)
 
-* **Bugfix**: Abschnittsformatierungsbug behoben
+- **Bugfix**: Abschnittsformatierungsbug behoben
 
 ### 0.2.0 (16.06.2023)
 
-* **Neu**: Das TEI Layout auf vertikal umgestellt
+- **Neu**: Das TEI Layout auf vertikal umgestellt
 
 ### 0.1.0 (13.06.2023)
 
-* **Neu**: TEI Input hinzugefügt
+- **Neu**: TEI Input hinzugefügt
 
 ### 0.0.3 (17.05.2023)
 
-* **Bugfix**: Korrektur im Softwarepublikationsprozess
+- **Bugfix**: Korrektur im Softwarepublikationsprozess
 
 ### 0.0.2 (17.05.2023)
 
-* **Bugfix**: Ausgabepfad korrekt handhaben
+- **Bugfix**: Ausgabepfad korrekt handhaben
 
 ### 0.0.1 (17.05.2023)
 
-* **Neu**: Erste Version
+- **Neu**: Erste Version
