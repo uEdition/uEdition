@@ -35,6 +35,7 @@ chapters:
   - file: recipes/index
     sections:
       - file: recipes/mixed-content-xml
+      - file: recipes/tei-block-content-wrap
   # - file: tei/index
   #   sections:
   #     - file: tei/sections
