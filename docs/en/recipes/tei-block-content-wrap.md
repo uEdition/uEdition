@@ -13,7 +13,7 @@ The content thus has to be converted into the following structure, in order to s
 
 :::{code-block} xml
 <tei:p>
-<tei:seg>This text is contained directly in a block-element.</tei:seg>
+  <tei:seg>This text is contained directly in a block-element.</tei:seg>
 </tei:p>
 :::
 

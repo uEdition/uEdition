@@ -14,7 +14,7 @@ Der Inhalt muss daher in die folgende Struktur umgewandelt werden, damit der Inh
 
 :::{code-block} xml
 <tei:p>
-<tei:seg>Dieser Text liegt direkt in einem Blockelement.</tei:seg>
+  <tei:seg>Dieser Text liegt direkt in einem Blockelement.</tei:seg>
 </tei:p>
 :::
 
