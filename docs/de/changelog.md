@@ -2,6 +2,8 @@
 
 ## 2.x
 
+### 2.1.0 (06.03.2026)
+
 - **Aktualisiert**: Das Standardtheme in Einzelprojekte übergeführt
 
 ### 2.0.3 (27.02.2026)
