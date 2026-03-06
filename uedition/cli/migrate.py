@@ -10,7 +10,7 @@ import tomlkit
 from rich import print as output
 
 from uedition.cli.base import app
-from uedition.settings import NoConfigError
+from uedition.settings import NoConfigError, settings
 
 
 def cleanup_old_files() -> None:
@@ -124,6 +124,24 @@ def migrate_ueditor() -> None:
         tomlkit.dump(pyproject, out_f)
 
 
+def migrate_sphinx_book_theme() -> None:
+    """Migrate the sphinx_book_theme from the uEdition into the project."""
+    sphinx_config = settings["sphinx_config"]
+    if "html_theme" in sphinx_config and sphinx_config["html_theme"] != "sphinx_book_theme":
+        return
+    with open("pyproject.toml") as in_f:
+        pyproject = tomlkit.parse(in_f.read())
+    found = False
+    for dependency in pyproject["tool"]["hatch"]["envs"]["default"]["dependencies"]:
+        if "sphinx_book_theme" in dependency:
+            found = True
+    if not found:
+        output(":hammer: Migrating the default theme")
+        pyproject["tool"]["hatch"]["envs"]["default"]["dependencies"].append("sphinx_book_theme")
+        with open("pyproject.toml", "w") as out_f:
+            tomlkit.dump(pyproject, out_f)
+
+
 @app.command()
 def migrate() -> None:
     """Migrate the μEdition to the latest version."""
@@ -134,4 +152,5 @@ def migrate() -> None:
     cleanup_gitignore()
     cleanup_pyproject()
     migrate_ueditor()
+    migrate_sphinx_book_theme()
     output(":checkered_flag: Migration complete")

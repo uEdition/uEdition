@@ -2,6 +2,8 @@
 
 ## 2.x
 
+- **Aktualisiert**: Das Standardtheme in Einzelprojekte übergeführt
+
 ### 2.0.3 (27.02.2026)
 
 - **Bugfix**: TEI-XML Kommentare, Processing Instructions und Entitäten ignorieren
@@ -49,7 +51,7 @@
 
 - **Neu**: TEI Output ist optional
 - **Aktualisiert**: JupyterBook auf Version 1 aktualisert
-- **Aktualisert**: Sprachwechsler wird nicht angezeigt, wenn nur eine Sprache konfiguriert ist
+- **Aktualisiert**: Sprachwechsler wird nicht angezeigt, wenn nur eine Sprache konfiguriert ist
 - **Bugfix**: Einen Bug im Ausgabepfadname korrigiert
 - **Bugfix**: Einen Bug im Sprachwechsler behoben
 
