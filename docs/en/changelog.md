@@ -2,6 +2,8 @@
 
 ## 2.1
 
+- **Update**: Move the default theme install into individual projects
+
 ### 2.0.3 (27.02.2026)
 
 - **Bugfix**: Ignore TEI-XML comments, processing instructions, entities.
