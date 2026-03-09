@@ -20,6 +20,8 @@ sphinx_config:
     - sphinx_external_toc
     - sphinx_design
     - uedition
+    - uedition_theme.ext
+  html_theme: uedition-theme
   html_static_path:
     - _static
   html_css_files:
