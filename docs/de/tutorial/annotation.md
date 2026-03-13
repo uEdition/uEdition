@@ -14,7 +14,7 @@ findet sich unter [https://myst-parser.readthedocs.io/en/latest/syntax/typograph
 
 ## Einfache Textauszeichnungen
 
-Die einfachsten (under vermutlich häufigsten) Textauszeichnungen sind fett-gedruckter und kursiver Text. Fett-gedruckter
+Die einfachsten Textauszeichnungen sind fett-gedruckter und kursiver Text. Fett-gedruckter
 Text wird mittels doppelter `**` ausgezeichnet, während für den kursiven Text der Unterstrich `_` genutzt wird. Zum
 Beispiel generiert folgender Markdown text:
 
@@ -84,7 +84,7 @@ Das Ergebnis ist wiederum gleich, aber im HTML ist das Attribute jetzt auch vorh
 ## Einfache Textblöcke
 
 Die zwei primären Elemente um den Textinhalt zu strukturieren sind Überschriften und Absätze. Überschriften werden in
-Markdown mittels des Rautensymbols for der Überschrift ausgezeichnet. Dabei definiert die Anzahl der Rautensymbole das
+Markdown mittels des Rautensymbols vor der Überschrift ausgezeichnet. Dabei definiert die Anzahl der Rautensymbole das
 Überschriftenlevel. Absätze werden in Markdown einfach durch eine Leerzeile voneinander getrennt.
 
 Folgendes Markdownbeispiel enthält eine Überschrift der ersten Ebene, eine Überschrift der zweiten Ebene und drei
@@ -153,7 +153,7 @@ Dies ist eine Zeile in einem Vers.
 ::::
 :::::
 
-Ebenso wie bei den Textauszeichnungen können dem TEI Attribute mitgegeben werden. Diese werden über den `:attributes`
+Ebenso wie bei den Textauszeichnungen können dem TEI Attribute mitgegeben werden. Diese werden über den `:attributes:`
 Schlüssel innerhalb des Textblockes definiert:
 
 :::::{code-block} markdown
