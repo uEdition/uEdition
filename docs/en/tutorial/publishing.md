@@ -1,22 +1,22 @@
-# Die μEdition veröffentlichen
+# Publishing the μEdition
 
-Die μEdition zu veröffentlichen ist der letzte Kernschritt dieses Tutorials. Die zwei weiteren Aspekte der Nutzung
-von Git und TEI sind optional und für die Nutzung der μEdition nicht notwendig.
+Publishing the μEdition is the last core step in this tutorial. The two other aspects of using Git and TEI are
+optional and are not needed for the core usage of the μEdition.
 
-:::{room3b-video} /uedition/tutorial/publishing/de
+:::{room3b-video} /uedition/tutorial/publishing/en
 :::
 
-## Einzelschritte
+## Individual steps
 
-1. Im Terminal den Server mittels der Tastenkombination {kbd}`Str+c` stoppen.
-2. Dann folgenden Befehl ausführen, um die μEdition für die Veröffentlichung zu generieren:
+1. In the terminal where you are running the μEdition server, press {kbd}`Ctrl+c` to stop the server.
+2. Then run the following command to generate the μEdition for publication:
 
    :::{code-block} console
    $ hatch run build
    :::
 
-3. Dann im Dateiexplorer des Betriebssystems den Ordner der μEdition finden und dort existiert jetzt ein Ordner
-   {file}`site`. Dieser enthält die generierte μEdition. Die Dateien in diesem Order können jetzt auf ein
-   beliebiges Webhosting geladen werden, um die μEdition zu veröffentlichen.
-4. Es kann auch die {file}`index.html` im Order {file}`site/de` direkt im Browser geöffnet werden um die
-   generierte μEdition zu sehen.
+3. In the file explorer of your operating system (not in the μEditor) go to the folder with your μEdition and
+   there you will find a folder {file}`site`. This contains the generated μEdition. The files in this folder
+   can now be uploaded to any web-hosting platform in order to publish the μEdition.
+4. You can try opening the {file}`index.html` in the {file}`site/en` folder directly in the browser, in order
+   to see that it has generated correctly.
