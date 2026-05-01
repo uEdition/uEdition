@@ -4,6 +4,7 @@
 
 ### Dev
 
+- **New**: Automatically load the core Sphinx extensions
 - **Bugfix**: Return correct metadata for the Sphinx extension
 - **Bugfix**: Ensure TEI heading ids are unique
 
