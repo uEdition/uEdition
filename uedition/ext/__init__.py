@@ -5,8 +5,8 @@
 
 from sphinx.application import Sphinx
 
-from uedition.ext import config, language_switcher, tei
 from uedition.__about__ import __version__
+from uedition.ext import config, language_switcher, tei
 
 
 def setup(app: Sphinx) -> dict:
