@@ -2,7 +2,7 @@
 
 ## 2.x
 
-### Dev
+### 2.1.1 (01.05.2026)
 
 - **Bugfix**: Updated dependencies (lxml)
 
