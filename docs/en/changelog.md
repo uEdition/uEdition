@@ -5,6 +5,7 @@
 ### Dev
 
 - **Bugfix**: Return correct metadata for the Sphinx extension
+- **Bugfix**: Ensure TEI heading ids are unique
 
 ### 2.1.1 (01.05.2026)
 

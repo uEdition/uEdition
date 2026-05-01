@@ -5,6 +5,7 @@
 ### Dev
 
 - **Bugfix**: Korrekte Metadaten für die Sphinx Erweiterung liefern
+- **Bugfix**: Eindeutige ids für Abschnitte in TEI Dokumenten garantieren
 
 ### 2.1.1 (01.05.2026)
 
