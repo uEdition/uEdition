@@ -35,6 +35,17 @@ class TEIParser(SphinxParser):
     supported: tuple[str, ...] = ("tei",)
     """Specify that only .tei files are parsed"""
 
+    def ensure_unique_id(self, id_value: str) -> str:
+        """Ensure that a given id_value is unique."""
+        if not hasattr(self, "_unique_ids"):
+            self._unique_ids = {}
+        if id_value in self._unique_ids:
+            self._unique_ids[id_value] = self._unique_ids[id_value] + 1
+            return f"{id_value}-{self._unique_ids[id_value]}"
+        else:
+            self._unique_ids[id_value] = 0
+            return id_value
+
     def parse(self: "TEIParser", inputstring: str, document: nodes.document) -> None:
         """
         Parse source TEI text.
@@ -47,6 +58,7 @@ class TEIParser(SphinxParser):
         :param document: The root docutils node to add AST elements to
         :type document: :class:`~docutils.nodes.document`
         """
+        self._unique_ids = {}
         functions = etree.FunctionNamespace("https://uedition.readthedocs.org")
         functions["format_iso8601_date"] = format_iso8601_date
         root = etree.fromstring(inputstring.encode("UTF-8"))  # noqa: S320
@@ -59,7 +71,7 @@ class TEIParser(SphinxParser):
         doc_title.append(nodes.Text(title if title else "[Untitled]"))
         doc_section.append(doc_title)
         for conf_section in self.config.tei["sections"]:
-            section = nodes.section(ids=[nodes.make_id(conf_section["name"])])
+            section = nodes.section(ids=[self.ensure_unique_id(nodes.make_id(conf_section["name"]))])
             if conf_section["title"]:
                 section_title = nodes.title()
                 section_title.append(nodes.Text(conf_section["title"]))
@@ -75,7 +87,7 @@ class TEIParser(SphinxParser):
                             self._walk_tree(child, tmp)
                     self._wrap_sections(section, tmp)
             elif conf_section["type"] == "textlist":
-                # Process a text section
+                # Process a textlist section
                 sources = root.xpath(conf_section["selector"], namespaces=namespaces)
                 if len(sources) > 0:
                     if conf_section["sort"] is not None:
@@ -220,7 +232,7 @@ class TEIParser(SphinxParser):
                 section_level = int(node.attributes["html_tag"][1])
                 while section_level <= section_stack[-1][0]:
                     section_stack.pop()
-                new_section = nodes.section(ids=[nodes.make_id(node.astext())])
+                new_section = nodes.section(ids=[self.ensure_unique_id(nodes.make_id(node.astext()))])
                 title = nodes.title(attributes={"data-test": ""})
                 title.children = node.children
                 new_section.append(title)
