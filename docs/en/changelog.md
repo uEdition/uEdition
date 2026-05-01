@@ -2,6 +2,10 @@
 
 ## 2.x
 
+### Dev
+
+- **Bugfix**: Updated dependencies (lxml)
+
 ### 2.1.0 (06.03.2026)
 
 - **Update**: Move the default theme install into individual projects
