@@ -114,7 +114,7 @@ def config_build(lang: dict) -> None:
         "root_doc": toc["root"],
         "html_theme": "sphinx_book_theme",
         "html_theme_options": {},
-        "extensions": ["myst_parser", "sphinx_external_toc", "uedition"],
+        "extensions": ["uedition"],
         "myst_enable_extensions": [
             "amsmath",
             "attrs_inline",
