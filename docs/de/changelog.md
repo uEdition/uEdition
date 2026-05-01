@@ -2,6 +2,10 @@
 
 ## 2.x
 
+### Dev
+
+- **Bugfix**: Softwarekomponenten (lxml) aktualisiert
+
 ### 2.1.0 (06.03.2026)
 
 - **Aktualisiert**: Das Standardtheme in Einzelprojekte übergeführt
