@@ -12,12 +12,10 @@ output: site
 repository:
   url: https://github.com/uEdition/uEdition
 title:
-  de: "\u03BCEdition"
-  en: "\u03BCEdition"
+  de: "μEdition"
+  en: "μEdition"
 sphinx_config:
   extensions:
-    - myst_parser
-    - sphinx_external_toc
     - sphinx_design
     - uedition
     - uedition_theme.ext
