@@ -2,7 +2,7 @@
 
 ## 2.x
 
-### Dev
+### 2.2.0 (01.05.2026)
 
 - **New**: Automatically load the core Sphinx extensions
 - **Bugfix**: Return correct metadata for the Sphinx extension

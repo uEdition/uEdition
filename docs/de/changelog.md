@@ -2,7 +2,7 @@
 
 ## 2.x
 
-### Dev
+### 2.2.0 (01.05.2026)
 
 - **Neu**: Notwendige Sphinxerweiterungen werden jetzt automatisch geladen
 - **Bugfix**: Korrekte Metadaten für die Sphinxerweiterung liefern
