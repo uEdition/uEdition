@@ -2,6 +2,10 @@
 
 ## 2.x
 
+### Dev
+
+- **Bugfix**: Korrekte Metadaten für die Sphinx Erweiterung liefern
+
 ### 2.1.1 (01.05.2026)
 
 - **Bugfix**: Softwarekomponenten (lxml) aktualisiert

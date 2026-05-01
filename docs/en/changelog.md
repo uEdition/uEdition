@@ -2,6 +2,10 @@
 
 ## 2.x
 
+### Dev
+
+- **Bugfix**: Return correct metadata for the Sphinx extension
+
 ### 2.1.1 (01.05.2026)
 
 - **Bugfix**: Updated dependencies (lxml)
