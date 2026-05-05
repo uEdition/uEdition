@@ -159,7 +159,7 @@ def static_build(lang: dict) -> None:
         copytree("static", path.join(lang["path"], "_static"), dirs_exist_ok=True)
 
 
-def full_build(lang: dict) -> None:
+def full_build(lang: dict, fresh_env: bool = True) -> None:
     """Run the full build process for a single language."""
     reload_settings()
     landing_build()
@@ -171,7 +171,7 @@ def full_build(lang: dict) -> None:
             "sphinx-build",
             "--builder",
             "html",
-            "--fresh-env",
+            *(("--fresh-env",) if fresh_env else ()),
             lang["path"],
             path.join("_build", lang["path"], "html"),
         ],
@@ -184,7 +184,7 @@ def full_build(lang: dict) -> None:
                 "sphinx-build",
                 "--builder",
                 "tei",
-                "--fresh-env",
+                *(("--fresh-env",) if fresh_env else ()),
                 lang["path"],
                 path.join("_build", lang["path"], "tei"),
             ],
@@ -248,11 +248,11 @@ def partial_build(lang: dict) -> None:
 
 
 @app.command()
-def build() -> None:
+def build(fresh_env: bool = True) -> None:
     """Build the full μEdition."""
     if not path.exists("uEdition.yml") and not path.exists("uEdition.yaml"):
         raise NoConfigError()
     if path.exists(settings["output"]["path"]):
         rmtree(settings["output"]["path"])
     for lang in settings["languages"]:
-        full_build(lang)
+        full_build(lang, fresh_env=fresh_env)
