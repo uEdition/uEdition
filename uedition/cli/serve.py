@@ -9,7 +9,7 @@ from typing import Callable
 from livereload import Server
 
 from uedition.cli.base import app
-from uedition.cli.build import full_build, partial_build
+from uedition.cli.build import full_build, partial_build, run_build
 from uedition.settings import NoConfigError, settings
 
 
@@ -18,7 +18,7 @@ def build_cmd(lang: dict, full: bool = True) -> Callable[[], None]:  # noqa: FBT
     if full:
 
         def cmd() -> None:
-            full_build(lang, fresh_env=False)
+            full_build(lang)
 
         return cmd
     else:
