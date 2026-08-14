@@ -41,3 +41,4 @@ chapters:
   #     - file: tei/blocks
   #     - file: tei/marks
   - file: changelog
+  - file: cli

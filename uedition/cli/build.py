@@ -5,6 +5,7 @@
 
 import json
 import subprocess
+from enum import Enum
 from os import makedirs, path
 from shutil import copytree, ignore_patterns, rmtree
 
@@ -159,8 +160,8 @@ def static_build(lang: dict) -> None:
         copytree("static", path.join(lang["path"], "_static"), dirs_exist_ok=True)
 
 
-def full_build(lang: dict) -> None:
-    """Run the full build process for a single language."""
+def run_build(lang: dict, full: bool = True) -> None:
+    """Run the build process for a single language. Full if full=True, only as-needed if full=False"""
     reload_settings()
     landing_build()
     toc_build(lang)
@@ -171,7 +172,7 @@ def full_build(lang: dict) -> None:
             "sphinx-build",
             "--builder",
             "html",
-            "--fresh-env",
+            *(("--fresh-env",) if full else ()),
             lang["path"],
             path.join("_build", lang["path"], "html"),
         ],
@@ -184,7 +185,7 @@ def full_build(lang: dict) -> None:
                 "sphinx-build",
                 "--builder",
                 "tei",
-                "--fresh-env",
+                *(("--fresh-env",) if full else ()),
                 lang["path"],
                 path.join("_build", lang["path"], "tei"),
             ],
@@ -205,54 +206,27 @@ def full_build(lang: dict) -> None:
                 dirs_exist_ok=True,
             )
 
+
+def full_build(lang: dict) -> None:
+    """Run the full build process for a single language."""
+    run_build(lang, full=True)
 
 def partial_build(lang: dict) -> None:
     """Run the as-needed build process for a single language."""
-    landing_build()
-    subprocess.run(  # noqa: S603
-        [  # noqa: S607
-            "sphinx-build",
-            "--builder",
-            "html",
-            lang["path"],
-            path.join("_build", lang["path"], "html"),
-        ],
-        check=False,
-        shell=False,
-    )
-    if settings["output"]["tei"]:
-        subprocess.run(  # noqa:S603
-            [  # noqa: S607
-                "sphinx-build",
-                "--builder",
-                "tei",
-                lang["path"],
-                path.join("_build", lang["path"], "tei"),
-            ],
-            check=False,
-            shell=False,
-        )
-    if path.isdir(path.join("_build", lang["path"], "html")):
-        copytree(
-            path.join("_build", lang["path"], "html"),
-            path.join(settings["output"]["path"], lang["path"]),
-            dirs_exist_ok=True,
-        )
-        if settings["output"]["tei"] and path.isdir(path.join("_build", lang["path"], "tei")):
-            copytree(
-                path.join("_build", lang["path"], "tei"),
-                path.join(settings["output"]["path"], lang["path"]),
-                ignore=ignore_patterns("_sphinx_design_static"),
-                dirs_exist_ok=True,
-            )
+    run_build(lang, full=False)
+
+
+class BuildMode(str, Enum):
+    FULL = "full"
+    PARTIAL = "partial"
 
 
 @app.command()
-def build() -> None:
-    """Build the full μEdition."""
+def build(build_mode: BuildMode = BuildMode.FULL) -> None:
+    """Build the μEdition."""
     if not path.exists("uEdition.yml") and not path.exists("uEdition.yaml"):
         raise NoConfigError()
     if path.exists(settings["output"]["path"]):
         rmtree(settings["output"]["path"])
     for lang in settings["languages"]:
-        full_build(lang)
+        run_build(lang, full=(build_mode == BuildMode.FULL))
